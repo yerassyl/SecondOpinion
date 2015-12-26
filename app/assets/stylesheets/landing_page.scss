@@ -1,0 +1,15 @@
+// Place all the styles related to the landing_page controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "foundation";
+
+#client-callback-form {
+  z-index: 100;
+  position: fixed;
+  bottom:0;
+  right: 0;
+  width:400px;
+  border: solid thin $oil;
+  padding: 20px;
+}

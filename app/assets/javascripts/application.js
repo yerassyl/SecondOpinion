@@ -14,6 +14,12 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function(){
+    $(document).foundation();
+    alert("he");
+});

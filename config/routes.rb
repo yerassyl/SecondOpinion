@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root 'landing_page#index'
+  post '/client_call_backs' => 'landing_page#create_client_callback'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

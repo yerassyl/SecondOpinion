@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">Second Opinion</a></h1>
+    </li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>About Us</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="active"><a href="#">Prices</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="#">How It Works</a></li>
+      <li><a href="#">Services We Provide</a></li>
+      <li><a href="#">Doctors On Board</a></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+  </section>
+</nav>
+
+<div id="client-callback-form" >
+    <%= react_component 'HelloWorld' %>
+</div>
+
+
+
+<div id="client-callback-form" class="hidden">
+
+  <form>
+
+    <div class="form-field">
+      <input type="text" placeholder="Name" />
+    </div>
+
+    <div class="form-field">
+
+    </div>
+
+    <div class="form-field">
+      <input type="number" placeholder="Phone" />
+    </div>
+
+    <div class="form-field">
+      <input type="text" placeholder="Name" />
+    </div>
+
+    <div class="form-field">
+      <input type="email" placeholder="Email" />
+    </div>
+
+    <div class="form-field">
+      <textarea name="message" placeholder="msg"></textarea>
+    </div>
+
+  </form>
+
+</div>
+
+
+</body>
+</html>
