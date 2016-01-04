@@ -32,44 +32,61 @@
   </section>
 </nav>
 
-<div id="client-callback-form" >
-    <%= react_component 'HelloWorld' %>
+
+<div id="client-callback" class="callback-hidden">
+
+  <div id="form-header">
+      I want to be Client
+  </div>
+
+<div id="client-callback-form">
+
+    <%=form_for(@client_call_back,{url:call_backs_path,method: :post,remote:true}) do |f| %>
+
+      <%= render 'text_field', { form_builder: f, obj: :name, form_label: t('personal_details.name'), form_placeholder: t('dummy_placeholder.name') } %>
+
+      <div class="row collapse prefix-radius">
+        <div class="small-3 columns">
+            <span class="prefix">
+                 <%= t('personal_details.country') %>
+            </span>
+        </div>
+        <div class="small-9 columns">
+          <%= f.country_select :country, include_blank: t('forms.not_chosen') %>
+        </div>
+      </div>
+
+      <%= render 'text_field', { form_builder: f, obj: :phone, form_label: t('personal_details.phone'), form_placeholder: t('dummy_placeholder.phone') } %>
+
+      <%= render 'select_field', {form_builder: f, obj: :language, options: Language.all.collect{|p| [p.name,p.code]}, form_label: t('personal_details.language')} %>
+
+      <%= render 'text_field', { form_builder: f, obj: :email, form_label: t('personal_details.email'), form_placeholder: t('dummy_placeholder.email') } %>
+
+      <%= render 'select_field', {form_builder: f, obj: :specialization, options: Specialization.all.collect{|p| [p.name,p.name]}, form_label: t('personal_details.specialization')} %>
+
+      <%= f.text_area :message, {placeholder: t('personal_details.message'),class:'input-field'} %>
+
+      <div class="checkbox">
+        <%= f.check_box :didAgree %> <%= t('personal_details.i_agree_to')%> <%= link_to( t('personal_details.terms_of_use'),'#') %>
+      </div>
+
+
+        <div class="row">
+          <div class="small-5 columns">
+            some code
+          </div>
+          <div class="small-7 columns">
+            <%= f.text_field :code, {placeholder:'Code'}%>
+          </div>
+        </div>
+
+        <%= f.submit( t('personal_details.request_call_back'), class:'button success expand') %>
+
+    <% end %>
+
 </div>
 
-
-
-<div id="client-callback-form" class="hidden">
-
-  <form>
-
-    <div class="form-field">
-      <input type="text" placeholder="Name" />
-    </div>
-
-    <div class="form-field">
-
-    </div>
-
-    <div class="form-field">
-      <input type="number" placeholder="Phone" />
-    </div>
-
-    <div class="form-field">
-      <input type="text" placeholder="Name" />
-    </div>
-
-    <div class="form-field">
-      <input type="email" placeholder="Email" />
-    </div>
-
-    <div class="form-field">
-      <textarea name="message" placeholder="msg"></textarea>
-    </div>
-
-  </form>
-
 </div>
-
 
 </body>
 </html>

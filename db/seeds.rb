@@ -5,3 +5,37 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+  languages = Language.create(
+                          [
+                              {
+                                  name: 'English',
+                                  code: 'en'
+                              },
+                              {
+                                  name: 'Russian',
+                                  code: 'ru'
+                              },
+                              {
+                                  name: 'Hindi',
+                                  code: 'hi'
+                              }
+                          ]
+  )
+
+  specializations = Specialization.create(
+    [
+        {
+            name: 'General'
+        },
+        {
+            name: 'Pediatry'
+        },
+        {
+            name: 'Cardiology'
+        },
+        {
+            name: 'Surgery'
+        }
+    ]
+  )

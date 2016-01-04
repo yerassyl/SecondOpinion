@@ -1,8 +1,1 @@
-
-var HelloWorld = React.createClass({
-   render:function(){
-       return(
-         <p>Hello World</p>
-       );
-   }
-});
+//var HelloWorld = require('./components/HelloWorld.jsx');

@@ -21,5 +21,5 @@
 
 $(function(){
     $(document).foundation();
-    alert("he");
+
 });

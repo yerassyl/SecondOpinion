@@ -1,6 +1,6 @@
-class CreateClientCallBacks < ActiveRecord::Migration
+class CreateCallBacks < ActiveRecord::Migration
   def change
-    create_table :client_call_backs do |t|
+    create_table :call_backs do |t|
       t.string :name
       t.string :country
       t.string :phone

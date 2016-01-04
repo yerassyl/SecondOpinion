@@ -17,9 +17,39 @@
 
 @import "foundation";
 
+// classes for text color
+.alert {
+  color: $alert-color;
+}
+
+
 .hidden {
   display: none;
 }
-.select2-container {
-  width: 100%;
+
+.input-field {
+  border: solid 1px #CCC;
+  border-top-color: #DDD;
+  border-bottom-color: #BBB;
+  border-radius: 3px;
+
+}
+.error-input-field {
+  border-color: $alert-color !important;
+  opacity: .8;
+}
+.error-input-field::-webkit-input-placeholder {
+  color: $alert-color;
+}
+
+.error-input-field:-moz-placeholder { /* Firefox 18- */
+  color: $alert-color;
+}
+
+.error-input-field::-moz-placeholder {  /* Firefox 19+ */
+  color: $alert-color;
+}
+
+.error-input-field:-ms-input-placeholder {
+  color: $alert-color;
 }

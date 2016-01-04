@@ -1,26 +1,10 @@
 
-//var Select = require('react-select');
-
-var options = [
-    { value: 'one', label: 'One' },
-    { value: 'two', label: 'Two' }
-];
-
 var ClientCallBackForm = React.createClass({
     render:function(){
         return(<form>
-
                 <div className="form-field">
                     <input type="text" placeholder="Name" />
                 </div>
-
-
-                <Select
-                    name="form-field-name"
-                    value="one"
-                    options={options}
-                    onChange={logChange}
-                    />
 
                 <div className="form-field">
                     <input type="number" placeholder="Phone" />

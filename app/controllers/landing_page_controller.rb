@@ -1,12 +1,8 @@
 class LandingPageController < ApplicationController
 
   def index
-    @client_call_back = ClientCallBack.new
+    @client_call_back = CallBack.new
   end
 
-
-  def create_client_callback
-
-  end
 
 end

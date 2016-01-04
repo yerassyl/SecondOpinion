@@ -4,12 +4,31 @@
 
 @import "foundation";
 
-#client-callback-form {
+#client-callback {
   z-index: 100;
   position: fixed;
-  bottom:0;
   right: 0;
   width:400px;
   border: solid thin $oil;
+
+  transition: bottom 0.7s;
+  -webkit-transition: bottom 0.7s;
+  -moz-transition: bottom 0.7s;
+  -o-transition: bottom 0.7s;
+}
+.callback-hidden {
+  bottom: -600px;
+}
+.callback-shown {
+  bottom: 0px;
+}
+
+#client-callback-form {
   padding: 20px;
+}
+#form-header {
+  height: 50px;
+  background: $oil;
+  color:white;
+  padding:5px 30px;
 }

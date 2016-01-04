@@ -20,5 +20,24 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  personal_details:
+    name: "Name"
+    country: "Country"
+    phone: "Phone"
+    language: Language
+    email: "Email"
+    specialization: "Specialization"
+    message: "Message"
+    i_agree_to: "I agree to"
+    terms_of_use: "Terms of Use"
+    request_call_back: "Request Call Back"
+  forms:
+    not_chosen: "--not chosen--"
+    required: "required"
+  dummy_placeholder:
+    name: "Jack Reacher"
+    phone: "777 007 01 01"
+    email: "jreacher@gmail.com"
+    message: "I am Jack Reacher, I'll kill you"
+
 
