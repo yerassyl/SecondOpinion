@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26e1f5c9-4363-4024-8ff0-e991925db54d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/call_backs/create.js.erb" afterPath="$PROJECT_DIR$/app/views/call_backs/create.js.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/landing_page.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/landing_page.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SecondOpinion.iws" />
@@ -42,11 +41,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="call_backs_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="call_backs_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/call_backs_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16483517">
+            <state vertical-scroll-proportion="0.0">
               <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gemfile" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Gemfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.054945055">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -128,7 +137,6 @@
         <option value="$PROJECT_DIR$/app/views/landing_page/_text_field.html.erb.html" />
         <option value="$PROJECT_DIR$/app/views/landing_page/_text_field.html.erb" />
         <option value="$PROJECT_DIR$/app/views/landing_page/_select_field.html" />
-        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/public/assets/application-2028393c4a6998cbbae7e575b42ea176.css" />
         <option value="$PROJECT_DIR$/config/locales/en.yml" />
@@ -145,6 +153,7 @@
         <option value="$PROJECT_DIR$/app/controllers/call_backs_controller.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/call_backs.js" />
         <option value="$PROJECT_DIR$/app/views/call_backs/create.js.erb" />
+        <option value="$PROJECT_DIR$/Gemfile" />
       </list>
     </option>
   </component>
@@ -805,14 +814,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.054945055">
@@ -971,8 +972,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/call_backs_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16483517">
+        <state vertical-scroll-proportion="0.0">
           <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.054945055">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
           <folding />
         </state>
       </provider>
