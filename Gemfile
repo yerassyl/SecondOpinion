@@ -20,11 +20,12 @@ gem 'turbolinks'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'react-rails', '~> 1.5.0'
-gem 'foundation-rails'
-gem 'active_model_serializers'
 
-gem 'country_select'
+gem 'react-rails', '~> 1.5.0' # react js library
+gem 'foundation-rails' # foundation zurb for front-end
+gem 'active_model_serializers' # json serializers
+
+gem 'country_select' # select tag with all countries in iso etc. formats
 
 
 # Use ActiveModel has_secure_password
@@ -35,6 +36,7 @@ gem 'country_select'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

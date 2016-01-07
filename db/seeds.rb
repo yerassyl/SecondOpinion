@@ -19,6 +19,10 @@
                               {
                                   name: 'Hindi',
                                   code: 'hi'
+                              },
+                              {
+                                  name: 'Urdu',
+                                  code: 'ur'
                               }
                           ]
   )

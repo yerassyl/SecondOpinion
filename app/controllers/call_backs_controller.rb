@@ -11,7 +11,7 @@ class CallBacksController < ApplicationController
       if @call_back.save
           format.js
       else
-          format.json {render json: @call_back.errors, status: :unprocessable_entity }
+          format.js {render json: @call_back.errors, status: :unprocessable_entity }
       end
     end
 
