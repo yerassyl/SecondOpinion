@@ -6,7 +6,7 @@ $(document).ready(function(){
     var callback = $("#client-callback");
 
     $("#form-header").click(function(){
-        console.log("callback click");
+        console.log("client callback click");
         if (callback.hasClass("callback-hidden")){
             callback.removeClass("callback-hidden").addClass("callback-shown");
         }else {

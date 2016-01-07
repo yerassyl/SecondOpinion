@@ -1,2 +1,6 @@
 // call when call_back create is successful
-alert("<%= @call_back.email %>");
+
+console.log("create.js.erb called")
+var callback_form = $("#client-callback-form");
+var message = "<h3>Your callback has been sent. We will contact you soon via <%= @call_back.email %></h3>";
+callback_form.html(message);
