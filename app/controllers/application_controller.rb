@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
     redirect_to access_denied_path, :alert => exception.message
   end
 
-
   protected
 
   # redirecting to appropriate url based on role

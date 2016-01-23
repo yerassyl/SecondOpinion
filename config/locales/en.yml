@@ -48,5 +48,7 @@ en:
     message: "I am Jack Reacher, I'll kill you"
   client_registration:
     accept_and_register: "Accept and create account"
-
+  registration_result:
+    welcome: "Welcome to the Sample App!"
+    wrong: "Something went wrong!"
 

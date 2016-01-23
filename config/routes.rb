@@ -2,15 +2,12 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-
   resources :managers, only: [:index]
 
-  resources :clients, only: [:index]
+  resources :clients, only: [:index, :new, :create]
   post 'clients/accept/:call_back' => 'clients#accept'
 
   resources :call_backs, only: [:index,:create, :show]
-
-
   root 'landing_page#index'
   get 'access_denied' => 'landing_page#access_denied'
 

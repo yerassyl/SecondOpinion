@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+qqq
   def index
     # get all patients that belong to that client
   end
