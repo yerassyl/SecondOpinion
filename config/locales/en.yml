@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  navigation:
+    go_back: "GO BACK"
+    go_to_main: "GO TO MAIN"
   personal_details:
     name: "Name"
     country: "Country"
@@ -48,5 +51,9 @@ en:
     message: "I am Jack Reacher, I'll kill you"
   client_registration:
     accept_and_register: "Accept and create account"
+    client_accepted: "Client account has been successfully created and password was sent to: "
+    user_with_that: "User with that "
+    email_is_taken: " email has already been registered"
+
 
 

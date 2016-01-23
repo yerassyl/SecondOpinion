@@ -13,7 +13,8 @@ class Ability
   end
 
   def manager
-    can :read, CallBack
+     can :read, CallBack
+     # cannot :manage, Client
   end
 
   def client
