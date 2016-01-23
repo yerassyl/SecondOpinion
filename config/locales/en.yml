@@ -57,5 +57,10 @@ en:
   registration_result:
     welcome: "Welcome to the Sample App!"
     wrong: "Something went wrong!"
+  warnings:
+    resource_not_found: "Resource not found"
+  messaging:
+    message_sent: "Message has been sent!"
+
 
 
