@@ -7,7 +7,9 @@ class Ability
 
   end
 
+  # write down role permissions here
   def admin
+
   end
 
   def manager

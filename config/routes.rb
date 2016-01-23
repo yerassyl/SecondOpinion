@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
 
   resources :managers, only: [:index]
+
   resources :clients, only: [:index]
+  post 'clients/accept/:call_back' => 'clients#accept'
+
   resources :call_backs, only: [:index,:create, :show]
 
 
