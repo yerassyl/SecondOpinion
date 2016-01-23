@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
 
+  # devise routes
   devise_for :users
+
+  # default root routes for each role
+  # authenticated :user, ->(u) { u.has_role?('admin') } do
+  #   root to: '#index', as: :admin_root
+  # end
+  #
+  # authenticated :user, ->(u) { u.has_role?('manager') } do
+  #   root to: 'requests#index', as: :admin_root
+  # end
+
+
 
 
   resources :managers, only: [:index]
-
   resources :clients, only: [:index]
-  post 'clients/accept/:call_back' => 'clients#accept'
-
+  post 'clients/accept/:id' => 'clients#accept', as: :client_accept
   resources :call_backs, only: [:index,:create, :show]
-
 
   root 'landing_page#index'
   get 'access_denied' => 'landing_page#access_denied'
