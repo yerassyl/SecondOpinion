@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # devise routes
   devise_for :users
 
+
   # default root routes for each role
   # authenticated :user, ->(u) { u.has_role?('admin') } do
   #   root to: '#index', as: :admin_root
