@@ -22,6 +22,7 @@ gem 'turbolinks'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'mailboxer' # Messaging gem
 
 gem 'react-rails', '~> 1.5.0' # react js library
 gem 'foundation-rails' # foundation zurb for front-end

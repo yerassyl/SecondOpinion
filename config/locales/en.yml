@@ -48,5 +48,9 @@ en:
     message: "I am Jack Reacher, I'll kill you"
   client_registration:
     accept_and_register: "Accept and create account"
+  warnings:
+    resource_not_found: "Resource not found"
+  messaging:
+    message_sent: "Message has been sent!"
 
 

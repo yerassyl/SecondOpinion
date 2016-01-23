@@ -10,6 +10,14 @@ class ApplicationController < ActionController::Base
     redirect_to access_denied_path, :alert => exception.message
   end
 
+  rescue_from ActiveRecord::RecordNotFound do
+    flash[:warning] = I18n.t('warnings.resource_not_found')
+    redirect_back_or root_path
+  end
+
+  def redirect_back_or(path)
+    redirect_to request.referer || path
+  end
 
   protected
 

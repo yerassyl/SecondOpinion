@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :clients, only: [:index]
   resources :call_backs, only: [:index,:create, :show]
 
+  resources :conversations, only: [:index, :show, :destroy]
+  resources :messages, only: [:new, :create]
 
   root 'landing_page#index'
   get 'access_denied' => 'landing_page#access_denied'
