@@ -1,4 +1,7 @@
 class CallBacksController < ApplicationController
+  load_and_authorize_resource
+  before_action :set_callback, only: [:show]
+
 
   def index
 
@@ -17,8 +20,16 @@ class CallBacksController < ApplicationController
 
   end
 
+  def show
+  end
+
 
   private
+
+  def set_callback
+    @call_back = CallBack.find(params[:id])
+  end
+
   def callback_params
     params.require(:call_back).permit(:name,:country,:phone,:language,:email,:specialization,:message,:didAgree,:code)
   end

@@ -5,8 +5,10 @@ ruby '2.2.0'
 gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'coffee-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -23,10 +25,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'react-rails', '~> 1.5.0' # react js library
 gem 'foundation-rails' # foundation zurb for front-end
+gem 'font-awesome-rails' # icons
+
 gem 'active_model_serializers' # json serializers
 
-gem 'country_select' # select tag with all countries in iso etc. formats
+gem 'devise' # authorization library
+gem 'cancancan', '~> 1.10'  # authentication library
 
+gem 'country_select' # select tag with all countries in iso etc. formats
+gem 'kaminari' # pagintaion library
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -49,5 +56,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'faker'
 end
 

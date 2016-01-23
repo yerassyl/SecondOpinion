@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
-  root 'landing_page#index'
 
-  resources :call_backs, only: [:index,:create]
+  devise_for :users
+
+
+  resources :managers, only: [:index]
+  resources :clients, only: [:index]
+  resources :call_backs, only: [:index,:create, :show]
+
+
+  root 'landing_page#index'
+  get 'access_denied' => 'landing_page#access_denied'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

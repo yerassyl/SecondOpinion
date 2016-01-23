@@ -1,0 +1,40 @@
+<%= render 'layouts/header' %>
+
+  <div class="row">
+    <div class="small-12 columns">
+
+      <h2>Incoming client callbacks </h2>
+      <table>
+        <thead>
+        <tr>
+          <td><%= t('personal_details.name') %></td>
+          <td><%= t('personal_details.email') %> </td>
+          <td><%= t('personal_details.country') %></td>
+          <td><%= t('personal_details.phone') %></td>
+          <td><%= t('personal_details.specialization') %></td>
+          <td><%= t('personal_details.message') %> </td>
+          <td> </td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @call_backs.each do |call_back| %>
+            <tr>
+              <td><%= call_back.name %></td>
+              <td><%= call_back.email %></td>
+              <td><%= call_back.country %></td>
+              <td><%= call_back.phone %></td>
+              <td><%= call_back.specialization %></td>
+              <td><%= call_back.message %> </td>
+              <td>
+                <%= link_to (fa_icon 'eye',class:'fa-2x'), call_back %>
+              </td>
+            </tr>
+        <% end %>
+        <%= paginate @call_backs %>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+

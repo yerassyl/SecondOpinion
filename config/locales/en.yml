@@ -24,7 +24,7 @@ en:
     name: "Name"
     country: "Country"
     phone: "Phone"
-    language: Language
+    language: "Language"
     email: "Email"
     specialization: "Specialization"
     message: "Message"
@@ -34,10 +34,19 @@ en:
   forms:
     not_chosen: "--not chosen--"
     required: "required"
+    auth:
+      login: "Login"
+      logout: "Logout"
+      username: "username"
+      password: "password"
+      email: "email"
+      remember_me: "Remember me"
   dummy_placeholder:
     name: "Jack Reacher"
     phone: "777 007 01 01"
     email: "jreacher@gmail.com"
     message: "I am Jack Reacher, I'll kill you"
+  client_registration:
+    accept_and_register: "Accept and create account"
 
 

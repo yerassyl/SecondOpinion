@@ -1,0 +1,10 @@
+<div class="error-message">
+
+  <% flash.each do |key, value| %>
+      <div data-alert class="alert-box radius <%= key %>">
+        <%= value %>
+        <a href="#" class="close">&times;</a>
+      </div>
+  <% end %>
+
+</div>

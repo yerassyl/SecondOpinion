@@ -1,0 +1,24 @@
+<%= render 'layouts/header' %>
+
+<div class="row">
+  <div class="small-4 columns">
+    <h3>Client callback ID:<%= @call_back.id %></h3>
+  </div>
+  <div class="small-8 columns"></div>
+</div>
+
+<div class="row">
+  <div class="small-7 columns">
+    <%= render 'call_backs/detail_row', key: t('personal_details.name'), value: @call_back.name %>
+    <%= render 'call_backs/detail_row', key: t('personal_details.email'), value: @call_back.email %>
+    <%= render 'call_backs/detail_row', key: t('personal_details.country'), value: @call_back.country %>
+    <%= render 'call_backs/detail_row', key: t('personal_details.phone'), value: @call_back.phone %>
+    <%= render 'call_backs/detail_row', key: t('personal_details.specialization'), value: @call_back.specialization %>
+    <%= render 'call_backs/detail_row', key: t('personal_details.message'), value: @call_back.message %>
+  </div>
+
+  <div class="small-5 columns">
+    <%= link_to t('client_registration.accept_and_register'), '#', class: 'button tiny success' %>
+  </div>
+
+</div>
