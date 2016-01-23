@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   post 'clients/accept/:id' => 'clients#accept', as: :client_accept
   resources :call_backs, only: [:index,:create, :show]
 
+  resources :conversations, only: [:index, :show, :destroy]
+  resources :messages, only: [:new, :create]
+
+
   root 'landing_page#index'
   get 'access_denied' => 'landing_page#access_denied'
 
