@@ -54,6 +54,8 @@ en:
     client_accepted: "Client account has been successfully created and password was sent to: "
     user_with_that: "User with that "
     email_is_taken: " email has already been registered"
-
+  registration_result:
+    welcome: "Welcome to the Sample App!"
+    wrong: "Something went wrong!"
 
 

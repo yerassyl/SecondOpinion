@@ -4,7 +4,6 @@ class Ability
   def initialize(user)
       user ||= User.new # guest user (not logged in)
       user.roles.each { |role| send(role.name.downcase) }
-
   end
 
   # write down role permissions here
