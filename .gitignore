@@ -11,7 +11,8 @@
 /log/*
 !/log/.keep
 /tmp
-node_modules/
+/node_modules/
 /.idea/workspace.xml
 /.idea/tasks.xml
-/config/database.yml
+.gitignore
+.idea/
