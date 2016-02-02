@@ -8,6 +8,8 @@ class CallBack < ActiveRecord::Base
             :code,
             presence: true
 
+  validates :email, uniqueness: true
+
   validates :didAgree, presence: {message: I18n.t('forms.required') }
 
 

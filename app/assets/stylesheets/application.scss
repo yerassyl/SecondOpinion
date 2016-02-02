@@ -1,9 +1,14 @@
+// dont touch these
 @import "foundation_and_overrides";
+@import "font-awesome"; // dont delete it, it is correct!!!
 
 @import "conversations";
 @import "authorization";
 @import "landing_page";
+
 @import "clients";
+@import "profile";
+@import "patients";
 
 .container {
   width:90%;
@@ -11,6 +16,19 @@
 }
 table td {
   min-width: 150px;
+}
+.form {
+  width: 50%;
+  margin: 20px auto;
+  padding:20px;
+}
+.form-wide {
+  width:90%;
+  margin:20px auto;
+  padding:20px;
+}
+.float-right {
+  float: right;
 }
 
 // classes for text color
@@ -20,6 +38,12 @@ table td {
 // error message classes
 .error-message {
   margin:5px;
+}
+.field_with_errors {
+  .input-field {
+    color: $alert-color;
+    border-color: $alert-color;
+  }
 }
 
 .hidden {

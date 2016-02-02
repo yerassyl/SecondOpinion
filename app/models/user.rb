@@ -14,8 +14,11 @@ class User < ActiveRecord::Base
 
   has_many :assignments
   has_many :roles, through: :assignments
+  has_one :manager
+  has_one :client
 
   # check if user is assigned to the given role
+  # note: pass symbol as a parameter, not string
   def has_role?(role_sym)
     roles.any? { |r| r.name.underscore.to_sym == role_sym }
   end

@@ -24,17 +24,20 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'mailboxer' # Messaging gem
 
+# major gems
 gem 'react-rails', '~> 1.5.0' # react js library
 gem 'foundation-rails' # foundation zurb for front-end
 gem 'font-awesome-rails' # icons
-
 gem 'active_model_serializers' # json serializers
 
 gem 'devise' # authorization library
 gem 'cancancan', '~> 1.10'  # authentication library
+gem 'carrierwave' # file upload
 
+# small functionality gems
 gem 'country_select' # select tag with all countries in iso etc. formats
 gem 'kaminari' # pagintaion library
+gem 'cocoon' # allows easier nested attributes
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -49,6 +52,10 @@ gem 'kaminari' # pagintaion library
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :development do

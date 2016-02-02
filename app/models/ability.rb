@@ -3,29 +3,41 @@ class Ability
 
   def initialize(user)
       user ||= User.new # guest user (not logged in)
-      user.roles.each { |role| send(role.name.downcase) }
+      user.roles.each { |role| send(role.name.downcase, user) }
   end
 
   # write down role permissions here
-  def admin
+  def admin(user)
 
   end
 
-  def manager
-     can :read, CallBack
-     # cannot :manage, Client
+  def manager(user)
+    can :manage, Manager
+    can [:read, :create], CallBack
+    can [:accept], Client
   end
 
-  def client
-    can :manage, :all
+  def client(user)
+    can :manage, Client, :id => user.client.id
+    can [:read, :new_medical_history,:create_medical_history], Patient do |patient|
+      any_patient?(user.client, patient.id)
+    end
+    can [:create], [Patient]
   end
 
-  def patient
+  def patient(user)
 
   end
 
-  def doctor
+  def doctor(user)
 
   end
+
+  # helper methods
+
+  def any_patient?(client, id)
+    client.patients.any? {|p| p.id == id }
+  end
+
 
 end

@@ -5,26 +5,41 @@ Rails.application.routes.draw do
 
 
   # default root routes for each role
-  # authenticated :user, ->(u) { u.has_role?('admin') } do
-  #   root to: '#index', as: :admin_root
-  # end
-  #
-  # authenticated :user, ->(u) { u.has_role?('manager') } do
-  #   root to: 'requests#index', as: :admin_root
-  # end
+   authenticated :user, ->(u) { u.has_role?(:manager) } do
+     root to: 'managers#index', as: :manager_root
+   end
+   authenticated :user, ->(u) { u.has_role?(:client) } do
+     root to: 'clients#index', as: :client_root
+   end
 
 
+  # all the routes in the block will ask for authentication first
+  # if not authenticated, user will be redirected to sign in page
+  authenticate :user do
 
+    resources :managers, only: [:index]
+    resources :clients, only: [:index,:new,:show] do
+      collection do
+        post 'accept', action: :accept
+      end
+    end
 
-  resources :managers, only: [:index]
-  resources :clients, only: [:index]
-  post 'clients/accept/:id' => 'clients#accept', as: :client_accept
-  resources :call_backs, only: [:index,:create, :show]
+    resources :patients, only: [:new,:create,:show] do
+      collection do
+        get 'new_medical_history'
+        post 'create_medical_history', action: :create_medical_history
+      end
+    end
 
-  resources :conversations, only: [:index, :show, :destroy]
-  resources :messages, only: [:new, :create]
+    resources :call_backs, only: [:index, :show]
+    resources :conversations, only: [:index, :show, :destroy]
+    resources :messages, only: [:new, :create]
 
+  end
 
+  # not authorized routes
+  resources :call_backs, only: [:create]
+  # routes that do not need authentication must be declared here
   root 'landing_page#index'
   get 'access_denied' => 'landing_page#access_denied'
 

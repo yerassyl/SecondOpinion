@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
     if current_user.has_role?(:admin)
       clients_path
     elsif current_user.has_role?(:client)
+      clients_path
     elsif current_user.has_role?(:patient)
     elsif current_user.has_role?(:manager)
       managers_path

@@ -1,46 +1,53 @@
 class ClientsController < ApplicationController
-  before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     # get all patients that belong to that client
+    @patients = current_user.client.patients
+  end
+
+  def show
+    
   end
 
   # accept and create client account, then send message to the provided email
   def accept
-    @call_back_id = params[:id]
+    @call_back_id = params[:callback_id]
     @call_back = CallBack.find(@call_back_id)
     @client_role = Role.find_by(name: 'client')
 
     if !User.find_by(email: @call_back.email)
-      @client_user = User.new(
+      @user = User.new(
           name: @call_back.name,
           email: @call_back.email,
           password: '12345678'
       )
-
-      if @client_user.save
+      if @user.save
         @client_role_assignment = Assignment.create(
-            user_id: @client_user.id,
+            user_id: @user.id,
             role_id: @client_role.id
         )
         if @client_role_assignment
+          @client = Client.create(
+                              user_id: @user.id,
+                              country: @call_back.country,
+                              phone: @call_back.phone,
+                              language: @call_back.language
+          )
           @call_back.update(accepted: true)
-          flash[:success] = I18n.t('client_registration.client_accepted')
+          # send email message
+          ClientMailer.welcome_email(@user).deliver_now
+          flash.now[:success] = I18n.t('client_registration.client_accepted') + ' '+@user.email
         end
       else
-        if @client_user.errors.any?
-          flash[:error] = @client_user.errors
+        if @user.errors.any?
+          flash.now[:error] = @user.errors
         end
       end
     else
-      flash[:error] = I18n.t('client_registration.user_with_that') + @call_back.email + I18n.t('client_registration.email_is_taken')
+      flash.now[:error] = I18n.t('client_registration.user_with_that') + @call_back.email + I18n.t('client_registration.email_is_taken')
     end
-    @call_back = params[:call_back]
-    @client = Client.create(
-                        name: @call_back.name,
-                        email: @call_back.email,
-                        password: '12345678'
-    )
+
   end
 
   def new
@@ -53,7 +60,7 @@ class ClientsController < ApplicationController
       @assignment = Assignment.new(user_id: @user.id, role_id: Role.find_by(name: 'client').id)
       @assignment.save
       flash[:success] = "Welcome to the Sample App!"
-      redirect_to root_pasth
+      redirect_to root_past
     else
       flash[:info] = "Something went wrong"
       render 'new'

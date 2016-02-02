@@ -1,0 +1,13 @@
+<!-- partial for text fields with label
+usage: render 'text_field', { form_builder: f, obj: :name, form_label: t('personal_details.phone'), form_placeholder: 'text' }
+-->
+<div class="row collapse prefix-radius">
+    <div class="large-4 small-4 columns">
+            <span class="prefix">
+                 <%= form_label %>
+            </span>
+    </div>
+    <div class="small-8 columns">
+        <%= form_builder.text_field obj, { placeholder: form_placeholder, class: 'input-field' } %>
+    </div>
+</div>

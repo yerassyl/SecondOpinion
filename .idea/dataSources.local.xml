@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="Rails SecondOpinion: development" uuid="ed937385-7b57-4d94-912e-cada7a25327e" />
-    <data-source name="Rails SecondOpinion: production" uuid="0103f03c-0c0d-429e-899f-4bc3b1a2ff57" />
-    <data-source name="Rails SecondOpinion: test" uuid="119175b6-bdc0-49c4-ad81-ca385edbbbea" />
+    <data-source name="Rails SecondOpinion: development" uuid="ed937385-7b57-4d94-912e-cada7a25327e">
+      <user-name>postgres</user-name>
+      <user-password>df9b</user-password>
+    </data-source>
+    <data-source name="Rails SecondOpinion: production" uuid="0103f03c-0c0d-429e-899f-4bc3b1a2ff57">
+      <user-name>SecondOpinion</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddff9dfefdfe9dfe5dfe4dfeedfe5dffadfe3dfe4dfe3dfe5dfe4dff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
+    </data-source>
+    <data-source name="Rails SecondOpinion: test" uuid="119175b6-bdc0-49c4-ad81-ca385edbbbea">
+      <user-name>postgres</user-name>
+      <user-password>df9b</user-password>
+    </data-source>
   </component>
 </project>

@@ -20,12 +20,12 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
+  username: postgres
+  password: 1
 
 development:
   <<: *default
   database: SecondOpinion_development
-  username: anuarserikov
-  password: qwerty
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,11 +57,10 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
+test: &test
   <<: *default
   database: SecondOpinion_test
-  username: anuarserikov
-  password: qwerty
+
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -87,3 +86,6 @@ production:
   database: SecondOpinion_production
   username: SecondOpinion
   password: <%= ENV['SECONDOPINION_DATABASE_PASSWORD'] %>
+
+cucumber:
+  <<: *test

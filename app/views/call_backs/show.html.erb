@@ -1,6 +1,6 @@
-<%= render 'layouts/header' %>
+<%= render 'layouts/messages' %>
 
-<div class="row">
+ <div class="row">
   <div class="small-4 columns">
     <h3>Client callback ID:<%= @call_back.id %></h3>
   </div>
@@ -24,7 +24,11 @@
   </div>
 
   <div class="small-5 columns">
-    <%= link_to t('client_registration.accept_and_register'), clients_accept_path(@call_backкфш), class: 'button tiny success' %>
+    <% if @call_back.accepted %>
+      <%= link_to t('client_registration.accepted'), '#', class:'button tiny success disabled' %>
+    <% else %>
+      <%= link_to t('client_registration.accept_and_register'), accept_clients_path(callback_id: @call_back.id), method: :post, class: 'button tiny success' %>
+    <% end %>
   </div>
 
 </div>

@@ -1,10 +1,9 @@
 class ManagersController < ApplicationController
-  before_action :authenticate_user!
 
+  load_and_authorize_resource
 
   def index
-    @call_backs = CallBack.all.page(params[:page])
-    authorize! :index, current_user
+    @call_backs = CallBack.where(accepted: false).order(created_at: 'DESC').page(params[:page])
   end
 
   def show
