@@ -20,11 +20,39 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  verbs:
+    remove: "Remove"
+    add: "Add"
+  nouns:
+    singular:
+      disease: "Disease"
+      medication: "Medication"
+      allergy: "Allergy"
+      lab_test: "Lab Test"
+      document: "Document"
+      description: "Description"
+    plural:
+      diseases: "Diseases"
+      medications: "Medications"
+      allergies: "Allergies"
+      lab_tests: "Lab tests"
+      other_documents: "Other documents"
+      other_medical_documents: "Other Medical Documents"
   navigation:
     go_back: "GO BACK"
     go_to_main: "GO TO MAIN"
   personal_details:
     name: "Name"
+    firstname: "Firstname"
+    middlename: "Middlename"
+    lastname: "Lastname"
+    date_of_birth: "Date of birth"
+    maritial_status: "Maritial Status"
+    gender: "Gender"
+    telephone: "Telephone"
+    cellphone: "Cellphone"
+    emergency_person: "Emergency person"
+    emergency_person_phone: "Emergency person phone"
     country: "Country"
     phone: "Phone"
     language: "Language"
@@ -35,14 +63,16 @@ en:
     terms_of_use: "Terms of Use"
     request_call_back: "Request Call Back"
   forms:
+    submit: "Submit"
+    submit_and_proceed_to_medical_history: "Submit and proceed to medical history"
     not_chosen: "--not chosen--"
-    required: "required"
+    required: "Required"
     auth:
       login: "Login"
       logout: "Logout"
-      username: "username"
-      password: "password"
-      email: "email"
+      username: "Username"
+      password: "Password"
+      email: "Email"
       remember_me: "Remember me"
   dummy_placeholder:
     name: "Jack Reacher"
@@ -50,6 +80,7 @@ en:
     email: "jreacher@gmail.com"
     message: "I am Jack Reacher, I'll kill you"
   client_registration:
+    accepted: 'Accepted'
     accept_and_register: "Accept and create account"
     client_accepted: "Client account has been successfully created and password was sent to: "
     user_with_that: "User with that "
@@ -61,6 +92,31 @@ en:
     resource_not_found: "Resource not found"
   messaging:
     message_sent: "Message has been sent!"
+  patient_module:
+    new_patient: "Register new Patient"
+    patient_registered: "Patient has been successfully registered"
+    add_medical_history: "Add medical history"
+    medical_history:
+      medical_history_added: "New medical history has been added"
+      reason: "Reason"
+      do_you_smoke: "Do you smoke?"
+      do_you_drink: "Do you drink?"
+      are_you_pregnant: "Are you pregnant?"
+      other: "Other"
+      disease:
+        disease: "Disease"
+        diagnose: "Diagnose"
+        condition: "Condition"
+        treatment: "Treatment"
+      medication:
+        medication: "Medication"
+        medication_name: "Medication name"
+        dose: "Dose"
+        per_day: "Frequency"
+      allergy:
+        allergy_name: "Allergy name"
+
+
 
 
 

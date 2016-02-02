@@ -1,6 +1,4 @@
 
-<%= render 'landing_page/header' %>
-
 <%= render 'layouts/messages' %>
 <div class="temp">
   <h2> Here will be landing page for potential clients and doctors. It will be developed last</h2>
@@ -18,7 +16,7 @@
 
     <%=form_for(@client_call_back,{url:call_backs_path,method: :post,remote:true}) do |f| %>
 
-      <%= render 'text_field', { form_builder: f, obj: :name, form_label: t('personal_details.name'), form_placeholder: t('dummy_placeholder.name') } %>
+      <%= render 'layouts/text_field', { form_builder: f, obj: :name, form_label: t('personal_details.name'), form_placeholder: t('dummy_placeholder.name') } %>
 
       <div class="row collapse prefix-radius">
         <div class="small-3 columns">
@@ -31,11 +29,11 @@
         </div>
       </div>
 
-      <%= render 'text_field', { form_builder: f, obj: :phone, form_label: t('personal_details.phone'), form_placeholder: t('dummy_placeholder.phone') } %>
+      <%= render 'layouts/text_field', { form_builder: f, obj: :phone, form_label: t('personal_details.phone'), form_placeholder: t('dummy_placeholder.phone') } %>
 
       <%= render 'select_field', {form_builder: f, obj: :language, options: Language.all.collect{|p| [p.name,p.code]}, form_label: t('personal_details.language')} %>
 
-      <%= render 'text_field', { form_builder: f, obj: :email, form_label: t('personal_details.email'), form_placeholder: t('dummy_placeholder.email') } %>
+      <%= render 'layouts/text_field', { form_builder: f, obj: :email, form_label: t('personal_details.email'), form_placeholder: t('dummy_placeholder.email') } %>
 
       <%= render 'select_field', {form_builder: f, obj: :specialization, options: Specialization.all.collect{|p| [p.name,p.name]}, form_label: t('personal_details.specialization')} %>
 

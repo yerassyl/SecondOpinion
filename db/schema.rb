@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160123153123) do
+ActiveRecord::Schema.define(version: 20160202113338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "allergies", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "medical_history_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "allergies", ["medical_history_id"], name: "index_allergies_on_medical_history_id", using: :btree
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id"
@@ -40,6 +49,40 @@ ActiveRecord::Schema.define(version: 20160123153123) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
+
+  create_table "clients", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "country"
+    t.string   "phone"
+    t.string   "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
+
+  create_table "diseases", force: :cascade do |t|
+    t.string   "diagnose"
+    t.string   "condition"
+    t.string   "treatment"
+    t.text     "other"
+    t.integer  "medical_history_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "diseases", ["medical_history_id"], name: "index_diseases_on_medical_history_id", using: :btree
+
+  create_table "lab_tests", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "file"
+    t.integer  "medical_history_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "lab_tests", ["medical_history_id"], name: "index_lab_tests_on_medical_history_id", using: :btree
 
   create_table "languages", force: :cascade do |t|
     t.string   "name",       null: false
@@ -100,6 +143,68 @@ ActiveRecord::Schema.define(version: 20160123153123) do
 
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
+
+  create_table "managers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "managers", ["user_id"], name: "index_managers_on_user_id", using: :btree
+
+  create_table "medical_histories", force: :cascade do |t|
+    t.text     "reason"
+    t.boolean  "smoke",      default: false
+    t.boolean  "drink",      default: false
+    t.boolean  "pregnant",   default: false
+    t.integer  "patient_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "medical_histories", ["patient_id"], name: "index_medical_histories_on_patient_id", using: :btree
+
+  create_table "medications", force: :cascade do |t|
+    t.string   "name"
+    t.string   "dose"
+    t.integer  "per_day"
+    t.text     "other"
+    t.integer  "medical_history_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "medications", ["medical_history_id"], name: "index_medications_on_medical_history_id", using: :btree
+
+  create_table "other_documents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "file"
+    t.integer  "medical_history_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "other_documents", ["medical_history_id"], name: "index_other_documents_on_medical_history_id", using: :btree
+
+  create_table "patients", force: :cascade do |t|
+    t.string   "firstname",              null: false
+    t.string   "middlename"
+    t.string   "lastname",               null: false
+    t.date     "birthday"
+    t.string   "maritial_status"
+    t.boolean  "gender"
+    t.string   "email",                  null: false
+    t.string   "telephone"
+    t.string   "cellphone"
+    t.string   "emergency_person"
+    t.string   "emergency_person_phone"
+    t.integer  "client_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "patients", ["client_id"], name: "index_patients_on_client_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",       null: false

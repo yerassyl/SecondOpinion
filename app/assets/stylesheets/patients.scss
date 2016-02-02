@@ -1,0 +1,19 @@
+// Place all the styles related to the patients controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#diseases {
+    padding: 20px;
+}
+.nested-fields {
+  margin-bottom:30px;
+  border: 1px solid $aluminum;
+  padding: 20px;
+}
+.medical-history .section {
+  margin-bottom:30px;
+  border-bottom: 1px solid $aluminum;
+}
+.medical-history .sub-section {
+  padding-bottom: 20px;
+}

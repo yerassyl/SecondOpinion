@@ -14,6 +14,7 @@
 
             <% if user_signed_in? %>
               <li><a href=""><%= print_role(current_user) %></a></li>
+              <li><a href=""><%= current_user.name %></a></li>
               <li><%= link_to t('forms.auth.logout'), destroy_user_session_path, method: :delete %></li>
             <% else %>
             <li data-no-turbolink><%= link_to t('forms.auth.login'), new_user_session_path %></li>

@@ -1,0 +1,45 @@
+<%= render 'layouts/messages' %>
+
+<div class="row">
+  <div class="small-3 columns">
+    <h2>My patients </h2>
+  </div>
+  <div class="small-9 columns">
+    <%= link_to t('patient_module.new_patient'), new_patient_path, class:'button tiny' %>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+
+    <table>
+      <thead>
+        <tr>
+          <td>Full name</td>
+          <td>Date of birth</td>
+          <td>Maritial Status</td>
+          <td>Email</td>
+          <td>Telephone</td>
+          <td>Gender</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+      <% @patients.each do |patient| %>
+        <tr>
+          <td><%= "#{patient.firstname} #{patient.middlename} #{patient.lastname} "  %></td>
+          <td><%= patient.birthday %></td>
+          <td><%= patient.maritial_status %></td>
+          <td><%= patient.email %></td>
+          <td><%= patient.telephone %></td>
+          <td><%= patient.gender %></td>
+          <td><%= link_to (fa_icon 'eye',class:'fa-2x'), patient %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <%= current_user.client.patients.present? %>
+
+  </div>
+</div>

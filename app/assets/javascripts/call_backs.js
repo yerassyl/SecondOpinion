@@ -7,7 +7,7 @@ $(document).ready(function(){
     $('#new_call_back').on('ajax:success', function(e,data,status,xhr){
         console.log("success");
         // show success message to client
-        // due to some problems with ajax:succes detection this is done in create.js.erb
+        // due to some problems with ajax:success detection this is done in create.js.erb
 
 
     }).on('ajax:error',function(e,data,status,xhr){
@@ -28,6 +28,7 @@ $(document).ready(function(){
         }
         if (response.email!=null){
             $('#call_back_email').addClass("error-input-field").removeClass('input-field').attr('placeholder',response.email);
+            $('#email-message').text(response.email);
         }
         if (response.specialization!=null){
             $('#call_back_specialization').addClass("error-input-field").removeClass('input-field');

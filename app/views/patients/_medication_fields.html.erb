@@ -1,0 +1,10 @@
+<div class="nested-fields">
+
+  <%= render 'layouts/text_field',form_builder: f,obj: :name, form_label:t('patient_module.medical_history.medication.medication_name'), form_placeholder:'' %>
+  <%= render 'layouts/text_field',form_builder: f,obj: :dose, form_label:t('patient_module.medical_history.medication.dose'), form_placeholder:'' %>
+  <%= render 'layouts/text_field',form_builder: f,obj: :per_day, form_label:t('patient_module.medical_history.medication.per_day'), form_placeholder:'' %>
+  <%= render 'layouts/text_field',form_builder: f,obj: :other, form_label:t('patient_module.medical_history.other'), form_placeholder:'' %>
+
+  <%= link_to_remove_association "#{t('verbs.remove')} #{t('patient_module.medical_history.medication.medication')}", f, class:'float-right' %>
+
+</div>

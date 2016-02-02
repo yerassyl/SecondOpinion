@@ -1,0 +1,39 @@
+<div class="form">
+
+  <div class="row">
+
+    <div class="small-12 columns">
+      <h2> Add Patient </h2>
+      <%= render 'layouts/messages' %>
+      <%= render 'layouts/error_messages', object: @patient %>
+
+      <%= form_for @patient do |f| %>
+          <%= render 'layouts/text_field', form_builder: f, obj: :firstname,form_label: t('personal_details.firstname'),form_placeholder: ''%>
+          <%= render 'layouts/text_field', form_builder: f, obj: :middlename,form_label: t('personal_details.middlename'),form_placeholder: '' %>
+          <%= render 'layouts/text_field', form_builder: f, obj: :lastname, form_label: t('personal_details.lastname'), form_placeholder: '' %>
+          <%= render 'layouts/text_field', form_builder: f, obj: :email, form_label: t('personal_details.email'), form_placeholder:'' %>
+
+          <%= f.label t('personal_details.date_of_birth') %>
+          <%= f.date_select(:birthday, start_year: 1940, end_year: 2016) %>
+
+          <%= f.label t('personal_details.maritial_status') %>
+          <%= f.select(:maritial_status, %w[Married Not-married] ) %>
+
+          <%= f.label t('personal_details.gender') %>
+          <%= f.select(:gender, [['Male','1'],['Female','0']] ) %>
+
+          <%= render 'layouts/text_field', form_builder: f, obj: :telephone, form_label: t('personal_details.telephone'), form_placeholder:'' %>
+          <%= render 'layouts/text_field', form_builder: f, obj: :cellphone, form_label: t('personal_details.cellphone'), form_placeholder:'' %>
+          <%= render 'layouts/text_field', form_builder: f, obj: :emergency_person, form_label: t('personal_details.emergency_person'), form_placeholder:'' %>
+          <%= render 'layouts/text_field', form_builder: f, obj: :emergency_person_phone, form_label: t('personal_details.emergency_person_phone'), form_placeholder:'' %>
+
+          <%= f.hidden_field :client_id %>
+          <%= f.submit t('forms.submit'), class:'button success' %> OR
+          <%= link_to t('forms.submit_and_proceed_to_medical_history'), '#', class:'button success' %>
+
+      <% end %>
+    </div>
+
+  </div>
+
+</div>

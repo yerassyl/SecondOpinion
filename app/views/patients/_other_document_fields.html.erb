@@ -1,0 +1,10 @@
+<div class="nested-fields">
+
+  <%= render 'layouts/text_field',form_builder: f,obj: :name, form_label:t('personal_details.name'), form_placeholder:'' %>
+  <%= render 'layouts/text_field',form_builder: f,obj: :description, form_label:t('nouns.singular.description'), form_placeholder:'' %>
+
+  <%= f.file_field :other_document, multiple:true, accept: 'image/jpg,application/pdf'%>
+
+  <%= link_to_remove_association "#{t('verbs.remove')} #{t('nouns.singular.document')}", f, class:'float-right' %>
+
+</div>
