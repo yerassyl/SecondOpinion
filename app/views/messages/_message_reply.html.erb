@@ -1,0 +1,24 @@
+<%= form_tag messages_path, method: :post do %>
+    <div class="row">
+      <div class="large-4 columns">
+        <%= label_tag 'message[subject]', 'Subject' %>
+        <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-4 columns">
+        <%= label_tag 'message[body]', 'Message' %>
+        <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-4 columns">
+        <%= label_tag 'recipients', 'Choose recipients' %>
+        <%= select_tag 'recipients', recipients_options, multiple: true, class: 'form-control' %>
+      </div>
+    </div>
+
+    <%= submit_tag 'Send', class: 'button' %>
+<% end %>

@@ -4,7 +4,11 @@ class ConversationsController < ApplicationController
   before_action :get_conversation, except: [:index]
 
   def index
-    @conversations = @mailbox.inbox.page(params[:page])
+    @conversations = @mailbox.conversations.page(params[:page]).per(20)
+  end
+
+  def compose
+
   end
 
   def show

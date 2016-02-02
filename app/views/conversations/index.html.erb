@@ -1,9 +1,23 @@
 <%= render 'layouts/header' %>
 
-<p><%= link_to 'Start conversation', new_message_path, class: 'btn btn-lg btn-primary' %></p>
+<%= render 'conversations/conversation_sidebar' %>
 
-<ul class="list-group">
-  <%= render partial: 'conversations/conversation', collection: @conversations %>
-</ul>
+<main id="main">
+  <div class="overlay"></div>
+  <header class="header">
+    <div class="search-box">
+      <input placeholder="Search..."><span class="icon glyphicon glyphicon-search"></span>
+    </div>
+    <h1 class="page-title"><a class="sidebar-toggle-btn trigger-toggle-sidebar"><span class="line"></span><span class="line"></span><span class="line"></span><span class="line line-angle1"></span><span class="line line-angle2"></span></a>Inbox<a><span class="icon glyphicon glyphicon-chevron-down"></span></a></h1>
+  </header>
+  <div id="main-nano-wrapper" class="nano">
+    <div class="nano-content">
+      <ul class="message-list">
+        <%= render partial: 'conversations/conversation', collection: @conversations %>
+      </ul>
+      <a href="#" class="load-more-link">Show more messages</a>
+    </div>
+  </div>
+</main>
 
-<%= paginate @conversations %>
+<%= render 'conversations/conversation_message' %>

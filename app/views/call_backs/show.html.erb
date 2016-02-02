@@ -8,6 +8,12 @@
 </div>
 
 <div class="row">
+  <div class="small-12 columns">
+    <%= link_to t('navigation.go_back'), managers_path %>
+  </div>
+</div>
+
+<div class="row">
   <div class="small-7 columns">
     <%= render 'call_backs/detail_row', key: t('personal_details.name'), value: @call_back.name %>
     <%= render 'call_backs/detail_row', key: t('personal_details.email'), value: @call_back.email %>
@@ -18,7 +24,7 @@
   </div>
 
   <div class="small-5 columns">
-    <%= link_to t('client_registration.accept_and_register'), '#', class: 'button tiny success' %>
+    <%= link_to t('client_registration.accept_and_register'), client_accept_path(@call_back), class: 'button tiny success' %>
   </div>
 
 </div>

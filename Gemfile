@@ -43,7 +43,7 @@ gem 'kaminari' # pagintaion library
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# gem 'capistrano-rails', group: :developmentrai
 
 
 group :development, :test do

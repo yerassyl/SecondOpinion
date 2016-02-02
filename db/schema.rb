@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(version: 20160123153123) do
     t.text     "message"
     t.boolean  "didAgree"
     t.string   "code"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.boolean  "accepted",       default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "languages", force: :cascade do |t|

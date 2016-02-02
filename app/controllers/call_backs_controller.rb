@@ -1,5 +1,6 @@
 class CallBacksController < ApplicationController
   load_and_authorize_resource
+
   before_action :set_callback, only: [:show]
 
 
@@ -22,6 +23,7 @@ class CallBacksController < ApplicationController
 
   def show
   end
+
 
 
   private
