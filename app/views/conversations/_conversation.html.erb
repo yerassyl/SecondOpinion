@@ -1,3 +1,13 @@
-<li class="list-group-item clearfix">
-  <%= link_to conversation.subject, conversation_path(conversation) %>
+<li class="unread">
+  <div class="col col-1"><span class="dot"></span>
+    <div class="checkbox-wrapper">
+      <input type="checkbox" id="chk1">
+      <label for="chk1" class="toggle"></label>
+    </div>
+    <div class="title">Medopinion Manager</div>
+  </div>
+  <div class="col col-2">
+    <div class="subject">Subject: <%= link_to conversation.subject, conversation_path(conversation) %></div>
+    <div class="date">11:49 am</div>
+  </div>
 </li>
