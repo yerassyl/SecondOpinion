@@ -1,0 +1,24 @@
+<aside id="sidebar" class="nano">
+  <div class="nano-content">
+    <div class="logo-container"><%= button_to 'Messaging', conversations_path, class: 'logo-container', method: :get %></div>
+
+    <%= button_to 'Compose New', new_message_path, class: 'compose-button', method: :get %>
+    <menu class="menu-segment">
+      <ul>
+        <li class="active"><a href="#">Inbox<span> (9)</span></a></li>
+        <li><a href="#">Sent</a></li>
+        <li><a href="#">Trash</a></li>
+      </ul>
+    </menu>
+    <div class="separator"></div>
+    <div class="menu-segment">
+      <ul class="labels">
+        <li class="title">Your Patients</li>
+        <li><a href="#">Yerassyl D.<span class="ball pink"></span></a></li>
+        <li><a href="#">Anuar S.<span class="ball green"></span></a></li>
+        <li><a href="#">Sagynysh B.<span class="ball blue"></span></a></li>
+      </ul>
+    </div>
+    <div class="bottom-padding"></div>
+  </div>
+</aside>

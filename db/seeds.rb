@@ -34,11 +34,16 @@ roles = Role.create(
                   password: '12345678'
   )
 
+  client = User.create(
+                   name: 'client',
+                   email: 'client@gmail.com',
+                   password: '12345678'
+  )
+
   # assign adming role to admin user
   adminAssignment = Assignment.create(user_id: '1', role_id:'1')
   managerAssignment = Assignment.create(user_id: '2', role_id:'4')
-
-
+  clientAssignment = Assignment.create(user_id: '3', role_id: '2')
 
   languages = Language.create(
                           [
