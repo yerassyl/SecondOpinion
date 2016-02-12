@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'mailboxer' # Messaging gem
 
 # major gems
-gem 'react-rails', '~> 1.5.0' # react js library
+gem 'react-rails', '~> 1.6.0' # react js library
 gem 'foundation-rails' # foundation zurb for front-end
 gem 'font-awesome-rails' # icons
 gem 'active_model_serializers' # json serializers

@@ -1,14 +1,23 @@
+$border-color: $iron;
+
+.section {
+
+}
 .profile {
-  margin: 10px 5px;
   padding: 30px;
+  border-bottom: 1px solid $border-color;
+}
+.profile-info {
+  color: $jet;
+  li {
+    list-style: none;
+  }
 }
 
-.profile-info li {
-  list-style: none;
+.medical-history {
+  border-right: 1px solid $border-color;
 }
-.profile-info .labels {
-  color: $jumbo;
-}
-.profile-info .values {
 
+.headings {
+  border-bottom: 3px solid $warning-color;
 }

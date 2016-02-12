@@ -8,7 +8,6 @@ class PatientsController < ApplicationController
   end
 
   def show
-
   end
 
   def create
@@ -40,6 +39,24 @@ class PatientsController < ApplicationController
     end
   end
 
+  def allergies
+    render :json => @allergies = {
+      chronicsList: Allergy.all,
+      :form => {
+          :action => create_allergy_patients_path,
+          :csrf_param => request_forgery_protection_token,
+          :csrf_token => form_authenticity_token
+      }
+    }
+  end
+
+  # add allergy to patient's profile
+  def create_allergy
+    @allergy = Allergy.new(allergy_params)
+    if @allergy.save
+      render :json => @allergy
+    end
+  end
 
   private
 
@@ -58,6 +75,10 @@ class PatientsController < ApplicationController
   def patient_params
     params.require(:patient).permit(:firstname,:middlename,:lastname,:birthday,:maritial_status,:gender,:email,
                                     :telephone,:cellphone,:emergency_person,:emergency_person_phone, :client_id)
+  end
+
+  def allergy_params
+    params.require(:allergy).permit(:name,:patient_id)
   end
 
   def medical_history_params

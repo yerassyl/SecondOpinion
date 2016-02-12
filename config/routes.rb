@@ -27,7 +27,9 @@ Rails.application.routes.draw do
     resources :patients, only: [:new,:create,:show] do
       collection do
         get 'new_medical_history'
+        get 'allergies'
         post 'create_medical_history', action: :create_medical_history
+        post 'create_allergy', action: :create_allergy
       end
     end
 

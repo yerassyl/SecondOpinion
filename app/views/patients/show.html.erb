@@ -35,9 +35,23 @@
 
 </div>
 
-<div class="row medical-history">
-    <h2> Medical History </h2>
-    <div class="small-12 large-12 columns">
+<div class="row">
+    <div class="small-3 large-3 columns medical-history">
+      <h3 class="headings">Allergies</h3>
+      <%= @allergies %>
+      <%= react_component('ChronicBox', {url_get: allergies_patients_path,
+                                         url_post: create_allergy_patients_path, obj: 'allergy'}) %>
+
+      <h3 class="headings">Diseases</h3>
+      <ul>
+        <li>disease 1</li>
+        <li>disease 1</li>
+        <li>disease 1</li>
+        <li>disease 1</li>
+      </ul>
+
+    </div>
+    <div class="small-9 large-9 columns">
 
     </div>
 </div>

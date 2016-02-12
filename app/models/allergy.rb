@@ -1,4 +1,6 @@
 class Allergy < ActiveRecord::Base
-  belongs_to :medical_history
+  # note: this class describes relation of allergy to particular patient
+  # it is not allergies database
+  belongs_to :patient
 
 end
