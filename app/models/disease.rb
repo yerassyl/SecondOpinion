@@ -1,4 +1,6 @@
 class Disease < ActiveRecord::Base
-  belongs_to :medical_history
+  # note: this class describes relation of disease to particular patient
+  # it is not disease database
+  belongs_to :patient
 
 end

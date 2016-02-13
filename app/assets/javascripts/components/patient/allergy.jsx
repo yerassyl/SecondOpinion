@@ -1,10 +1,10 @@
-// chronics = allergies | diseases
+// allergies = allergies | diseases
 
-var ChronicBox = React.createClass({
+var AllergyBox = React.createClass({
 
     getInitialState: function(){
       return {
-          chronicsList: [],
+          allergiesList: [],
           form: []
       }
     },
@@ -19,7 +19,7 @@ var ChronicBox = React.createClass({
           url: this.props.url_get,
           dataType: 'json',
           success: function(data){
-            this.setState({chronicsList: data.chronicsList});
+            this.setState({allergiesList: data.allergiesList});
             this.setState({form: data.form});
           }.bind(this),
           error: function(xhr, status, err){
@@ -27,21 +27,21 @@ var ChronicBox = React.createClass({
           }.bind(this)
       });
     },
-    handleChronicSubmit: function(chronic) {
+    handleAllergySubmit: function(allergy) {
         // optimistic update
-        var chronics = this.state.chronicsList;
-        var tempChronic = {
-            name: chronic.name,
+        var allergies = this.state.allergiesList;
+        var tempAllergy = {
+            name: allergy.name,
             id: Date.now()
         };
-        var newChronics = chronics.concat([tempChronic]);
+        var newAllergies = allergies.concat([tempAllergy]);
+        this.setState({allergiesList: newAllergies});
         // declare formData to be submitted
         var formData = {
-            csrf_token: chronic.csrf_token,
-            csrf_param: chronic.csrf_param,
-            'allergy[name]': chronic.name
-        }
-        this.setState({chronicsList: newChronics});
+                csrf_token: allergy.csrf_token,
+                csrf_param: allergy.csrf_param,
+                'allergy[name]': allergy.name
+            };
         $.ajax({
             url: this.props.url_post,
             dataType: 'json',
@@ -49,44 +49,44 @@ var ChronicBox = React.createClass({
             data: formData,
             success: function(data){
                 console.log(data);
-                //this.setState({chronicsList: data });
+                //this.setState({allergiesList: data });
             }.bind(this),
             error: function(xhr, status, err){
-                this.setState({chronicsList: chronics });
+                this.setState({allergiesList: allergies });
                 console.error(this.props.url_post, status, err.toString());
             }.bind(this)
         });
     },
     render: function(){
         return(
-            <div className="chronics">
-                <ChronicsList chronics={this.state.chronicsList} />
-                <ChronicForm url={this.props.url_post} form={this.state.form}
-                             onChronicSubmit={this.handleChronicSubmit} obj={this.props.obj}/>
+            <div className="allergies">
+                <AllergiesList allergies={this.state.allergiesList} />
+                <AllergyForm url={this.props.url_post} form={this.state.form}
+                             onAllergySubmit={this.handleAllergySubmit} obj={this.props.obj}/>
             </div>
         )
     }
 });
 
-var ChronicsList = React.createClass({
+var AllergiesList = React.createClass({
     getDefaultProps: function(){
-      return {chronics: []}
+      return {allergies: []}
     },
     render:function(){
-        var chronics = this.props.chronics.map(function(chronic){
+        var allergies = this.props.allergies.map(function(allergy){
             return(
-                <Chronic name={chronic.name} key={chronic.id} />
+                <Allergy name={allergy.name} key={allergy.id} />
             )
         });
         return(
             <ul>
-                {chronics}
+                {allergies}
             </ul>
         )
     }
 });
 
-var Chronic = React.createClass({
+var Allergy = React.createClass({
 
     render: function(){
         return(
@@ -96,7 +96,7 @@ var Chronic = React.createClass({
 });
 
 
-var ChronicForm = React.createClass({
+var AllergyForm = React.createClass({
 
     getInitialState: function(){
       return {inputText: "" }
@@ -104,7 +104,7 @@ var ChronicForm = React.createClass({
     handleInputChange: function(e){
         this.setState( {inputText: e.target.value});
     },
-    addChronic: function(e){
+    addAllergy: function(e){
         e.preventDefault();
         var csrf_param = this.props.form.csrf_param;
         var csrf_token = this.props.form.csrf_token;
@@ -113,9 +113,7 @@ var ChronicForm = React.createClass({
             return;
         }
         // form params
-
-        var object = this.props.obj+"[name]";
-        this.props.onChronicSubmit({
+        this.props.onAllergySubmit({
             csrf_param: csrf_param,
             csrf_token: csrf_token,
             name: input
@@ -125,9 +123,8 @@ var ChronicForm = React.createClass({
     },
 
     render:function(){
-        var name = this.props.obj+"[name]";
         return(
-            <form className="addChronic" onSubmit={this.addChronic} method="post" action={this.props.url} acceptCharset="UTF-8">
+            <form className="addAllergy" onSubmit={this.addAllergy} method="post" action={this.props.url} acceptCharset="UTF-8">
              <input name="utf8" type="hidden" value="✓" />
              <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
             <div className="row">
@@ -135,7 +132,7 @@ var ChronicForm = React.createClass({
                     <div className="row collapse">
 
                             <div className="small-10 columns">
-                                <input type="text" name={name} value={this.state.inputText} onChange={this.handleInputChange} />
+                                <input type="text" name='allergy[name]' value={this.state.inputText} onChange={this.handleInputChange} />
                             </div>
 
                             <div className="small-2 columns">

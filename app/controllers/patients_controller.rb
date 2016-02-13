@@ -41,11 +41,11 @@ class PatientsController < ApplicationController
 
   def allergies
     render :json => @allergies = {
-      chronicsList: Allergy.all,
-      :form => {
-          :action => create_allergy_patients_path,
-          :csrf_param => request_forgery_protection_token,
-          :csrf_token => form_authenticity_token
+      allergiesList: Allergy.all,
+      form: {
+          action:  create_allergy_patients_path,
+          csrf_param:  request_forgery_protection_token,
+          csrf_token:  form_authenticity_token
       }
     }
   end
@@ -56,6 +56,21 @@ class PatientsController < ApplicationController
     if @allergy.save
       render :json => @allergy
     end
+  end
+
+  def diseases
+    render :json => @diseases = {
+        chronicList: Disease.all,
+        form: {
+            action: create_disease_patients_path,
+            csrf_param: request_forgery_protection_token,
+            csrf_token: form_authenticity_token
+        }
+    }
+  end
+
+  def create_disease
+
   end
 
   private
@@ -79,6 +94,10 @@ class PatientsController < ApplicationController
 
   def allergy_params
     params.require(:allergy).permit(:name,:patient_id)
+  end
+
+  def disease_params
+    params.require(:disease).permit(:name, :patient_id)
   end
 
   def medical_history_params

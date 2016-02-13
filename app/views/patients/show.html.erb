@@ -39,9 +39,10 @@
     <div class="small-3 large-3 columns medical-history">
       <h3 class="headings">Allergies</h3>
       <%= @allergies %>
-      <%= react_component('ChronicBox', {url_get: allergies_patients_path,
-                                         url_post: create_allergy_patients_path, obj: 'allergy'}) %>
-
+      <%= react_component('AllergyBox', {url_get: allergies_patients_path,
+                                         url_post: create_allergy_patients_path}) %>
+      <%#= react_component('C',{url_get: diseases_patients_path,
+                                        url_post: create_disease_patients_path, obj: 'disease'}) %>
       <h3 class="headings">Diseases</h3>
       <ul>
         <li>disease 1</li>
