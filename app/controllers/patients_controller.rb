@@ -41,12 +41,12 @@ class PatientsController < ApplicationController
 
   def allergies
     render :json => @allergies = {
-      allergiesList: Allergy.where(patient_id: @patient.id),
-      form: {
-          action:  create_allergy_patients_path,
-          csrf_param:  request_forgery_protection_token,
-          csrf_token:  form_authenticity_token
-      }
+        allergiesList: Allergy.where(patient_id: @patient.id),
+        form: {
+            action:  create_allergy_patients_path,
+            csrf_param:  request_forgery_protection_token,
+            csrf_token:  form_authenticity_token
+        }
     }
   end
 
@@ -54,9 +54,20 @@ class PatientsController < ApplicationController
   def create_allergy
     @allergy = Allergy.new(allergy_params)
     if @allergy.save
-      render :json => @allergy
+      render json: {
+          allergiesList: Allergy.where(patient_id: params[:allergy][:patient_id])
+      }
     end
   end
+
+  def delete_allergy
+    if Allergy.delete(params[:allergy_id])
+      render json: {status: :ok}
+    else
+      render json: {status: :error}
+    end
+  end
+
 
   def diseases
     render :json => @diseases = {

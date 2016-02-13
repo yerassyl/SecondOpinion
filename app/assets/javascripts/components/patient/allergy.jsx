@@ -1,4 +1,3 @@
-// allergies = allergies | diseases
 
 var AllergyBox = React.createClass({
 
@@ -12,6 +11,7 @@ var AllergyBox = React.createClass({
         return {
             url_get: "",
             url_post: "",
+            url_delete: "",
             patient_id: 0
         }
     },
@@ -50,8 +50,7 @@ var AllergyBox = React.createClass({
             method: 'POST',
             data: formData,
             success: function(data){
-                console.log(data);
-                //this.setState({allergiesList: data });
+                this.setState({allergiesList: data.allergiesList });
             }.bind(this),
             error: function(xhr, status, err){
                 this.setState({allergiesList: allergies });
@@ -59,10 +58,33 @@ var AllergyBox = React.createClass({
             }.bind(this)
         });
     },
+    handleAllergyDelete: function(allergy){
+        // optimistically delete
+        var allergies = this.state.allergiesList;
+        var newAllergies = allergies.filter(function(a){
+            return a.id != allergy.id;
+        });
+        this.setState({allergiesList: newAllergies});
+        // handle allergy delete here
+        var allergy_id = allergy.id;
+        $.ajax({
+            url: this.props.url_delete,
+            dataType: 'json',
+            method: 'POST',
+            data: {allergy_id: allergy_id},
+            success: function(data){
+                //this.setState({allergiesList: data.allergiesList});
+            }.bind(this),
+            error: function(xhr,status,err){
+                this.setState({allergiesList: allergies});
+                console.error(this.props.url_delete, status, err.toString());
+            }.bind(this)
+        });
+    },
     render: function(){
         return(
             <div className="allergies">
-                <AllergiesList allergies={this.state.allergiesList} />
+                <AllergiesList allergies={this.state.allergiesList} onHandleDelete={this.handleAllergyDelete} />
                 <AllergyForm url={this.props.url_post} form={this.state.form}
                              onAllergySubmit={this.handleAllergySubmit} obj={this.props.obj}/>
             </div>
@@ -74,10 +96,15 @@ var AllergiesList = React.createClass({
     getDefaultProps: function(){
       return {allergies: []}
     },
+    handleAllergyDelete: function(allergy){
+      // pass allergy id up to AllergyBox
+      this.props.onHandleDelete({id: allergy.id});
+    },
     render:function(){
+        var that = this;
         var allergies = this.props.allergies.map(function(allergy){
             return(
-                <Allergy name={allergy.name} key={allergy.id} />
+            <Allergy onAllergyDelete={that.handleAllergyDelete} name={allergy.name} key={allergy.id} id={allergy.id} />
             )
         });
         return(
@@ -87,17 +114,16 @@ var AllergiesList = React.createClass({
         )
     }
 });
-
+//
 var Allergy = React.createClass({
-    getDefaultProps: function(){
-        return {
-            id: 0,
-            name: ""
-        }
-    },
+
     deleteAllergy: function(e){
         e.preventDefault();
-
+        var allergy_id = this.props.id;
+        // pass allergy id up to AllergyList
+        this.props.onAllergyDelete({
+           id: allergy_id
+        });
     },
     render: function(){
         return(
