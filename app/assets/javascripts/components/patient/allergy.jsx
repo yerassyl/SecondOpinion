@@ -11,12 +11,13 @@ var AllergyBox = React.createClass({
     getDefaultPros: function(){
         return {
             url_get: "",
-            url_post: ""
+            url_post: "",
+            patient_id: 0
         }
     },
     componentDidMount: function(){
       $.ajax({
-          url: this.props.url_get,
+          url: this.props.url_get+"?id="+this.props.patient_id,
           dataType: 'json',
           success: function(data){
             this.setState({allergiesList: data.allergiesList});
@@ -40,7 +41,8 @@ var AllergyBox = React.createClass({
         var formData = {
                 csrf_token: allergy.csrf_token,
                 csrf_param: allergy.csrf_param,
-                'allergy[name]': allergy.name
+                'allergy[name]': allergy.name,
+                'allergy[patient_id]': this.props.patient_id
             };
         $.ajax({
             url: this.props.url_post,
@@ -87,10 +89,19 @@ var AllergiesList = React.createClass({
 });
 
 var Allergy = React.createClass({
+    getDefaultProps: function(){
+        return {
+            id: 0,
+            name: ""
+        }
+    },
+    deleteAllergy: function(e){
+        e.preventDefault();
 
+    },
     render: function(){
         return(
-            <li>{this.props.name}</li>
+            <li className="allergy-obj">{this.props.name} <a href="#" onClick={this.deleteAllergy} className="fa fa-trash"> </a> </li>
         )
     }
 });
@@ -147,7 +158,3 @@ var AllergyForm = React.createClass({
     }
 });
 
-
-
-
-//$(document).ready(ready);

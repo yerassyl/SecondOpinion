@@ -41,7 +41,7 @@ class PatientsController < ApplicationController
 
   def allergies
     render :json => @allergies = {
-      allergiesList: Allergy.all,
+      allergiesList: Allergy.where(patient_id: @patient.id),
       form: {
           action:  create_allergy_patients_path,
           csrf_param:  request_forgery_protection_token,

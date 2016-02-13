@@ -1,23 +1,40 @@
 $border-color: $iron;
+.patient {
 
-.section {
+  .section {
 
-}
-.profile {
-  padding: 30px;
-  border-bottom: 1px solid $border-color;
-}
-.profile-info {
-  color: $jet;
-  li {
-    list-style: none;
   }
-}
+  .profile {
+    padding: 30px;
+    border-bottom: 1px solid $border-color;
+  }
+  .profile-info {
+    color: $jet;
+    li {
+      list-style: none;
+    }
+  }
 
-.medical-history {
-  border-right: 1px solid $border-color;
-}
+  .medical-history {
+    border-right: 1px solid $border-color;
+  }
 
-.headings {
-  border-bottom: 3px solid $warning-color;
+  .headings {
+    border-bottom: 3px solid $warning-color;
+  }
+  ul {
+    margin-left: 0;
+  }
+  .fa {
+    float:right;
+    color: $border-color;
+  }
+  .allergy-obj {
+    border-bottom: 1px solid $border-color;
+    padding-top:7px;
+    &:hover {
+      background-color: $white-smoke;
+    }
+  }
+
 }
