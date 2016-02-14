@@ -1,6 +1,11 @@
 $border-color: $iron;
 .patient {
-
+  .fl {
+    float:left;
+  }
+  .fr {
+    float: right;
+  }
   .section {
 
   }
@@ -26,15 +31,52 @@ $border-color: $iron;
     margin-left: 0;
   }
   .fa {
-    float:right;
     color: $border-color;
   }
-  .allergy-obj {
+  .allergy-obj, .disease-obj {
     border-bottom: 1px solid $border-color;
-    padding-top:7px;
+    padding: 7px 4px;
     &:hover {
       background-color: $white-smoke;
     }
+  }
+  .disease-obj .disease-extra {
+    color: $border-color;
+  }
+
+
+  // switch checkbox styles
+  .switch-on {
+    position: absolute;
+    left: -55px;
+    top: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 9px;
+  }
+
+  .switch-off {
+    position: absolute;
+    left: -25px;
+    top: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 9px;
+  }
+
+  .sub-menu {
+    border-top: 3px solid $alert-color;
+  }
+  .sub-menu i {
+    color: $success-color;
+    margin-right:5px;
+  }
+
+  .show {
+    display: block;
+  }
+  .hide {
+    display: none;
   }
 
 }

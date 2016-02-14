@@ -37,7 +37,8 @@
 </div>
 
 <div class="row">
-    <div class="small-3 large-3 columns medical-history">
+
+  <div class="small-3 large-3 columns medical-history">
       <h3 class="headings">Allergies</h3>
       <%= react_component('AllergyBox', {url_get: allergies_patients_path,
                                          url_post: create_allergy_patients_path,
@@ -45,14 +46,15 @@
                                           patient_id: @patient.id}) %>
 
       <h3 class="headings">Diseases</h3>
-      <ul>
-        <li>disease 1</li>
-        <li>disease 1</li>
-        <li>disease 1</li>
-        <li>disease 1</li>
-      </ul>
+      <%= react_component('DiseaseBox',{
+          url_get: diseases_patients_path,
+          url_post: create_disease_patients_path,
+          url_delete: delete_disease_patients_path,
+          patient_id: @patient.id
+      }) %>
 
     </div>
+
     <div class="small-9 large-9 columns">
 
     </div>

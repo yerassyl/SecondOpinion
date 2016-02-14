@@ -71,7 +71,7 @@ class PatientsController < ApplicationController
 
   def diseases
     render :json => @diseases = {
-        chronicList: Disease.all,
+        diseasesList: Disease.where(patient_id: @patient.id),
         form: {
             action: create_disease_patients_path,
             csrf_param: request_forgery_protection_token,
@@ -81,7 +81,20 @@ class PatientsController < ApplicationController
   end
 
   def create_disease
+    @disease = Disease.new(disease_params)
+    if @disease.save
+      render json: {
+          diseasesList: Disease.where(patient_id: params[:disease][:patient_id])
+      }
+    end
+  end
 
+  def delete_disease
+    if Disease.delete(params[:disease_id])
+      render json: {status: :ok}
+    else
+      render json: {status: :error}
+    end
   end
 
   private
@@ -108,7 +121,7 @@ class PatientsController < ApplicationController
   end
 
   def disease_params
-    params.require(:disease).permit(:name, :patient_id)
+    params.require(:disease).permit(:diagnose,:condition,:treatment,:other, :patient_id)
   end
 
   def medical_history_params

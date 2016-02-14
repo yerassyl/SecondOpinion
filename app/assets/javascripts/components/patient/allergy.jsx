@@ -4,7 +4,9 @@ var AllergyBox = React.createClass({
     getInitialState: function(){
       return {
           allergiesList: [],
-          form: []
+          form: [],
+          formClass: "hide",
+          trashClass: "hide"
       }
     },
     getDefaultPros: function(){
@@ -70,7 +72,7 @@ var AllergyBox = React.createClass({
         $.ajax({
             url: this.props.url_delete,
             dataType: 'json',
-            method: 'POST',
+            method: 'DELETE',
             data: {allergy_id: allergy_id},
             success: function(data){
                 //this.setState({allergiesList: data.allergiesList});
@@ -81,12 +83,28 @@ var AllergyBox = React.createClass({
             }.bind(this)
         });
     },
+    handleFormToggle: function(toggle){
+        var formClass = (toggle) ? "show" : "hide";
+        this.setState({formClass: formClass});
+    },
+    handleTrashToggle: function(toggle){
+        var formClass = (toggle) ? "show" : "hide";
+        this.setState({trashClass: formClass});
+    },
     render: function(){
         return(
             <div className="allergies">
-                <AllergiesList allergies={this.state.allergiesList} onHandleDelete={this.handleAllergyDelete} />
+                <AllergiesList allergies={this.state.allergiesList}
+                               onHandleDelete={this.handleAllergyDelete}
+                                trashClass={this.state.trashClass} />
+
+                <AllergyMenu onFormClassChange={this.handleFormToggle}
+                            onTrashToggle={this.handleTrashToggle} />
+
                 <AllergyForm url={this.props.url_post} form={this.state.form}
-                             onAllergySubmit={this.handleAllergySubmit} obj={this.props.obj}/>
+                             onAllergySubmit={this.handleAllergySubmit}
+                             obj={this.props.obj}
+                             formClass={this.state.formClass}/>
             </div>
         )
     }
@@ -101,12 +119,14 @@ var AllergiesList = React.createClass({
       this.props.onHandleDelete({id: allergy.id});
     },
     render:function(){
-        var that = this;
+        //var that = this;
         var allergies = this.props.allergies.map(function(allergy){
             return(
-            <Allergy onAllergyDelete={that.handleAllergyDelete} name={allergy.name} key={allergy.id} id={allergy.id} />
+            <Allergy onAllergyDelete={this.handleAllergyDelete}
+                     name={allergy.name} key={allergy.id} id={allergy.id}
+                    trashClass={this.props.trashClass} />
             )
-        });
+        },this);
         return(
             <ul>
                 {allergies}
@@ -127,11 +147,50 @@ var Allergy = React.createClass({
     },
     render: function(){
         return(
-            <li className="allergy-obj">{this.props.name} <a href="#" onClick={this.deleteAllergy} className="fa fa-trash"> </a> </li>
+            <li className="allergy-obj">
+                {this.props.name}
+                <span className="fr">
+                    <span className={this.props.trashClass}>
+                        <a href="#" onClick={this.deleteAllergy} className="fa fa-trash fr"> </a>
+                    </span>
+                </span>
+            </li>
+
+
         )
     }
 });
 
+var AllergyMenu = React.createClass({
+    getInitialState: function(){
+        return {
+            addMenu: true,
+            deleteMenu: true
+        }
+    },
+    // show/hide add Disease form
+    toggleAddAllergy: function(){
+        this.setState({addMenu: !this.state.addMenu});
+        this.props.onFormClassChange(this.state.addMenu);
+
+    },
+    toggleTrash: function(){
+        this.setState({deleteMenu: !this.state.deleteMenu});
+        this.props.onTrashToggle(this.state.deleteMenu);
+    },
+    render: function(){
+        return (
+            <div className="row">
+                <div className="small-12 large-12 columns">
+                    <h4 className="sub-menu">
+                        <i className="fa fa-plus-square" onClick={this.toggleAddAllergy}></i>
+                        <i className="fa fa-trash" onClick={this.toggleTrash}></i>
+                    </h4>
+                </div>
+            </div>
+        )
+    }
+});
 
 var AllergyForm = React.createClass({
 
@@ -161,7 +220,7 @@ var AllergyForm = React.createClass({
 
     render:function(){
         return(
-            <form className="addAllergy" onSubmit={this.addAllergy} method="post" action={this.props.url} acceptCharset="UTF-8">
+            <form className={this.props.formClass} onSubmit={this.addAllergy} method="post" action={this.props.url} acceptCharset="UTF-8">
              <input name="utf8" type="hidden" value="✓" />
              <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
             <div className="row">

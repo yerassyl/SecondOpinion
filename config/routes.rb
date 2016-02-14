@@ -28,10 +28,11 @@ Rails.application.routes.draw do
       collection do
         get 'allergies'
         post 'create_allergy', action: :create_allergy
-        post 'delete_allergy', action: :delete_allergy
+        delete 'delete_allergy', action: :delete_allergy
 
         get 'diseases'
         post 'create_disease', action: :create_disease
+        delete 'delete_disease', action: :delete_disease
 
         get 'new_medical_history'
         post 'create_medical_history', action: :create_medical_history
