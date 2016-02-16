@@ -1,6 +1,4 @@
-
 var AllergyBox = React.createClass({
-
     getInitialState: function(){
       return {
           allergiesList: [],
