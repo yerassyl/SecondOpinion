@@ -41,12 +41,12 @@ class PatientsController < ApplicationController
 
   def allergies
     render :json => @allergies = {
-      chronicsList: Allergy.all,
-      :form => {
-          :action => create_allergy_patients_path,
-          :csrf_param => request_forgery_protection_token,
-          :csrf_token => form_authenticity_token
-      }
+        allergiesList: Allergy.where(patient_id: @patient.id),
+        form: {
+            action:  create_allergy_patients_path,
+            csrf_param:  request_forgery_protection_token,
+            csrf_token:  form_authenticity_token
+        }
     }
   end
 
@@ -54,7 +54,46 @@ class PatientsController < ApplicationController
   def create_allergy
     @allergy = Allergy.new(allergy_params)
     if @allergy.save
-      render :json => @allergy
+      render json: {
+          allergiesList: Allergy.where(patient_id: params[:allergy][:patient_id])
+      }
+    end
+  end
+
+  def delete_allergy
+    if Allergy.delete(params[:allergy_id])
+      render json: {status: :ok}
+    else
+      render json: {status: :error}
+    end
+  end
+
+
+  def diseases
+    render :json => @diseases = {
+        diseasesList: Disease.where(patient_id: @patient.id),
+        form: {
+            action: create_disease_patients_path,
+            csrf_param: request_forgery_protection_token,
+            csrf_token: form_authenticity_token
+        }
+    }
+  end
+
+  def create_disease
+    @disease = Disease.new(disease_params)
+    if @disease.save
+      render json: {
+          diseasesList: Disease.where(patient_id: params[:disease][:patient_id])
+      }
+    end
+  end
+
+  def delete_disease
+    if Disease.delete(params[:disease_id])
+      render json: {status: :ok}
+    else
+      render json: {status: :error}
     end
   end
 
@@ -79,6 +118,10 @@ class PatientsController < ApplicationController
 
   def allergy_params
     params.require(:allergy).permit(:name,:patient_id)
+  end
+
+  def disease_params
+    params.require(:disease).permit(:diagnose,:condition,:treatment,:other, :patient_id)
   end
 
   def medical_history_params

@@ -5,7 +5,7 @@ class CreateDiseases < ActiveRecord::Migration
       t.string :condition
       t.string :treatment
       t.text :other
-      t.belongs_to :medical_history, index:true
+      t.belongs_to :patient, index: true
       t.timestamps null: false
     end
   end

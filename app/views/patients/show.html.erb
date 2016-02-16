@@ -1,4 +1,5 @@
 <%= render 'layouts/messages' %>
+<div class="patient">
 
 <div class="row profile">
   <h2> Personal Details </h2>
@@ -36,22 +37,27 @@
 </div>
 
 <div class="row">
-    <div class="small-3 large-3 columns medical-history">
+
+  <div class="small-3 large-3 columns medical-history">
       <h3 class="headings">Allergies</h3>
-      <%= @allergies %>
-      <%= react_component('ChronicBox', {url_get: allergies_patients_path,
-                                         url_post: create_allergy_patients_path, obj: 'allergy'}) %>
+      <%= react_component('AllergyBox', {url_get: allergies_patients_path,
+                                         url_post: create_allergy_patients_path,
+                                         url_delete: delete_allergy_patients_path,
+                                          patient_id: @patient.id}) %>
 
       <h3 class="headings">Diseases</h3>
-      <ul>
-        <li>disease 1</li>
-        <li>disease 1</li>
-        <li>disease 1</li>
-        <li>disease 1</li>
-      </ul>
+      <%= react_component('DiseaseBox',{
+          url_get: diseases_patients_path,
+          url_post: create_disease_patients_path,
+          url_delete: delete_disease_patients_path,
+          patient_id: @patient.id
+      }) %>
 
     </div>
+
     <div class="small-9 large-9 columns">
 
     </div>
+</div>
+
 </div>
