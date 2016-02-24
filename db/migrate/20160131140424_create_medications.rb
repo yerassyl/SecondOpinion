@@ -5,7 +5,7 @@ class CreateMedications < ActiveRecord::Migration
       t.string :dose
       t.integer :per_day
       t.text :other
-      t.belongs_to :medical_history, index:true
+      t.belongs_to :medical_situation, index:true
       t.timestamps null: false
     end
   end

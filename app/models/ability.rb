@@ -19,7 +19,7 @@ class Ability
 
   def client(user)
     can :manage, Client, :id => user.client.id
-    can [:read, :new_medical_history,:create_medical_history,
+    can [:read, :new_medical_history,:create_medical_situation,
          :allergies, :create_allergy, :delete_allergy,
          :diseases, :create_disease, :delete_disease], Patient do |patient|
       any_patient?(user.client, patient.id)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202113338) do
+ActiveRecord::Schema.define(version: 20160220092409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,12 +77,12 @@ ActiveRecord::Schema.define(version: 20160202113338) do
     t.string   "name"
     t.text     "description"
     t.string   "file"
-    t.integer  "medical_history_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "medical_situation_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  add_index "lab_tests", ["medical_history_id"], name: "index_lab_tests_on_medical_history_id", using: :btree
+  add_index "lab_tests", ["medical_situation_id"], name: "index_lab_tests_on_medical_situation_id", using: :btree
 
   create_table "languages", force: :cascade do |t|
     t.string   "name",       null: false
@@ -164,28 +164,37 @@ ActiveRecord::Schema.define(version: 20160202113338) do
 
   add_index "medical_histories", ["patient_id"], name: "index_medical_histories_on_patient_id", using: :btree
 
+  create_table "medical_situations", force: :cascade do |t|
+    t.string   "reason"
+    t.integer  "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "medical_situations", ["patient_id"], name: "index_medical_situations_on_patient_id", using: :btree
+
   create_table "medications", force: :cascade do |t|
     t.string   "name"
     t.string   "dose"
     t.integer  "per_day"
     t.text     "other"
-    t.integer  "medical_history_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "medical_situation_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  add_index "medications", ["medical_history_id"], name: "index_medications_on_medical_history_id", using: :btree
+  add_index "medications", ["medical_situation_id"], name: "index_medications_on_medical_situation_id", using: :btree
 
   create_table "other_documents", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.string   "file"
-    t.integer  "medical_history_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "medical_situation_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  add_index "other_documents", ["medical_history_id"], name: "index_other_documents_on_medical_history_id", using: :btree
+  add_index "other_documents", ["medical_situation_id"], name: "index_other_documents_on_medical_situation_id", using: :btree
 
   create_table "patients", force: :cascade do |t|
     t.string   "firstname",              null: false

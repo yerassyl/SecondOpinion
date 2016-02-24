@@ -1,13 +1,14 @@
 $border-color: $iron;
 .patient {
-  .fl {
-    float:left;
-  }
-  .fr {
-    float: right;
-  }
-  .section {
 
+  .green {
+    color: $success-color;
+  }
+  .grey {
+    color: $border-color;
+  }
+  .fa {
+    color: $border-color;
   }
   .profile {
     padding: 30px;
@@ -29,9 +30,6 @@ $border-color: $iron;
   }
   ul {
     margin-left: 0;
-  }
-  .fa {
-    color: $border-color;
   }
   .allergy-obj, .disease-obj {
     border-bottom: 1px solid $border-color;
@@ -77,6 +75,32 @@ $border-color: $iron;
   }
   .hide {
     display: none;
+  }
+
+
+  #diseases {
+    padding: 20px;
+  }
+  .nested-fields {
+    border-bottom: 1px solid $border-color;
+    padding: 20px 20px 0 20px;
+  }
+  .medical-history .section {
+    margin-bottom:30px;
+    border-bottom: 1px solid $border-color;
+  }
+  .medical-history .sub-section {
+    padding-bottom: 20px;
+  }
+  .nested-fields .links h4 a {
+    color: $success-color;
+  }
+  // situation form
+  .situation-form {
+    padding: 30px;
+  }
+  #new_med_situation_btn {
+    margin:20px;
   }
 
 }

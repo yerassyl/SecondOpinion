@@ -23,6 +23,7 @@ en:
   verbs:
     remove: "Remove"
     add: "Add"
+    taking: "Taking"
   nouns:
     singular:
       disease: "Disease"
@@ -99,6 +100,7 @@ en:
     medical_history:
       medical_history_added: "New medical history has been added"
       reason: "Reason"
+      reason_you_came: "Reason taking consultations"
       do_you_smoke: "Do you smoke?"
       do_you_drink: "Do you drink?"
       are_you_pregnant: "Are you pregnant?"
@@ -113,9 +115,14 @@ en:
         medication_name: "Medication name"
         dose: "Dose"
         per_day: "Frequency"
+        placeholders:
+          dose: 'Dosing amount'
+          per_day: 'How many times per day'
+          any_other: 'Any other information'
       allergy:
         allergy_name: "Allergy name"
-
+  medical_situation_added: "New Medical Situation has been opened"
+  medical_situation_error: 'Sorry, There were problems creating medical situation'
 
 
 

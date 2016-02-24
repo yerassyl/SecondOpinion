@@ -33,6 +33,7 @@ gem 'active_model_serializers' # json serializers
 gem 'devise' # authorization library
 gem 'cancancan', '~> 1.10'  # authentication library
 gem 'carrierwave' # file upload
+gem 'remotipart', '~> 1.2' # file upload via js
 
 # small functionality gems
 gem 'country_select' # select tag with all countries in iso etc. formats

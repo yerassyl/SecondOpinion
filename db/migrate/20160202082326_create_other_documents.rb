@@ -4,7 +4,7 @@ class CreateOtherDocuments < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :file
-      t.belongs_to :medical_history, index: true
+      t.belongs_to :medical_situation, index: true
       t.timestamps null: false
     end
   end

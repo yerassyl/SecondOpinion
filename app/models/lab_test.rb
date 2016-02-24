@@ -7,5 +7,9 @@ class LabTest < ActiveRecord::Base
   # validates_attachment :file, content_type: { content_type: ['image/jpg', 'application/pdf'] }
 
   mount_uploader :file, LabTestUploader
-  belongs_to :medical_history
+#  validates :name, presence: true
+
+  attr_accessor :avatar_cache
+  belongs_to :medical_situation
+
 end

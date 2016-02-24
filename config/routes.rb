@@ -34,8 +34,8 @@ Rails.application.routes.draw do
         post 'create_disease', action: :create_disease
         delete 'delete_disease', action: :delete_disease
 
-        get 'new_medical_history'
-        post 'create_medical_history', action: :create_medical_history
+        get 'new_medical_situation'
+        post 'create_medical_situation', action: :create_medical_situation
       end
     end
 

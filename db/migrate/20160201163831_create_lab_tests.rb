@@ -4,7 +4,7 @@ class CreateLabTests < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.string :file
-      t.belongs_to :medical_history, index:true
+      t.belongs_to :medical_situation, index:true
       t.timestamps null: false
     end
   end

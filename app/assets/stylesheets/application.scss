@@ -10,7 +10,15 @@
 @import "profile";
 @import "patients";
 
-
+.fl {
+  float:left;
+}
+.fr {
+  float: right;
+}
+.clear {
+  clear: both;
+}
 li {
   list-style: none;
 }
@@ -61,6 +69,7 @@ table td {
   border-radius: 3px;
 
 }
+// styles for error messages in input filds
 .error-input-field {
   border-color: $alert-color !important;
   opacity: .8;

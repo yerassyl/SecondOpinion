@@ -27,7 +27,7 @@
       </div>
 
       <div class="small-4 large-4 columns">
-        <%= link_to t('patient_module.add_medical_history'), new_medical_history_patients_path(patient: @patient) %>
+
       </div>
 
     </div>
@@ -56,6 +56,66 @@
     </div>
 
     <div class="small-9 large-9 columns">
+
+      <div class="row">
+        <div class="small-12 large-12 columns">
+          <span><%= link_to 'New Medical Situation', '#',class:'button success tiny', id:'new_med_situation_btn' %>
+          </span>
+          <%= render 'medical_situation_form' %>
+        </div>
+      </div>
+
+
+        <% @medical_situations.each do |medical_situation| %>
+          <div class="row medical_situation">
+            <div class="small-12 large-12 columns">
+
+              <div class="row">
+                <div class="small-3 large-3 columns">
+                  <h4><%= t('patient_module.medical_history.reason') %></h4>
+                </div>
+                <div class="small-9 large-9 columns">
+                  <%= medical_situation.reason %>
+                </div>
+              </div>
+
+              <div class="row">
+
+                <div class="small-4 large-4 columns">
+                  <h4><%= "#{t('nouns.plural.medications')} #{t('verbs.taking')}" %></h4>
+                  <% if medical_situation.medications.present? %>
+                      <% medical_situation.medications.each do |medication| %>
+                          medication: <%= medication.name %>
+                          dose: <%= medication.dose %>
+                          per day: <%= medication.per_day %>
+                          other: <%= medication.other %>
+                      <% end %>
+                  <% end %>
+                </div>
+
+                <div class="small-4 large-4 columns">
+                  <h4><%= t('nouns.plural.lab_tests')%></h4>
+                  <% if medical_situation.lab_tests.present? %>
+                      <% medical_situation.lab_tests.each do |lab_test| %>
+                          lab test: <%= lab_test.name %>
+                          description: <%= lab_test.description %>
+                          file: <%= lab_test.file.url %>
+                      <% end %>
+                  <% end %>
+                </div>
+
+                <div class="small-4 large-4 columns">
+                  <h4><%= t('nouns.plural.other_documents')%></h4>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        <% end %>
+
+
 
     </div>
 </div>

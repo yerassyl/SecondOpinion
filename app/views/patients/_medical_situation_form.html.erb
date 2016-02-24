@@ -1,0 +1,61 @@
+<%= render 'layouts/messages' %>
+<%= render 'layouts/error_messages', object: @medical_situation %>
+
+<%= form_for @medical_situation, url: create_medical_situation_patients_path(patient:@patient),:authenticity_token => true,
+             html: {class:'situation-form'} do |f| %>
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix"><%= t('patient_module.medical_history.reason')%></span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <%= f.text_field :reason, placeholder:t('patient_module.medical_history.reason_you_came') %>
+      </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="small-4 large-4 columns">
+        <h4 class="headings"> <%= t('nouns.plural.medications')%> </h4>
+
+        <%= f.fields_for :medications do |medication| %>
+            <%= render 'patients/medication_fields', f: medication %>
+        <% end %>
+        <div class="links">
+          <h4><%= link_to_add_association '', f, :medications, class:'fa fa-plus-square green' %></h4>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="small-4 large-4 columns">
+        <h4 class="headings"> <%= t('nouns.plural.lab_tests') %> </h4>
+        <div>
+          <%= f.fields_for :lab_tests do |lab_test| %>
+              <%= render 'patients/lab_test_fields', f: lab_test %>
+          <% end %>
+        </div>
+        <div class="links">
+          <h4><%= link_to_add_association '', f, :lab_tests,class:'fa fa-plus-square green' %></h4>
+        </div>
+      </div>
+
+      <div class="small-4 large-4 columns">
+        <h4 class="headings"> <%= t('nouns.plural.other_medical_documents') %> </h4>
+        <%= f.fields_for :other_documents do |other_document| %>
+            <%= render 'patients/other_document_fields', f: other_document %>
+        <% end %>
+        <div class="links">
+          <h4><%= link_to_add_association '', f, :other_documents, class:'fa fa-plus-square green' %></h4>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="small-12 large-12 columns" id="error-messages">
+
+      </div>
+    </div>
+    <%= f.submit t('forms.submit'), class:'button success', id:'submit_medical_situation' %>
+
+<% end %>

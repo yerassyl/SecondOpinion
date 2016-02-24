@@ -1,13 +1,16 @@
 class PatientsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_patient, only: [:new_medical_history]
+  before_action :set_patient, only: [:new_medical_situation]
 
   def new
     @patient = Patient.new
   end
 
   def show
+    @medical_situation = MedicalSituation.new
+    @medical_situations = MedicalSituation.where(patient_id: @patient.id)
+    build_nested_attributes
   end
 
   def create
@@ -21,22 +24,33 @@ class PatientsController < ApplicationController
     end
   end
 
-  def new_medical_history
-    @medical_history = MedicalHistory.new
-    build_nested_attributes
+  def new_medical_situation
+    @medical_situation = MedicalSituation.new
   end
 
-  def create_medical_history
+  def create_medical_situation
     @patient_id = params[:patient]
-    @medical_history = MedicalHistory.new(medical_history_params)
-    if @medical_history.save
-      flash.now[:medical_history_added] = I18n.t('patient_module.medical_history.medical_history_added')
-      redirect_to patient_path(@patient_id)
-    else
-      @patient = Patient.find(@patient_id)
-      #build_nested_attributes
-      render 'new_medical_history'
+    @medical_situation = MedicalSituation.new(medical_situation_params)
+    @medical_situation.patient_id = @patient_id
+    respond_to do |format|
+      if @medical_situation.save
+        format.json { render json: @medical_situation, status: :created}
+        format.html {
+          flash[:success] = I18n.t('medical_situation_added')
+          redirect_to patient_path(@patient_id)
+        }
+      else
+        format.json {render json: @medical_situation.errors, status: :unprocessable_entity}
+        format.html {
+          flash[:alert] = 'Sorry, There were problems creating medical situations'
+          redirect_to patient_path(@patient_id)
+        }
+        @patient = Patient.find(@patient_id)
+
+      end
+
     end
+
   end
 
   def allergies
@@ -104,11 +118,9 @@ class PatientsController < ApplicationController
   end
 
   def build_nested_attributes
-    @medical_history.diseases.build
-    @medical_history.medications.build
-    @medical_history.allergies.build
-    @medical_history.lab_tests.build
-    @medical_history.other_documents.build
+    @medical_situation.medications.build
+    @medical_situation.lab_tests.build
+    @medical_situation.other_documents.build
   end
 
   def patient_params
@@ -124,13 +136,11 @@ class PatientsController < ApplicationController
     params.require(:disease).permit(:diagnose,:condition,:treatment,:other, :patient_id)
   end
 
-  def medical_history_params
-    params.require(:medical_history).permit(:reason,:smoke,:drink,:pregnant,
-      diseases_attributes:[:id,:_destroy,:diagnose,:condition,:treatment,:other,:medical_history_id],
-      medications_attributes:[:id,:_destroy,:name,:dose,:per_day,:other,:medical_history_id],
-      allergies_attributes: [:id,:_destroy,:name],
-      lab_tests_attributes: [:id,:_destroy,:name,:description,:file],
-      other_documents_attributes: [:id,:_destroy, :name, :description, :file]
+  def medical_situation_params
+    params.require(:medical_situation).permit(:reason, :patient_id,
+      medications_attributes:[:id,:_destroy,:name,:dose,:per_day,:other,:medical_situation_id],
+      lab_tests_attributes: [:id,:_destroy,:name,:description, :medical_situation_id,:file,:file_cache],
+      other_documents_attributes: [:id,:_destroy, :name, :description, :medical_situation_id, :file, :other_document_cache]
     )
   end
 

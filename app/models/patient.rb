@@ -7,7 +7,7 @@ class Patient < ActiveRecord::Base
   validates :email, uniqueness: true
 
   belongs_to :client
-  has_many :medical_histories
+  has_many :medical_situations
   has_many :allergies
   has_many :diseases
 
