@@ -135,7 +135,7 @@ var Disease = React.createClass({
        });
    },
    render: function(){
-       console.log(this.props.diseaseObj.condition);
+       //console.log(this.props.diseaseObj.condition);
        var condition = (this.props.diseaseObj.condition=="true") ? 'Issue' : 'Not an issue';
        var treatment = (this.props.diseaseObj.treatment=="true") ? 'Taking treatment' : 'Not taking treatment';
 
@@ -191,7 +191,9 @@ var DiseaseForm = React.createClass({
             diagnose:"",
             condition: false,
             treatment: false,
-            otherInformation: ""
+            otherInformation: "",
+            diagnoseClass: "",
+            diagnosePlaceholder: "",
         }
     },
     handleDiagnoseChange: function(e){
@@ -217,6 +219,8 @@ var DiseaseForm = React.createClass({
         var otherInformation = this.state.otherInformation.trim();
 
         if (!diagnose){
+            this.setState({diagnoseClass: 'error-input-field'});
+            this.setState({diagnosePlaceholder: 'this field cant be blank'});
             return;
         }
 
@@ -233,6 +237,8 @@ var DiseaseForm = React.createClass({
         this.setState({condition:false});
         this.setState({treatment:false});
         this.setState({otherInformation:""});
+        this.setState({diagnoseClass: ""});
+        this.setState({diagnosePlaceholder: ""});
     },
 
     render: function(){
@@ -246,7 +252,8 @@ var DiseaseForm = React.createClass({
                        <span className="prefix">Disease</span>
                    </div>
                    <div className="small-8 large-8 columns">
-                       <input type="text" value={this.state.diagnose} onChange={this.handleDiagnoseChange} />
+                       <input type="text" value={this.state.diagnose} onChange={this.handleDiagnoseChange} className={this.state.diagnoseClass}
+                       placeholder={this.state.diagnosePlaceholder}/>
                    </div>
                </div>
 

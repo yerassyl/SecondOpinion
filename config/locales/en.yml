@@ -114,7 +114,9 @@ en:
         medication: "Medication"
         medication_name: "Medication name"
         dose: "Dose"
-        per_day: "Frequency"
+        frequency: "Frequency"
+        times: "times"
+        per_day: "Per day"
         placeholders:
           dose: 'Dosing amount'
           per_day: 'How many times per day'
@@ -123,6 +125,9 @@ en:
         allergy_name: "Allergy name"
   medical_situation_added: "New Medical Situation has been opened"
   medical_situation_error: 'Sorry, There were problems creating medical situation'
+  file: "File"
+  open: "Open"
+  download: "Download"
 
 
 

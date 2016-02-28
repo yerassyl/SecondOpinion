@@ -42,6 +42,12 @@ table td {
 .float-right {
   float: right;
 }
+.button {
+  &:active {
+    position: relative;
+    top:-1px;
+  }
+}
 
 // classes for text color
 .alert {
@@ -69,7 +75,7 @@ table td {
   border-radius: 3px;
 
 }
-// styles for error messages in input filds
+// styles for error messages in input fields
 .error-input-field {
   border-color: $alert-color !important;
   opacity: .8;

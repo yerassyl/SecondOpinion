@@ -24,5 +24,4 @@
 $(function(){
     $(document).foundation();
 
-
 });
