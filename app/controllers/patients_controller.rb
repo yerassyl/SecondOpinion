@@ -9,7 +9,7 @@ class PatientsController < ApplicationController
 
   def show
     @medical_situation = MedicalSituation.new
-    @medical_situations = MedicalSituation.where(patient_id: @patient.id)
+    @medical_situations = MedicalSituation.where('patient_id = ? AND closed=?', @patient.id, false).limit(1).order(created_at: :desc)
     build_nested_attributes
   end
 
@@ -46,11 +46,19 @@ class PatientsController < ApplicationController
           redirect_to patient_path(@patient_id)
         }
         @patient = Patient.find(@patient_id)
-
       end
-
     end
+  end
 
+  # load more medical situations that belong to that patient
+  def load_more
+    if params[:id]
+      @med_situations = MedicalSituation.where('id < ?', params[:id]).limit(5)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def allergies

@@ -1,0 +1,71 @@
+<div class="row medical_situation record" data-id="<%= medical_situation.id %>">
+  <div class="small-12 large-12 columns">
+
+    <div class="row">
+      <div class="small-12 large-12 columns">
+        <span class="fr heading">date opened: <%= medical_situation.created_at.to_date %></span>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="small-3 large-2 columns">
+        <span class="heading"><%= t('patient_module.medical_history.reason') %></span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <span class="reason"><%= medical_situation.reason %></span>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="small-4 large-4 columns">
+        <h4 class="headings"><%= "#{t('nouns.plural.medications')} #{t('verbs.taking')}" %></h4>
+        <% if medical_situation.medications.present? %>
+            <ul>
+              <% medical_situation.medications.each do |medication| %>
+                  <li>
+                    <span class="heading"><%= t('nouns.singular.medication')%>:</span> <%= medication.name %><br>
+                    <span class="heading"><%= t('patient_module.medical_history.medication.dose')%>:</span> <%= medication.dose %> |
+                    <span class="heading"><%= t('patient_module.medical_history.medication.frequency')%>:</span> <%= medication.per_day %> <%= t('patient_module.medical_history.medication.times') %><br>
+                    <span class="heading"><%= t('patient_module.medical_history.other')%>:</span> <%= medication.other %>
+                  </li>
+              <% end %>
+            </ul>
+        <% end %>
+      </div>
+
+      <div class="small-4 large-4 columns">
+        <h4 class="headings"><%= t('nouns.plural.lab_tests')%></h4>
+        <% if medical_situation.lab_tests.present? %>
+            <ul>
+              <% medical_situation.lab_tests.each do |lab_test| %>
+                  <li>
+                    <span class="heading"><%= t('personal_details.name')%>:</span> <%= lab_test.name %> <br>
+                    <span class="heading"><%= t('nouns.singular.description')%>:</span> <%= lab_test.description %><br>
+                    <span class="heading"><%= t('file')%></span> <%= link_to t('open'), lab_test.file.url, {target:'_blank'} %>
+                  </li>
+              <% end %>
+        <% end %>
+        </ul>
+      </div>
+
+      <div class="small-4 large-4 columns">
+        <h4 class="headings"><%= t('nouns.plural.other_documents')%></h4>
+        <% if medical_situation.other_documents.present? %>
+            <ul>
+              <% medical_situation.other_documents.each do |other_document| %>
+                  <li>
+                    <span class="heading"><%= t('personal_details.name')%>:</span> <%= other_document.name %><br>
+                    <span class="heading"><%= t('nouns.singular.description')%></span> <%= other_document.description %><br>
+                    <span class="heading"><%= t('file')%>: </span> <%=link_to t('open'), other_document.file.url %>
+                  </li>
+              <% end %>
+            </ul>
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
+</div>

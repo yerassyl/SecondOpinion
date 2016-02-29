@@ -167,8 +167,9 @@ ActiveRecord::Schema.define(version: 20160220092409) do
   create_table "medical_situations", force: :cascade do |t|
     t.string   "reason"
     t.integer  "patient_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "closed",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "medical_situations", ["patient_id"], name: "index_medical_situations_on_patient_id", using: :btree

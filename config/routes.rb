@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
         get 'new_medical_situation'
         post 'create_medical_situation', action: :create_medical_situation
+
+        get 'load_more'
       end
     end
 

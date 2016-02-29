@@ -8,6 +8,7 @@ class LabTest < ActiveRecord::Base
 
   mount_uploader :file, LabTestUploader
 #  validates :name, presence: true
+  validates :file, presence: true
 
   attr_accessor :avatar_cache
   belongs_to :medical_situation
