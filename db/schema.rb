@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220092409) do
+ActiveRecord::Schema.define(version: 20160305150016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160220092409) do
     t.boolean  "didAgree"
     t.string   "code"
     t.boolean  "accepted",       default: false
+    t.boolean  "rejected",       default: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
@@ -72,6 +73,16 @@ ActiveRecord::Schema.define(version: 20160220092409) do
   end
 
   add_index "diseases", ["patient_id"], name: "index_diseases_on_patient_id", using: :btree
+
+  create_table "doctors", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "address"
+    t.string   "resume"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "lab_tests", force: :cascade do |t|
     t.string   "name"

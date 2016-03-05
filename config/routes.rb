@@ -17,7 +17,12 @@ Rails.application.routes.draw do
   # if not authenticated, user will be redirected to sign in page
   authenticate :user do
 
-    resources :managers, only: [:index]
+    resources :managers, only: [:index] do
+      collection do
+        get :rejected
+        get :accepted
+      end
+    end
     resources :clients, only: [:index,:new,:show] do
       collection do
         post 'accept', action: :accept
@@ -41,6 +46,7 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :doctors, only: [:new, :create]
     resources :call_backs, only: [:index, :show]
     resources :conversations, only: [:index, :show, :destroy]
     resources :messages, only: [:new, :create]

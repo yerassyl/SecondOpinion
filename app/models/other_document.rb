@@ -8,8 +8,8 @@ class OtherDocument < ActiveRecord::Base
   mount_uploader :file, OtherDocumentUploader
 
   attr_accessor :other_document_cache
-  belongs_to :medical_situation
 
+  belongs_to :medical_situation
   validates :file, presence: true
 
 end

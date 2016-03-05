@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
          :trackable,
          :validatable
 
+   validates :email, uniqueness: true
   # Allows the model to exchange messages with other users
   acts_as_messageable
 

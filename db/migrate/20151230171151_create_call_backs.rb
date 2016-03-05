@@ -11,6 +11,7 @@ class CreateCallBacks < ActiveRecord::Migration
       t.boolean :didAgree
       t.string :code
       t.boolean :accepted, default:false
+      t.boolean :rejected, default:false
       t.timestamps null: false
     end
   end

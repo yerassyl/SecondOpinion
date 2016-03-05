@@ -1,0 +1,53 @@
+
+<%= render 'layouts/messages' %>
+
+<div class="row module-menu">
+  <div class="small-12 large-12 columns">
+
+    <%= link_to t('register_doctor'), new_doctor_path, class:'button tiny'  %>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+
+    <h2> <%= t('client_callbacks')%></h2>
+
+    <dl class="sub-nav">
+
+      <dt>Filter:</dt>
+      <dd class="<%= 'active' if current_page?(controller: :managers, action: :index) %>">
+        <%= link_to t('incoming'), managers_path %>
+      </dd>
+      <dd class="<%= 'active' if current_page?(controller: :managers, action: :rejected) %>">
+        <%= link_to t('rejected'), rejected_managers_path %>
+      </dd>
+      <dd class="<%= 'active' if current_page?(controller: :managers, action: :accepted) %>">
+        <%= link_to t('accepted'), accepted_managers_path %>
+      </dd>
+
+    </dl>
+
+    <table>
+      <thead>
+      <tr>
+        <td><%= t('personal_details.name') %></td>
+        <td><%= t('personal_details.email') %> </td>
+        <td><%= t('personal_details.country') %></td>
+        <td><%= t('personal_details.phone') %></td>
+        <td><%= t('personal_details.specialization') %></td>
+        <td><%= t('personal_details.message') %> </td>
+        <td> </td>
+      </tr>
+      </thead>
+      <tbody id="call_backs">
+      <%= render call_backs %>
+      <%= paginate call_backs %>
+      </tbody>
+
+    </table>
+
+  </div>
+</div>
+

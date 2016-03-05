@@ -6,7 +6,7 @@
   <%= render 'layouts/text_field',form_builder: f,obj: :description, form_label:t('nouns.singular.description'),
              form_placeholder:'' %>
   <%= f.file_field :file, accept: 'image/jpg,application/pdf'%>
-  <%#= f.hidden_field :file_cache %>
+  <%= f.hidden_field :file_cache %>
   <h4><%= link_to_remove_association '',f, class:'grey fa fa-trash' %></h4>
 
 </div>

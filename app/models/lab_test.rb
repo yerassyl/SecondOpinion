@@ -10,7 +10,7 @@ class LabTest < ActiveRecord::Base
 #  validates :name, presence: true
   validates :file, presence: true
 
-  attr_accessor :avatar_cache
+  attr_accessor :file_cache
   belongs_to :medical_situation
 
 end

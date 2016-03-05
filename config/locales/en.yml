@@ -50,6 +50,7 @@ en:
     date_of_birth: "Date of birth"
     maritial_status: "Maritial Status"
     gender: "Gender"
+    address: 'Address'
     telephone: "Telephone"
     cellphone: "Cellphone"
     emergency_person: "Emergency person"
@@ -80,6 +81,7 @@ en:
     phone: "777 007 01 01"
     email: "jreacher@gmail.com"
     message: "I am Jack Reacher, I'll kill you"
+    address: "District 13"
   client_registration:
     accepted: 'Accepted'
     accept_and_register: "Accept and create account"
@@ -129,6 +131,14 @@ en:
   open: "Open"
   download: "Download"
   load_more: "Load More"
+  register_doctor: 'Register new Doctor'
+  resume: 'Resume'
+  doctor_has_been_registered: 'Doctor has been successfully registered'
+  client_callbacks: 'Client Callbacks'
+  rejected: 'Rejected'
+  accepted: 'Accepted'
+  incoming: 'Incoming'
+
 
 
 
