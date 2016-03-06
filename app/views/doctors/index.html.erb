@@ -1,0 +1,9 @@
+<%= render 'layouts/messages' %>
+<%= render 'managers/module_menu' %>
+
+<div class="row">
+  <div class="small-12 large-12 columns">
+    <h2> <%= t('module.doctor')%></h2>
+    <%= link_to t('register_doctor'), new_doctor_path, class:'button tiny'  %>
+  </div>
+</div>

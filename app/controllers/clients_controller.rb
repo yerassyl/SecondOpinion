@@ -50,6 +50,14 @@ class ClientsController < ApplicationController
 
   end
 
+  def reject
+    @call_back = CallBack.find(params[:callback_id])
+    call_back = CallBack.find(@call_back.id)
+    call_back.update(rejected: true)
+    flash[:alert] = I18n.t('you_rejected_callback') + @call_back.email
+    redirect_to @call_back
+  end
+
   def new
     @user = User.new
   end

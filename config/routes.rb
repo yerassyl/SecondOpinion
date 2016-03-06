@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :clients, only: [:index,:new,:show] do
       collection do
         post 'accept', action: :accept
+        post 'reject', action: :reject
       end
     end
 
@@ -46,8 +47,14 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :doctors, only: [:new, :create]
-    resources :call_backs, only: [:index, :show]
+    resources :doctors, only: [:index, :new, :create]
+    resources :call_backs, only: [:index, :show] do
+      collection do
+        get :incoming
+        get :rejected
+        get :accepted
+      end
+    end
     resources :conversations, only: [:index, :show, :destroy]
     resources :messages, only: [:new, :create]
 

@@ -1,5 +1,13 @@
 <%= render 'layouts/messages' %>
 
+<div class="row">
+  <div class="small-12 columns">
+    <span class="sub-nav">
+      <%= link_to t('navigation.go_back'), managers_path %>
+    </span>
+  </div>
+</div>
+
  <div class="row">
   <div class="small-4 columns">
     <h3>Client callback ID:<%= @call_back.id %></h3>
@@ -7,11 +15,7 @@
   <div class="small-8 columns"></div>
 </div>
 
-<div class="row">
-  <div class="small-12 columns">
-    <%= link_to t('navigation.go_back'), managers_path %>
-  </div>
-</div>
+
 
 <div class="row">
   <div class="small-7 columns">
@@ -26,8 +30,11 @@
   <div class="small-5 columns">
     <% if @call_back.accepted %>
       <%= link_to t('client_registration.accepted'), '#', class:'button tiny success disabled' %>
+    <% elsif @call_back.rejected %>
+        <%= link_to t('rejected'), '#', class:'button tiny alert disabled' %>
     <% else %>
       <%= link_to t('client_registration.accept_and_register'), accept_clients_path(callback_id: @call_back.id), method: :post, class: 'button tiny success' %>
+      <%= link_to t('verbs.reject'), reject_clients_path(callback_id: @call_back.id), method: :post, class:'button tiny alert' %>
     <% end %>
   </div>
 

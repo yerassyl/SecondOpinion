@@ -14,8 +14,8 @@ class Ability
   def manager(user)
     can :manage, Manager
     can [:read, :create], CallBack
-    can [:accept], Client
-    can [:new, :create], Doctor
+    can [:accept, :reject], Client
+    can [:index, :new, :create], Doctor
   end
 
   def client(user)

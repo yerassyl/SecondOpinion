@@ -24,6 +24,7 @@ en:
     remove: "Remove"
     add: "Add"
     taking: "Taking"
+    reject: "Reject"
   nouns:
     singular:
       disease: "Disease"
@@ -138,6 +139,11 @@ en:
   rejected: 'Rejected'
   accepted: 'Accepted'
   incoming: 'Incoming'
+  you_rejected_callback: 'You have rejected callback from: '
+  module:
+    doctor: "Doctor Module"
+    client: "Client Module"
+
 
 
 

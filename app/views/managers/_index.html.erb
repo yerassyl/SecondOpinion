@@ -1,13 +1,8 @@
 
 <%= render 'layouts/messages' %>
 
-<div class="row module-menu">
-  <div class="small-12 large-12 columns">
 
-    <%= link_to t('register_doctor'), new_doctor_path, class:'button tiny'  %>
-
-  </div>
-</div>
+<%= render 'module_menu' %>
 
 <div class="row">
   <div class="small-12 columns">
@@ -17,13 +12,13 @@
     <dl class="sub-nav">
 
       <dt>Filter:</dt>
-      <dd class="<%= 'active' if current_page?(controller: :managers, action: :index) %>">
+      <dd class="<%= incoming_sub_nav_link %>">
         <%= link_to t('incoming'), managers_path %>
       </dd>
-      <dd class="<%= 'active' if current_page?(controller: :managers, action: :rejected) %>">
+      <dd class="<%= rejected_sub_nav_link %>">
         <%= link_to t('rejected'), rejected_managers_path %>
       </dd>
-      <dd class="<%= 'active' if current_page?(controller: :managers, action: :accepted) %>">
+      <dd class="<%= accepted_sub_nav_link %>">
         <%= link_to t('accepted'), accepted_managers_path %>
       </dd>
 
