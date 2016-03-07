@@ -8,4 +8,8 @@ class LandingPageController < ApplicationController
 
   end
 
+  def leave_callback
+  	
+  end
+
 end
