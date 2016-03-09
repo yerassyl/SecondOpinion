@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(version: 20160309074850) do
 
   add_index "diseases", ["patient_id"], name: "index_diseases_on_patient_id", using: :btree
 
+  create_table "doctor_callbacks", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "resume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "doctors", force: :cascade do |t|
     t.string   "name"
     t.string   "email"

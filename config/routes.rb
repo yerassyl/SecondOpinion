@@ -68,6 +68,8 @@ Rails.application.routes.draw do
   # routes that do not need authentication must be declared here
   root 'landing_page#index'
   get 'access_denied' => 'landing_page#access_denied'
+  get 'leave_callback' => 'landing_page#leave_callback'
+  post 'send_resume' => 'landing_page#send_resume'
 
 
 
