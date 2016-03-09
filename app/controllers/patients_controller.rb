@@ -1,4 +1,5 @@
 class PatientsController < ApplicationController
+
   load_and_authorize_resource
 
   before_action :set_patient, only: [:new_medical_situation]
@@ -52,13 +53,33 @@ class PatientsController < ApplicationController
 
   # load more medical situations that belong to that patient
   def load_more
-    if params[:id]
-      @med_situations = MedicalSituation.where('id < ?', params[:id]).limit(5)
+    if params[:med_id]
+      @med_situations = MedicalSituation.where('id < ?', params[:med_id]).limit(5)
     end
     respond_to do |format|
       format.html
       format.js
     end
+  end
+
+  # list all family histories
+  def familyHistories
+    render :json => @familyHistories = {
+        familyHistories: FamilyHistory.where(patient_id: @patient.id),
+        form: {
+            action: create_familyHistory_patients_path,
+            csrf_param:  request_forgery_protection_token,
+            csrf_token:  form_authenticity_token
+        }
+    }
+  end
+
+  def create_familyHistory
+
+  end
+
+  def delete_familyHistory
+
   end
 
   def allergies

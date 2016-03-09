@@ -10,21 +10,22 @@ $border-color: $iron;
   .fa {
     color: $border-color;
   }
-  .profile {
-    padding: 30px;
+  .border-right {
+    border-right: 1px solid $border-color;
+  }
+  .border-bottom {
     border-bottom: 1px solid $border-color;
+  }
+  .profile {
+    padding: 10px;
   }
   .profile-info {
     color: $jet;
+    padding-bottom: 20px;
     li {
       list-style: none;
     }
   }
-
-  .medical-history {
-    border-right: 1px solid $border-color;
-  }
-
   .headings {
     border-bottom: 3px solid $warning-color;
   }
@@ -76,7 +77,6 @@ $border-color: $iron;
   .hide {
     display: none;
   }
-
 
   .nested-fields {
     border-bottom: 1px solid $border-color;

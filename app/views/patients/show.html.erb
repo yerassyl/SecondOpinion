@@ -1,19 +1,40 @@
 <%= render 'layouts/messages' %>
+
 <div class="patient">
 
-<div class="row profile">
-  <h2> Personal Details </h2>
-  <!-- Profile image -->
-  <div class="small-3 large-3 columns">
-    Personal profile image ???
+  <div class="row">
+  <div class="large-3 columns border-right">
+
+    <h3 class="headings"><%= t('nouns.singular.family_history')%> </h3>
+    <%= react_component('FamilyHistoryBox',
+        {
+            url_get: familyHistories_patients_path,
+            url_post: create_familyHistory_patients_path,
+            url_delete: delete_familyHistory_patients_path,
+            patient_id: @patient.id
+        }) %>
+
+    <h3 class="headings"><%= t('nouns.plural.allergies')%></h3>
+    <%= react_component('AllergyBox', {url_get: allergies_patients_path,
+                                       url_post: create_allergy_patients_path,
+                                       url_delete: delete_allergy_patients_path,
+                                       patient_id: @patient.id}) %>
+
+    <h3 class="headings"><%= t('nouns.plural.diseases') %></h3>
+    <%= react_component('DiseaseBox',{
+        url_get: diseases_patients_path,
+        url_post: create_disease_patients_path,
+        url_delete: delete_disease_patients_path,
+        patient_id: @patient.id
+    }) %>
+
   </div>
 
-  <!-- Profile short information -->
-  <div class="small-9 large-9 columns">
+  <div class="large-9 columns">
 
-    <div class="row profile-info">
-
-      <div class="small-8 large-8 columns">
+    <div class="row border-bottom">
+      <div class="large-12 columns profile-info">
+        <h3> Personal Details </h3>
         <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.firstname'), value: @patient.firstname %>
         <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.lastname'), value:@patient.lastname %>
         <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.middlename'), value:@patient.middlename %>
@@ -25,63 +46,36 @@
         <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.emergency_person'), value:@patient.emergency_person %>
         <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.emergency_person_phone'), value:@patient.emergency_person_phone %>
       </div>
+    </div>
 
-      <div class="small-4 large-4 columns">
+    <div class="row">
+      <div class="large-12 columns">
+
+          <div class="row">
+            <div class="small-12 large-12 columns">
+          <span><%= link_to 'New Medical Situation', '#',class:'button success tiny', id:'new_med_situation_btn' %>
+          </span>
+              <%= render 'medical_situation_form' %>
+            </div>
+          </div>
+
+          <div class="medical_situations_container">
+            <%= render @medical_situations %>
+          </div>
+
+          <div class="row">
+            <div class="large-6 columns large-offset-3 load_more">
+              <%= image_tag 'loading_spinner.gif', style: 'display:none; margin:auto; ', class: 'loading-gif' %>
+              <%= link_to t('load_more'), load_more_patients_path, class:'button tiny default expand', id:'load_more_med_situations'%>
+            </div>
+          </div>
 
       </div>
-
     </div>
 
   </div>
 
 </div>
 
-<div class="row">
-
-  <div class="small-3 large-3 columns medical-history">
-      <h3 class="headings">Allergies</h3>
-      <%= react_component('AllergyBox', {url_get: allergies_patients_path,
-                                         url_post: create_allergy_patients_path,
-                                         url_delete: delete_allergy_patients_path,
-                                          patient_id: @patient.id}) %>
-
-      <h3 class="headings">Diseases</h3>
-      <%= react_component('DiseaseBox',{
-          url_get: diseases_patients_path,
-          url_post: create_disease_patients_path,
-          url_delete: delete_disease_patients_path,
-          patient_id: @patient.id
-      }) %>
-
-    </div>
-
-    <div class="small-9 large-9 columns">
-
-      <div class="row">
-        <div class="small-12 large-12 columns">
-          <span><%= link_to 'New Medical Situation', '#',class:'button success tiny', id:'new_med_situation_btn' %>
-          </span>
-          <%= render 'medical_situation_form' %>
-        </div>
-      </div>
-
-
-      <div class="medical_situations_container">
-        <%= render @medical_situations %>
-      </div>
-
-      <div class="row">
-        <div class="large-6 columns large-offset-3 load_more">
-          <%= image_tag 'loading_spinner.gif', style: 'display:none; margin:auto; ', class: 'loading-gif' %>
-          <%= link_to t('load_more'), load_more_patients_path, class:'button tiny default expand', id:'load_more_med_situations'%>
-        </div>
-      </div>
-
-
-
-
-
-    </div>
-</div>
 
 </div>

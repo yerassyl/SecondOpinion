@@ -36,13 +36,13 @@ $(document).on('ready page:load',function(){
 
         // get the last id and save it in a variable 'last-id'
         var last_id = $('.record').last().attr('data-id');
-
+        console.log(last_id);
         $.ajax({
             url: $(this).attr('href'),
             dataType: 'script',
             method: 'GET',
             data: {
-                id: last_id
+                med_id: last_id
             },
             success: function () {
                 // hide the loading gif

@@ -32,6 +32,9 @@ Rails.application.routes.draw do
 
     resources :patients, only: [:new,:create,:show] do
       collection do
+        get 'familyHistories'
+        post :create_familyHistory
+        delete :delete_familyHistory
         get 'allergies'
         post 'create_allergy', action: :create_allergy
         delete 'delete_allergy', action: :delete_allergy
@@ -47,7 +50,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :doctors, only: [:index, :new, :create]
+    resources :doctors, only: [:index, :new, :create,:show]
     resources :call_backs, only: [:index, :show] do
       collection do
         get :incoming

@@ -15,12 +15,13 @@ class Ability
     can :manage, Manager
     can [:read, :create], CallBack
     can [:accept, :reject], Client
-    can [:index, :new, :create], Doctor
+    can [:index, :new, :create, :show], Doctor
   end
 
   def client(user)
     can :manage, Client, :id => user.client.id
     can [:read, :new_medical_history,:create_medical_situation,
+         :familyHistories, :create_familyHistory, :delete_familyHistory,
          :allergies, :create_allergy, :delete_allergy,
          :diseases, :create_disease, :delete_disease,
           :load_more], Patient do |patient|

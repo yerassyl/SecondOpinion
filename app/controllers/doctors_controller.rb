@@ -3,11 +3,15 @@ class DoctorsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @doctors = Doctor.all
+    @doctors = Doctor.order(created_at: 'DESC').page(params[:page])
   end
 
   def new
     @doctor = Doctor.new
+  end
+
+  def show
+
   end
 
   def create

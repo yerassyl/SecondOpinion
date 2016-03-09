@@ -193,7 +193,7 @@ var DiseaseForm = React.createClass({
             treatment: false,
             otherInformation: "",
             diagnoseClass: "",
-            diagnosePlaceholder: "",
+            diagnosePlaceholder: ""
         }
     },
     handleDiagnoseChange: function(e){

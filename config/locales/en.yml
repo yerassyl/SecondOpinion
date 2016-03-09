@@ -30,6 +30,7 @@ en:
       disease: "Disease"
       medication: "Medication"
       allergy: "Allergy"
+      family_history: "Family History"
       lab_test: "Lab Test"
       document: "Document"
       description: "Description"

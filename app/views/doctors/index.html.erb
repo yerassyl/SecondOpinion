@@ -7,3 +7,26 @@
     <%= link_to t('register_doctor'), new_doctor_path, class:'button tiny'  %>
   </div>
 </div>
+
+<div class="row">
+  <div class="small-12 large-12 columns">
+
+    <table>
+      <thead>
+      <tr>
+        <td><%= t('personal_details.name') %></td>
+        <td><%= t('personal_details.email') %> </td>
+        <td><%= t('personal_details.address') %></td>
+        <td><%= t('personal_details.phone') %></td>
+        <td> </td>
+      </tr>
+      </thead>
+      <tbody id="call_backs">
+      <%= render @doctors %>
+      <%= paginate @doctors %>
+      </tbody>
+
+    </table>
+
+  </div>
+</div>

@@ -10,6 +10,7 @@ class Patient < ActiveRecord::Base
   has_many :medical_situations
   has_many :allergies
   has_many :diseases
+  has_many :familyHistories
 
   def print_gender
     gender=='1' ? 'Male' : 'Female'
