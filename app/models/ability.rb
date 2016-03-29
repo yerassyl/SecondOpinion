@@ -35,11 +35,9 @@ class Ability
   end
 
   def doctor(user)
-
   end
 
   # helper methods
-
   def any_patient?(client, id)
     client.patients.any? {|p| p.id == id }
   end

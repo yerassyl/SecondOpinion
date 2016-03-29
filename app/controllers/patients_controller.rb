@@ -75,11 +75,20 @@ class PatientsController < ApplicationController
   end
 
   def create_familyHistory
-
+    @fh = FamilyHistory.new(familyHistory_params)
+    if @fh.save
+      render json: {
+          familyHistories: FamilyHistory.where(patient_id: params[:family_history][:patient_id])
+      }
+    end
   end
 
   def delete_familyHistory
-
+    if FamilyHistory.delete(params[:fh_id])
+      render json: {status: :ok}
+    else
+      render json: {status: :error}
+    end
   end
 
   def allergies
@@ -155,6 +164,10 @@ class PatientsController < ApplicationController
   def patient_params
     params.require(:patient).permit(:firstname,:middlename,:lastname,:birthday,:maritial_status,:gender,:email,
                                     :telephone,:cellphone,:emergency_person,:emergency_person_phone, :client_id)
+  end
+
+  def familyHistory_params
+    params.require(:family_history).permit(:skype,:email,:alive,:age,:relationship,:other_information,:patient_id)
   end
 
   def allergy_params

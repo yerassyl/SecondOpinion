@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309074850) do
+ActiveRecord::Schema.define(version: 20160309092833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,15 +93,15 @@ ActiveRecord::Schema.define(version: 20160309074850) do
   end
 
   create_table "family_histories", force: :cascade do |t|
-    t.string   "alive"
+    t.string   "skype"
+    t.string   "email"
+    t.boolean  "alive",             default: true
     t.string   "age"
     t.string   "relationship"
     t.string   "other_information"
-    t.string   "email"
-    t.string   "skype"
     t.integer  "patient_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "family_histories", ["patient_id"], name: "index_family_histories_on_patient_id", using: :btree
