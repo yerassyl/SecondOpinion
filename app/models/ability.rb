@@ -35,6 +35,7 @@ class Ability
   end
 
   def doctor(user)
+    can :manage, Doctor, :id => user.doctor.id
   end
 
   # helper methods

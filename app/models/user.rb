@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :roles, through: :assignments
   has_one :manager
   has_one :client
+  has_one :doctor
 
   # check if user is assigned to the given role
   # note: pass symbol as a parameter, not string
