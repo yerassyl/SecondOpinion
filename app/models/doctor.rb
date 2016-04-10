@@ -7,6 +7,8 @@ class Doctor < ActiveRecord::Base
   validates :resume, presence: true
   validates :phone_number, presence: true
 
+  belongs_to :user
+
   attr_accessor :resume_cache
 
 end

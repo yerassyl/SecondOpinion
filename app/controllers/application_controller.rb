@@ -34,6 +34,7 @@ class ApplicationController < ActionController::Base
     elsif current_user.has_role?(:manager)
       managers_path
     elsif current_user.has_role?(:doctor)
+      doctors_path
     else
       root_path
     end

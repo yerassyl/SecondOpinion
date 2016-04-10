@@ -1,1 +1,52 @@
 <%= render 'layouts/messages' %>
+
+<div class="doctor">
+	<div class="row">
+		<div class="large-3 columns border-right">
+			<h3 class="headings"><%= t('TODO')%> </h3>
+		</div>
+
+		<div class="large-9 columns">
+	    <div class="row border-bottom">
+	      <div class="large-12 columns profile-info">
+	        <h3> Personal Details </h3>
+	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.name'), value: @doctor.name %>
+	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.email'), value: @doctor.email %>
+	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.phone_number'), value: @doctor.phone_number %>
+	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.address'), value: @doctor.address %>
+	        <div class="row info-instance">
+					  <div class="small-6 large-6 columns ">
+					    Resume
+					  </div>
+					  <div class="small-6 large-6 columns ">
+					    <%= link_to t('open'), @doctor.resume.url, {target:'_blank'} %>
+					  </div>
+					  <div class="small-6 large-6 columns">
+					    <% if current_user.email.eql? @doctor.email then %>
+	       				<%= button_tag 'Update', class:'button tiny success', id: 'update_resume_btn' %>
+	       			<% end %>
+	       		</div>
+					</div>
+	      </div>
+	    </div>
+
+	    <div class="update_resume_form" id="update_resume_form">
+	    	<div class="update_resume_form-content">
+		    	<div class="update_resume_form-header">
+		    		<h3> Update Your Resume </h3>
+		    	</div>
+		    	<div class="update_resume_form-body">
+			    	<%= form_for @doctor, :method => :patch, url: update_resume_doctor_path do |f| %>
+				    	<%= render 'layouts/error_messages', object: @doctor %>
+			        <%= f.file_field :resume, accept: 'application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document' %>
+			        <%= f.hidden_field :resume_cache %>
+
+			        <%= f.submit t('forms.submit'), class:'button tiny success' %>
+			    	<% end %>
+			    </div>
+			  </div>
+	    </div>
+
+	  </div>
+	</div>
+</div>
