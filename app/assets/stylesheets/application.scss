@@ -9,6 +9,12 @@
 @import "clients";
 @import "profile";
 @import "patients";
+@import "medical_situations";
+@import "select2";
+/*
+
+*/
+
 
 .fl {
   float:left;
@@ -18,6 +24,9 @@
 }
 .clear {
   clear: both;
+}
+ul {
+  margin-left: 0 ;
 }
 li {
   list-style: none;

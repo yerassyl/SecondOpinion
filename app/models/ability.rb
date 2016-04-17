@@ -13,6 +13,7 @@ class Ability
 
   def manager(user)
     can :manage, Manager
+    can [:index, :in_pool, :not_in_pool, :send_to_pool], MedicalSituation
     can [:read, :create], CallBack
     can [:accept, :reject], Client
     can [:index, :new, :create, :show], Doctor
@@ -20,13 +21,14 @@ class Ability
 
   def client(user)
     can :manage, Client, :id => user.client.id
-    can [:read, :new_medical_history,:create_medical_situation,
+    can [:read, :new_medical_history,:create,
          :familyHistories, :create_familyHistory, :delete_familyHistory,
          :allergies, :create_allergy, :delete_allergy,
          :diseases, :create_disease, :delete_disease,
-          :load_more], Patient do |patient|
+         ], Patient do |patient|
       any_patient?(user.client, patient.id)
     end
+    can [:create, :load_more], MedicalSituation
     can [:create], [Patient]
   end
 
@@ -35,12 +37,17 @@ class Ability
   end
 
   def doctor(user)
+    can [:take], MedicalSituation
+    can [:index], Pool
   end
 
   # helper methods
+
+  # patient that belongs to authorized client user
   def any_patient?(client, id)
     client.patients.any? {|p| p.id == id }
   end
 
+  # medical situation that belongs to the patient of authorized client
 
 end

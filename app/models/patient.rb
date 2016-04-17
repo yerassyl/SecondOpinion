@@ -4,8 +4,6 @@ class Patient < ActiveRecord::Base
             :email,
             presence: true
 
-  validates :email, uniqueness: true
-
   belongs_to :client
   has_many :medical_situations
   has_many :allergies
@@ -15,5 +13,6 @@ class Patient < ActiveRecord::Base
   def print_gender
     gender=='1' ? 'Male' : 'Female'
   end
+
   
 end

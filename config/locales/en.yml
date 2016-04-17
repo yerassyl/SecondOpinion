@@ -21,8 +21,10 @@
 
 en:
   verbs:
+    take: 'Take'
     remove: "Remove"
     add: "Add"
+    update: "Update"
     taking: "Taking"
     reject: "Reject"
   nouns:
@@ -34,6 +36,7 @@ en:
       lab_test: "Lab Test"
       document: "Document"
       description: "Description"
+      status: 'Status'
     plural:
       diseases: "Diseases"
       medications: "Medications"
@@ -98,6 +101,7 @@ en:
   messaging:
     message_sent: "Message has been sent!"
   patient_module:
+    patient: 'Patient'
     new_patient: "Register new Patient"
     patient_registered: "Patient has been successfully registered"
     add_medical_history: "Add medical history"
@@ -127,6 +131,7 @@ en:
           any_other: 'Any other information'
       allergy:
         allergy_name: "Allergy name"
+  open_new_medical_situations: "Open new medical situation"
   medical_situation_added: "New Medical Situation has been opened"
   medical_situation_error: 'Sorry, There were problems creating medical situation'
   file: "File"
@@ -141,11 +146,20 @@ en:
   accepted: 'Accepted'
   incoming: 'Incoming'
   you_rejected_callback: 'You have rejected callback from: '
-  module:
-    doctor: "Doctor Module"
-    client: "Client Module"
-
-
+  assign_to_doctor: "Assign to doctor or leave blank"
+  assigned_doctor: "Assigned Doctor"
+  send_to_pool: 'Send to pool'
+  set_price: 'Set Price'
+  price: 'Price'
+  all: 'All'
+  doctor_module: 'Doctor Module'
+  client_module: 'Client Module'
+  cases_module: 'Cases Module'
+  pool: 'Pool'
+  in_pool: 'In Pool'
+  not_in_pool: 'Not in Pool'
+  assign_doctor_tooltip: 'If you assign doctor case will go directly to doctor and will not appear in pool'
+  you_took_medical_situation: 'You have taken medical situation'
 
 
 

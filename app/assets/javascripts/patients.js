@@ -28,6 +28,7 @@ $(document).on('ready page:load',function(){
         }
     });
 
+    // load more medical situations
     loadMoreMedSituationsBtn.on('click', function(event){
         event.preventDefault();
         var loading_spinner = $('.loading-gif');
@@ -36,7 +37,7 @@ $(document).on('ready page:load',function(){
 
         // get the last id and save it in a variable 'last-id'
         var last_id = $('.record').last().attr('data-id');
-        console.log(last_id);
+        //console.log(last_id);
         $.ajax({
             url: $(this).attr('href'),
             dataType: 'script',
@@ -57,8 +58,6 @@ $(document).on('ready page:load',function(){
         });
 
     });
-
-
 
     // new medical situation form
     //$('#new_medical_situation').on("ajax:success", function(e,data,status,xhr){

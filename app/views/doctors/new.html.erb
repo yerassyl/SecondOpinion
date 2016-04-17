@@ -10,8 +10,8 @@
     <h3><%= t('register_doctor')%></h3>
 
     <%= form_for @doctor, authenticity_token: true do |f| %>
-        <%= render 'layouts/error_messages', object: @doctor %>
         <%= render 'layouts/messages' %>
+        <%= render 'layouts/error_messages', object: @doctor %>
         <%= render 'layouts/text_field', obj: :name, form_label: t('personal_details.name'), form_builder: f, form_placeholder: t('dummy_placeholder.name') %>
         <%= render 'layouts/text_field', obj: :email, form_label: t('personal_details.email'), form_builder: f, form_placeholder: t('dummy_placeholder.email') %>
         <%= render 'layouts/text_field', obj: :address, form_label: t('personal_details.address'), form_builder: f, form_placeholder: t('dummy_placeholder.address') %>

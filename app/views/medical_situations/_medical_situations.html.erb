@@ -1,0 +1,27 @@
+<%= render 'layouts/messages' %>
+
+<%= render 'managers/module_menu' %>
+
+<div class="row">
+  <div class="large-12 small-12 columns">
+
+    <dl class="sub-nav">
+
+      <dt>Filter:</dt>
+      <dd class="<%= all_situations_sub_nav_link %>">
+        <%= link_to t('all'), medical_situations_path %>
+      </dd>
+      <dd class="<%= in_pool %>">
+        <%= link_to t('in_pool'), in_pool_medical_situations_path %>
+      </dd>
+      <dd class="<%= not_in_pool %>">
+        <%= link_to t('not_in_pool'), not_in_pool_medical_situations_path %>
+      </dd>
+
+    </dl>
+
+  </div>
+</div>
+
+<%= render medical_situations %>
+

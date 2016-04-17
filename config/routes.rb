@@ -11,6 +11,9 @@ Rails.application.routes.draw do
    authenticated :user, ->(u) { u.has_role?(:client) } do
      root to: 'clients#index', as: :client_root
    end
+  authenticated :user, ->(u) { u.has_role?(:doctor) } do
+    root to: 'pools#index', as: :doctor_root
+  end
 
 
   # all the routes in the block will ask for authentication first
@@ -42,15 +45,21 @@ Rails.application.routes.draw do
         get 'diseases'
         post 'create_disease', action: :create_disease
         delete 'delete_disease', action: :delete_disease
+      end
+    end
 
-        get 'new_medical_situation'
-        post 'create_medical_situation', action: :create_medical_situation
-
+    resources :medical_situations, only: [:index, :create] do
+      collection do
+        get 'in_pool'
+        get 'not_in_pool'
+        post 'send_to_pool', action: :send_to_pool
         get 'load_more'
+        post 'take'
       end
     end
 
     resources :doctors, only: [:index, :new, :create,:show]
+    resources :pools, only: [:index]
     resources :call_backs, only: [:index, :show] do
       collection do
         get :incoming
@@ -60,7 +69,6 @@ Rails.application.routes.draw do
     end
     resources :conversations, only: [:index, :show, :destroy]
     resources :messages, only: [:new, :create]
-
   end
 
   # not authorized routes

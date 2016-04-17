@@ -19,11 +19,14 @@
 //= require react_ujs
 //= require components
 //= require cocoon
+//= require select2
 //= require_tree .
 
-$(function(){
+//$(function(){
+//
+//});
+
+$(document).on('ready page:load',function(){
     $(document).foundation();
-
-
-
+    $('.assign-doctor').select2();
 });

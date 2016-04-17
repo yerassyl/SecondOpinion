@@ -1,0 +1,25 @@
+// called when medical situation send to pool is launched
+
+<% if @medical_situation.errors.present? %>
+
+<% error_message = '' %>
+  <% @medical_situation.errors.full_messages.each do |message|%>
+    <% error_message += message %>
+    <% end %>
+  alert("<%= escape_javascript (error_message) %>");
+
+<% else %>
+// after successfully submitting medical situation to pool
+// show price.html.erb (price and assigned doctor info in top of medical situation info
+$('.medical_situation[data-id=<%= @medical_situation.id %>] .price_and_assigned_doctor ')
+    .html("<%= escape_javascript render 'price', medical_situation: @medical_situation %>");
+
+// change status of medical situation from Not In Pool to In Pool
+$('.medical_situation[data-id=<%= @medical_situation.id %>] .pool-status' )
+    .html('<h4 class="in-pool"><%= t('in_pool') %></h4>');
+
+// cnange green "Send to Pool" button to yellow "Update" button
+$('.medical_situation[data-id=<%= @medical_situation.id %>] .send_to_pool')
+    .removeClass("success").addClass("warning").val("<%= t('verbs.update')%>");
+
+<% end %>

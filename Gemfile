@@ -40,6 +40,7 @@ gem 'remotipart', '~> 1.2' # file upload via js
 gem 'country_select' # select tag with all countries in iso etc. formats
 gem 'kaminari' # pagintaion library
 gem 'cocoon' # allows easier nested attributes
+gem 'select2-rails' # select2 plugin
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

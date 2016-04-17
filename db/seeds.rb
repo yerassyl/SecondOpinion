@@ -45,6 +45,7 @@ roles = Role.create(
   managerAssignment = Assignment.create(user_id: '2', role_id:'4')
   clientAssignment = Assignment.create(user_id: '3', role_id: '2')
 
+  mainPool = Pool.create(name: 'Main') # id =1
   languages = Language.create(
                           [
                               {

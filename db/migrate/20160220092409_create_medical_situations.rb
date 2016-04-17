@@ -3,7 +3,11 @@ class CreateMedicalSituations < ActiveRecord::Migration
     create_table :medical_situations do |t|
       t.string :reason
       t.belongs_to :patient, index: true
-      t.boolean :closed, default: false
+      t.belongs_to :doctor, index: true
+      t.belongs_to :pool, index:true
+      t.boolean :paid, default: false
+      t.integer :price
+      t.boolean :inPool, default: false
       t.timestamps null: false
     end
   end

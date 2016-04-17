@@ -1,0 +1,2 @@
+<!--  current_user.doctor != nil -->
+<%= link_to t('verbs.take'), take_medical_situations_path(doctor_id: current_user.doctor, id: medical_situation), method: :post, class:'button tiny success' %>

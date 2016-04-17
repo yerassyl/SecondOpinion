@@ -9,6 +9,9 @@ class MedicalSituation < ActiveRecord::Base
   accepts_nested_attributes_for :other_documents, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :patient
+  belongs_to :doctor
+  belongs_to :pool
   validates :reason, presence: true
+  validates :price,  numericality: {only_integer: true, greater_than: 0}, on: :update
 
 end

@@ -55,7 +55,7 @@
             <div class="small-12 large-12 columns">
           <span><%= link_to 'New Medical Situation', '#',class:'button success tiny', id:'new_med_situation_btn' %>
           </span>
-              <%= render 'medical_situation_form' %>
+              <%= render 'medical_situations/medical_situation_form' %>
             </div>
           </div>
 
@@ -66,7 +66,7 @@
           <div class="row">
             <div class="large-6 columns large-offset-3 load_more">
               <%= image_tag 'loading_spinner.gif', style: 'display:none; margin:auto; ', class: 'loading-gif' %>
-              <%= link_to t('load_more'), load_more_patients_path, class:'button tiny default expand', id:'load_more_med_situations'%>
+              <%= link_to t('load_more'), load_more_medical_situations_path, class:'button tiny default expand', id:'load_more_med_situations'%>
             </div>
           </div>
 

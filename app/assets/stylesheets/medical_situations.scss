@@ -1,0 +1,10 @@
+// Place all the styles related to the medical_situations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.in-pool {
+  color: $success-color;
+}
+.not-in-pool {
+  color: $alert-color;
+}

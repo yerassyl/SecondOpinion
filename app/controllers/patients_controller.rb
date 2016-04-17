@@ -10,7 +10,7 @@ class PatientsController < ApplicationController
 
   def show
     @medical_situation = MedicalSituation.new
-    @medical_situations = MedicalSituation.where('patient_id = ? AND closed=?', @patient.id, false).limit(1).order(created_at: :desc)
+    @medical_situations = MedicalSituation.where('patient_id = ? AND paid=?', @patient.id, false).limit(1).order(created_at: :desc)
     build_nested_attributes
   end
 
@@ -22,43 +22,6 @@ class PatientsController < ApplicationController
       redirect_to @patient
     else
       render 'new'
-    end
-  end
-
-  def new_medical_situation
-    @medical_situation = MedicalSituation.new
-  end
-
-  def create_medical_situation
-    @patient_id = params[:patient]
-    @medical_situation = MedicalSituation.new(medical_situation_params)
-    @medical_situation.patient_id = @patient_id
-    respond_to do |format|
-      if @medical_situation.save
-        format.json { render json: @medical_situation, status: :created}
-        format.html {
-          flash[:success] = I18n.t('medical_situation_added')
-          redirect_to patient_path(@patient_id)
-        }
-      else
-        format.json {render json: @medical_situation.errors, status: :unprocessable_entity}
-        format.html {
-          flash[:alert] = 'Sorry, There were problems creating medical situations'
-          redirect_to patient_path(@patient_id)
-        }
-        @patient = Patient.find(@patient_id)
-      end
-    end
-  end
-
-  # load more medical situations that belong to that patient
-  def load_more
-    if params[:med_id]
-      @med_situations = MedicalSituation.where('id < ?', params[:med_id]).limit(5)
-    end
-    respond_to do |format|
-      format.html
-      format.js
     end
   end
 
@@ -178,12 +141,6 @@ class PatientsController < ApplicationController
     params.require(:disease).permit(:diagnose,:condition,:treatment,:other, :patient_id)
   end
 
-  def medical_situation_params
-    params.require(:medical_situation).permit(:reason, :patient_id,
-      medications_attributes:[:id,:_destroy,:name,:dose,:per_day,:other,:medical_situation_id],
-      lab_tests_attributes: [:id,:_destroy,:name,:description, :medical_situation_id,:file,:file_cache],
-      other_documents_attributes: [:id,:_destroy, :name, :description, :medical_situation_id, :file, :other_document_cache]
-    )
-  end
+
 
 end

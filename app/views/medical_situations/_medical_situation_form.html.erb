@@ -1,9 +1,9 @@
-<%= render 'layouts/messages' %>
 <%= render 'layouts/error_messages', object: @medical_situation %>
 
-<%= form_for @medical_situation, url: create_medical_situation_patients_path(patient:@patient),:authenticity_token => true,
+<%= form_for @medical_situation, url: medical_situations_path(patient:@patient),:authenticity_token => true,
              html: {class:'situation-form'} do |f| %>
-    <h3> Open new medical situation </h3>
+
+    <h3><%= t('open_new_medical_situations')%></h3>
     <div class="row collapse">
       <div class="small-3 large-2 columns">
         <span class="prefix"><%= t('patient_module.medical_history.reason')%></span>
