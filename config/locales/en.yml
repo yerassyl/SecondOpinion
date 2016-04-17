@@ -27,6 +27,7 @@ en:
     update: "Update"
     taking: "Taking"
     reject: "Reject"
+    cancel: 'Cancel'
   nouns:
     singular:
       disease: "Disease"

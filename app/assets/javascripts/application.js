@@ -28,7 +28,7 @@ $(function(){
 
 $(document).on('ready page:load',function(){
     $('.assign-doctor').select2();
-    console.log('select');
+
 });
 
 $(document).on('page:load', function(){

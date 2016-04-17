@@ -40,6 +40,7 @@ class Ability
     can [:take], MedicalSituation
     can [:index], Pool
     can :manage, Doctor, :id => user.doctor.id
+    cannot [:index]
   end
 
   # helper methods

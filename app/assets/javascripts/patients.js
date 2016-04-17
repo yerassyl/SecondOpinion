@@ -2,7 +2,6 @@
 //# All this logic will automatically be available in application.js.
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on('ready page:load',function(){
-    console.log('patients.js');
     var newMedSituationBtn = $('#new_med_situation_btn');
     var medSituationForm = $('#new_medical_situation');
     var submitMedicalSituation = $('#submit_medical_situation');
