@@ -1,6 +1,7 @@
 class DoctorsController < ApplicationController
 
   load_and_authorize_resource
+  before_action :set_doctor, only: [:show, :update_resume]
 
   def index
     @doctors = Doctor.order(created_at: 'DESC').page(params[:page])
@@ -11,7 +12,7 @@ class DoctorsController < ApplicationController
   end
 
   def show
-
+    
   end
 
   # fix doctor validation
@@ -19,12 +20,16 @@ class DoctorsController < ApplicationController
     @doctor = Doctor.new(doctor_params)
     @doctor_role = Role.find_by(name: 'doctor')
 
-    @user = User.new(name: params[:doctor][:name], email: params[:doctor][:email], password: 12345678)
-    if @user.save
-      @doctor.user_id = @user.id
-      if @doctor.save
-        if Assignment.create( user_id: @user.id,  role_id: @doctor_role.id )
-          flash[:success] = I18n.t('doctor_has_been_registered') + ' ' + @doctor.email
+    if !User.find_by(email: @doctor.email)
+      @user = User.new(name: params[:doctor][:name], email: params[:doctor][:email], password: 12345678)
+      if @user.save
+        @doctor.user_id = @user.id
+        if @doctor.save
+          Assignment.create(
+            user_id: @user.id,
+            role_id: @doctor_role.id
+          )
+          flash[:success] = I18n.t('doctor_has_been_registered') + '' + @doctor.email
           redirect_to managers_path
         end
       else
@@ -35,11 +40,23 @@ class DoctorsController < ApplicationController
     end
   end
 
+  def update
+  end
+
+  def update_resume
+    @doctor.update_attribute(:resume, params[:doctor][:resume])
+    redirect_to @doctor
+  end
+
   private
 
-  def doctor_params
-    params.require(:doctor).permit(:name,:email,:phone_number, :address, :resume, :resume_cache)
-  end
+    def set_doctor
+      @doctor = Doctor.find(params[:id])
+    end
+
+    def doctor_params
+      params.require(:doctor).permit(:name,:email,:phone_number, :address, :resume, :resume_cache)
+    end
 
 
 end

@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   # devise routes
   devise_for :users
 
-
   # default root routes for each role
    authenticated :user, ->(u) { u.has_role?(:manager) } do
      root to: 'managers#index', as: :manager_root
@@ -14,7 +13,6 @@ Rails.application.routes.draw do
   authenticated :user, ->(u) { u.has_role?(:doctor) } do
     root to: 'pools#index', as: :doctor_root
   end
-
 
   # all the routes in the block will ask for authentication first
   # if not authenticated, user will be redirected to sign in page
@@ -58,8 +56,13 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :doctors, only: [:index, :new, :create,:show]
     resources :pools, only: [:index]
+    resources :doctors do
+      member do
+        patch :update_resume
+      end
+    end
+
     resources :call_backs, only: [:index, :show] do
       collection do
         get :incoming

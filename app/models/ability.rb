@@ -39,6 +39,7 @@ class Ability
   def doctor(user)
     can [:take], MedicalSituation
     can [:index], Pool
+    can :manage, Doctor, :id => user.doctor.id
   end
 
   # helper methods

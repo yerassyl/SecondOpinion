@@ -15,4 +15,5 @@
 config/database.yml
 .idea/
 public/
+db/schema.rb
 
