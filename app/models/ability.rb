@@ -39,8 +39,9 @@ class Ability
   def doctor(user)
     can [:take], MedicalSituation
     can [:index], Pool
-    can :manage, Doctor, :id => user.doctor.id
-    cannot [:index]
+    # doctor can only see his profile or edit it.
+    can [:show, :update], Doctor, :id => user.doctor.id
+
   end
 
   # helper methods
