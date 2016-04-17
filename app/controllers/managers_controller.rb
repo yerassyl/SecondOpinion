@@ -4,7 +4,7 @@ class ManagersController < ApplicationController
 
   # index loads incoming callback requests initially
   def index
-    @call_backs = CallBack.order(created_at: 'DESC').page(params[:page])
+    @call_backs = CallBack.where(accepted: false, rejected: false).order(created_at: 'DESC').page(params[:page])
   end
 
   # rejected callbacks
