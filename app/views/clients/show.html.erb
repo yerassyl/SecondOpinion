@@ -1,1 +1,59 @@
-<h2> <%= @client.user.name %> </h2>
+<%= render 'layouts/messages' %>
+
+<div class="patient">
+
+  <div class="row">
+    <div class="large-3 columns border-right">
+      <h3> <%= @client.user.name %> </h3>
+
+    </div>
+
+    <div class="large-9 columns"><!-- RIGHT SECTION -->
+
+      <div class="row border-bottom">
+        <div class="large-12 columns profile-info">
+          <h3> Personal Details </h3>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.country'), value: @client.country %>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.phone'), value:@client.phone %>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.language'), value:@client.language %>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.email'), value:@client.user.email %>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="large-12 columns">
+        <table>
+          <thead>
+          <tr>
+            <td>Fullname</td>
+            <td>Birthday</td>
+            <td>Email</td>
+            <td>Telephone</td>
+            <td>Cellphone</td>
+            <td></td>
+          </tr>
+          </thead>
+          <tbody>
+          <% if @patients.present? %>
+            <% @patients.each do |patient| %>
+            <tr>
+              <td><%= patient.firstname +' '+patient.lastname %></td>
+              <td><%= patient.birthday %></td>
+              <td><%= patient.email %></td>
+              <td><%= patient.telephone %></td>
+              <td><%= patient.cellphone %></td>
+              <td></td>
+            </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+    </div><!-- END RIGHT SECTION -->
+
+  </div>
+
+
+</div>

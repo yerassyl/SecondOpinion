@@ -16,11 +16,9 @@
           <%= render 'medical_situations/price', medical_situation: medical_situation %>
         </span>
         &nbsp;
-        <% if current_user.has_role?(:doctor) %>
           <span>
             <%= render 'doctors/medical_situation_actions', medical_situation: medical_situation %>
           </span>
-        <% end %>
         <span class="fr heading">date opened: <%= medical_situation.created_at.to_date %></span>
       </div>
     </div>

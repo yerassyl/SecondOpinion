@@ -1,2 +1,11 @@
 <!--  current_user.doctor != nil -->
-<%= link_to t('verbs.take'), take_medical_situations_path(doctor_id: current_user.doctor, id: medical_situation), method: :post, class:'button tiny success' %>
+<% if current_user.has_role?(:doctor) %>
+
+    <!-- if medical situation is taken by current doctor -->
+    <% if medical_situation.doctor == current_user.doctor %>
+
+    <% else %>
+        <%= link_to t('verbs.take'), take_medical_situations_path(doctor_id: current_user.doctor, id: medical_situation),
+                    method: :post, class:'button tiny success' %>
+    <% end %>
+<% end %>

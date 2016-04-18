@@ -16,16 +16,28 @@
               <li class="has-dropdown">
                 <%= link_to (fa_icon 'user', class:'fa-1x'), '#' %>
                 <ul class="dropdown">
+                  <% if current_user.has_role?(:client) %>
+                    <li>
+                      <%= link_to t('my_patients'), clients_path %>
+                    </li>
+                    <li>
+                      <%= link_to t('my_profile'), user_profile %>
+                    </li>
+                    <li>
+                      <%= link_to t('edit_profile'), edit_client_path(current_user.client) %>
+                    </li>
+                  <% elsif current_user.has_role?(:manager) %>
+
+                  <% end %>
                   <li>
-                    <%= link_to t('my_profile'), user_profile %>
+                    <% if current_user.has_role?(:doctor)%>
+                        <%= link_to t('pool'), pools_path  %><% end %>
                   </li>
-                  <li class="active"><a href="#">Pool Items</a></li>
+
                   <li><%= link_to t('forms.auth.logout'), destroy_user_session_path, method: :delete %></li>
                 </ul>
               </li>
-
               <li><a href=""><%= print_role(current_user) %></a></li>
-              <li><a href=""><%= current_user.name %></a></li>
             <% else %>
             <li data-no-turbolink><%= link_to t('forms.auth.login'), new_user_session_path %></li>
             <% end %>

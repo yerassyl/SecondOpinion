@@ -2,6 +2,7 @@ class CreateClients < ActiveRecord::Migration
   def change
     create_table :clients do |t|
       t.belongs_to :user, index: true
+      t.string :name
       t.string :country
       t.string :phone
       t.string :language

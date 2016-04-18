@@ -28,6 +28,7 @@ en:
     taking: "Taking"
     reject: "Reject"
     cancel: 'Cancel'
+    save: 'Save'
   nouns:
     singular:
       disease: "Disease"
@@ -141,6 +142,7 @@ en:
   load_more: "Load More"
   register_doctor: 'Register new Doctor'
   resume: 'Resume'
+  resume_updated: 'You have updated your resume'
   doctor_has_been_registered: 'Doctor has been successfully registered'
   client_callbacks: 'Client Callbacks'
   rejected: 'Rejected'
@@ -162,5 +164,7 @@ en:
   assign_doctor_tooltip: 'If you assign doctor case will go directly to doctor and will not appear in pool'
   you_took_medical_situation: 'You have taken medical situation'
   my_profile: 'My Profile'
+  edit_profile: 'Edit Profile'
+  my_patients: 'My Patients'
 
 

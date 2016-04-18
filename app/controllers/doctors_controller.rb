@@ -12,7 +12,7 @@ class DoctorsController < ApplicationController
   end
 
   def show
-    
+    @medical_situations = @doctor.medical_situations
   end
 
   # fix doctor validation
@@ -45,6 +45,7 @@ class DoctorsController < ApplicationController
 
   def update_resume
     @doctor.update_attribute(:resume, params[:doctor][:resume])
+    flash[:success] = I18n.t('resume_updated')
     redirect_to @doctor
   end
 

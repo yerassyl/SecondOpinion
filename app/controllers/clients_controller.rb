@@ -30,6 +30,7 @@ class ClientsController < ApplicationController
         if @client_role_assignment
           @client = Client.create(
                               user_id: @user.id,
+                              name: @call_back.name,
                               country: @call_back.country,
                               phone: @call_back.phone,
                               language: @call_back.language
@@ -73,6 +74,14 @@ class ClientsController < ApplicationController
       flash[:info] = "Something went wrong"
       render 'new'
     end
+  end
+
+  def edit
+    # @client already should be loaded
+  end
+
+  def update
+
   end
 
   private

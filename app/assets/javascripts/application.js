@@ -22,14 +22,18 @@
 //= require select2
 //= require_tree .
 
-$(function(){
-    $(document).foundation();
-});
-
-$(document).on('ready page:load',function(){
+//$(function(){
+//    $(document).foundation();
+//});
+$(document).on('ready page:load', function () {
+    $(function(){ $(document).foundation(); });
     $('.assign-doctor').select2();
-
 });
+
+//
+//$(document).on('ready page:load',function(){
+//
+//});
 
 $(document).on('page:load', function(){
 
