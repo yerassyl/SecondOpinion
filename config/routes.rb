@@ -24,7 +24,7 @@ Rails.application.routes.draw do
         get :accepted
       end
     end
-    resources :clients, only: [:index,:new,:show] do
+    resources :clients, except:[:delete] do
       collection do
         post 'accept', action: :accept
         post 'reject', action: :reject

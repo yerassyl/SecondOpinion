@@ -11,9 +11,21 @@ module ApplicationHelper
     if current_user.has_role?(:admin)
     elsif current_user.has_role?(:manager)
     elsif current_user.has_role?(:client)
+        client_path(current_user.client.id)
     elsif current_user.has_role?(:doctor)
         doctor_path(current_user.doctor.id)
     else # patient
+
+    end
+  end
+
+  # edit profile link depending on user's role
+  def edit_profile
+    if current_user.has_role?(:client)
+      edit_client_path(current_user.client)
+    elsif current_user.has_role?(:doctor)
+      edit_doctr_path(current_user.doctor)
+    else
 
     end
   end

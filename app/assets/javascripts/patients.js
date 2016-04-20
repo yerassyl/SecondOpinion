@@ -29,7 +29,6 @@ $(document).on('ready page:load',function(){
 
     // load more medical situations
     loadMoreMedSituationsBtn.on('click', function(event){
-        alert('load more');
         event.preventDefault();
         var loading_spinner = $('.loading-gif');
         loadMoreMedSituationsBtn.hide();

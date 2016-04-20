@@ -7,7 +7,9 @@
 		</div>
 
 		<div class="large-9 columns">
-	    <div class="row border-bottom">
+
+      <!-- BEGIN PERSONAL DETAILS -->
+      <div class="row border-bottom">
 	      <div class="large-12 columns profile-info">
 	        <h3> Personal Details </h3>
 	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.name'), value: @doctor.name %>
@@ -28,7 +30,7 @@
 	       		</div>
 					</div>
 	      </div>
-	    </div>
+	    </div><!-- END PERSONAL DETAILS -->
 
 	    <div class="update_resume_form" id="update_resume_form">
 	    	<div class="update_resume_form-content">
@@ -47,6 +49,14 @@
 			    </div>
 			  </div>
 	    </div>
+
+      <br/>
+      <!-- BEGIN MEDICAL SITUATIONS -->
+      <div class="row">
+        <div class="small-12 large-12 columns">
+          <%= render @medical_situations %>
+        </div>
+      </div><!-- END MEDICAL SITUATIONS -->
 
 	  </div>
 	</div>

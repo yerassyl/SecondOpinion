@@ -20,7 +20,7 @@ class Ability
   end
 
   def client(user)
-    can :manage, Client, :id => user.client.id
+    can [:index,:show,:edit,:update], Client, :id => user.client.id
     can [:read, :new_medical_history,:create,
          :familyHistories, :create_familyHistory, :delete_familyHistory,
          :allergies, :create_allergy, :delete_allergy,
@@ -40,7 +40,7 @@ class Ability
     can [:take], MedicalSituation
     can [:index], Pool
     # doctor can only see his profile or edit it.
-    can [:show, :update], Doctor, :id => user.doctor.id
+    can [:show, :update, :update_resume], Doctor, :id => user.doctor.id
 
   end
 

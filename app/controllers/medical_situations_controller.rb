@@ -3,18 +3,18 @@ class MedicalSituationsController < ApplicationController
 
   # all medical situations
   def index
-    @medical_situations = MedicalSituation.order(created_at: 'desc').limit(10)
+    @medical_situations = MedicalSituation.order(created_at: 'desc').page(params[:page]).per(10)
     @doctors = Doctor.all
   end
 
   # in pool medical situations
   def in_pool
-    @medical_situations = MedicalSituation.where(inPool: true).order(created_at: 'desc')
+    @medical_situations = MedicalSituation.where(inPool: true).order(created_at: 'desc').page(params[:page]).per(10)
     @doctors = Doctor.all
   end
 
   def not_in_pool
-    @medical_situations = MedicalSituation.where(inPool: false).order(created_at: 'desc')
+    @medical_situations = MedicalSituation.where(inPool: false).order(created_at: 'desc').page(params[:page]).per(10)
     @doctors = Doctor.all
   end
 

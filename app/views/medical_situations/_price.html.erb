@@ -1,6 +1,12 @@
 <% if medical_situation.inPool %>
-    <span class="heading"><%= t('price') %></span> <span> <%= medical_situation.price %> $ </span>
-    <% if medical_situation.doctor.present? %>
-      <span class="heading"><%= t('assigned_doctor') %> </span> <span><%= medical_situation.doctor.name %></span>
+
+    <% if current_user.has_role?(:doctor) %>
+        <span class="heading"><%= t('price') %></span> <span> <%= medical_situation.price %> $ </span>
+    <% elsif current_user.has_role?(:manager) %>
+        <span class="heading"><%= t('price') %></span> <span> <%= medical_situation.price %> $ </span>
+        <% if medical_situation.doctor.present? %>
+          <span class="heading"><%= t('assigned_doctor') %> </span> <span><%= medical_situation.doctor.name %></span>
+        <% end %>
     <% end %>
+
 <% end %>
