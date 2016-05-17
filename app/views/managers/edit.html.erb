@@ -1,23 +1,19 @@
 <%= render 'layouts/messages' %>
 
-<div class="patient">
+<div class="manager">
 
   <div class="row">
     <div class="large-3 columns border-right">
-      <h3> <%= @client.name %> </h3>
-
+      <h3> <%= @manager.user.email %> </h3>
     </div>
-
-    <div class="large-9 columns"><!-- RIGHT SECTION -->
+    <div class="large-9 columns">
 
       <div class="row border-bottom">
         <div class="large-12 columns profile-info">
           <h3> Personal Details </h3>
-          <!-- form for editing -->
-          <%= form_for @client do |f| %>
-              <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :name, info_label:t('personal_details.name') %>
-              <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :country, info_label:t('personal_details.country') %>
-              <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :phone, info_label:t('personal_details.phone') %>
+          <%= form_for @manager do |f| %>
+              <%= render 'layouts/messages' %>
+              <%= render 'layouts/error_messages', object: @manager %>
               <%= render 'layouts/profile/profile_password_instance', f: f, obj: :password, info_label:t('forms.auth.password') %>
               <%= render 'layouts/profile/profile_password_instance', f: f, obj: :password_confirmation, info_label:t('forms.auth.password_confirmation') %>
               <%= render 'layouts/profile/profile_password_instance', f: f, obj: :current_password, info_label:t('forms.auth.current_password') %>
@@ -26,12 +22,6 @@
           <% end %>
         </div>
       </div>
-      <br/>
-
-
-    </div><!-- END RIGHT SECTION -->
-
+    </div>
   </div>
-
-
 </div>

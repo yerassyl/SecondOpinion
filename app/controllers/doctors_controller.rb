@@ -1,7 +1,7 @@
 class DoctorsController < ApplicationController
 
   load_and_authorize_resource
-  before_action :set_doctor, only: [:show, :update_resume]
+  before_action :set_doctor, only: [:show, :update_resume, :edit, :update]
 
   def index
     @doctors = Doctor.order(created_at: 'DESC').page(params[:page])
@@ -40,7 +40,27 @@ class DoctorsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
+    @user = @doctor.user
+
+    if @doctor.update_attributes(doctor_params)
+      if params[:doctor][:password].blank?
+        flash[:success] = I18n.t('doctor_profile_updated') + '' + @doctor.email
+        redirect_to @doctor
+      elsif @user.valid_password?(params[:doctor][:current_password])
+        @user.update_attribute(:password, params[:doctor][:password])
+        sign_in @user, :bypass => true
+        flash[:success] = I18n.t('doctor_profile_updated') + '' + @doctor.email
+        redirect_to @doctor
+      else 
+        render 'edit'
+      end
+    else
+      render 'edit'
+    end
   end
 
   def update_resume

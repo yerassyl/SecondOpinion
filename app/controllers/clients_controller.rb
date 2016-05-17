@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   load_and_authorize_resource
+  before_action :set_client, only: [:edit, :update]
 
   def index
     # get all patients that belong to that client
@@ -77,21 +78,39 @@ class ClientsController < ApplicationController
   end
 
   def edit
-    # @client already should be loaded
   end
 
   def update
+    @user = @client.user
 
+    if @client.update_attributes(client_params)
+      if params[:client][:password].blank?
+        flash[:success] = I18n.t('client_profile_updated') + '' + @client.user.email
+        redirect_to @client
+      elsif @user.valid_password?(params[:client][:current_password])
+        @user.update_attribute(:password, params[:client][:password])
+        sign_in @user, :bypass => true
+        flash[:success] = I18n.t('client_profile_updated') + '' + @client.user.email
+        redirect_to @client
+      else 
+        render 'edit'
+      end
+    else
+      render 'edit'
+    end
   end
 
   private
+    def set_client
+      @client = Client.find(params[:id])
+    end
 
-  def client_params
-    params.require(:user).permit(:name,:email,:password)
-  end
+    def client_params
+      params.require(:client).permit(:name,:email,:country, :phone, :language)
+    end
 
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
 
 end
