@@ -28,9 +28,10 @@
                     </li>
                   <% elsif current_user.has_role?(:manager) %>
                     <li>
-                      <%= link_to t('edit_profile'), edit_manager_path(current_user.manager) %>
+                      <%#= link_to t('edit_profile'), edit_manager_path(current_user.manager) %>
                     </li>
                   <% end %>
+
                   <% if current_user.has_role?(:doctor)%>
                     <li>
                       <%= link_to t('pool'), pools_path  %>
