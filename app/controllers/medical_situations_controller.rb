@@ -18,6 +18,19 @@ class MedicalSituationsController < ApplicationController
     @doctors = Doctor.all
   end
 
+  # show medical situation in expanded mode with it's medical_services and other related information
+  # such as notes, reports etc
+  def show
+    #@medical_situation should be loaded
+    @medical_services = @medical_situation.medical_services
+    @medical_service = MedicalService.new
+    @medications = @medical_situation.medications
+    @lab_tests = @medical_situation.lab_tests
+    @other_documents = @medical_situation.other_documents
+    @medical_situation_report = MedicalSituationReport.new
+    #@medical_service.medical_service_documents.build
+  end
+
 
   def create
     @patient_id = params[:patient]
@@ -77,6 +90,12 @@ class MedicalSituationsController < ApplicationController
      end
   end
 
+  # doctor can submit report
+  # js
+  def submit_report
+    @medical_situation_report = MedicalSituationReport.create(medical_situation_report_params)
+  end
+
   private
 
   def medical_situation_params
@@ -86,4 +105,9 @@ class MedicalSituationsController < ApplicationController
                                               other_documents_attributes: [:id,:_destroy, :name, :description, :medical_situation_id, :file, :other_document_cache]
     )
   end
+
+  def medical_situation_report_params
+    params.require(:medical_situation_report).permit(:medical_situation_id,:description,:file,:file_cache)
+  end
+
 end

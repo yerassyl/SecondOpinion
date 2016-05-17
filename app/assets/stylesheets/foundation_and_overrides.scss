@@ -1305,13 +1305,13 @@ $include-html-global-classes: $include-html-classes;
 // $include-html-table-classes: $include-html-classes;
 
 // These control the background color for the table and even rows
-// $table-bg: $white;
-// $table-even-row-bg: $snow;
+ $table-bg: $white;
+ $table-even-row-bg: $white;
 
 // These control the table cell border style
 // $table-border-style: solid;
 // $table-border-size: 1px;
-// $table-border-color: $gainsboro;
+ $table-border-color: $white-smoke;
 
 // These control the table head styles
 // $table-head-bg: $white-smoke;

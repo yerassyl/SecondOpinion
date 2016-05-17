@@ -32,6 +32,7 @@
 	      </div>
 	    </div><!-- END PERSONAL DETAILS -->
 
+
 	    <div class="update_resume_form" id="update_resume_form">
 	    	<div class="update_resume_form-content">
 		    	<div class="update_resume_form-header">
@@ -40,7 +41,8 @@
 		    	<div class="update_resume_form-body">
 			    	<%= form_for @doctor, :method => :patch, url: update_resume_doctor_path do |f| %>
 				    	<%= render 'layouts/error_messages', object: @doctor %>
-			        <%= f.file_field :resume, accept: 'application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document' %>
+			        <%= f.file_field :resume, accept: 'application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                  required: true %>
 			        <%= f.hidden_field :resume_cache %>
 
 			        <%= f.submit t('forms.submit'), class:'button tiny success' %>

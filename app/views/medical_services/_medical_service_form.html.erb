@@ -1,0 +1,19 @@
+<%= form_for @medical_service, remote: true do |f| %>
+
+    <%= f.hidden_field :medical_situation_id, value: @medical_situation.id %>
+    <label> What type of service (Specialization) do you need?
+      <%= f.collection_select :specialization_id, Specialization.all, :id, :name, {include_blank:true} %> <br/><br/>
+    </label>
+    <%= f.text_field :description, placeholder: t('nouns.singular.description') %>
+    <%= f.number_field :price, placeholder: t('price') %>
+
+    <label> Upload any related documents
+      <%= f.fields_for :medical_service_documents do |d| %>
+          <%= render 'medical_service_document_fields', f: d %>
+      <% end %>
+    </label>
+    <div class="links">
+      <%= link_to_add_association '', f, :medical_service_documents, class:'fa fa-2x fa-plus-square' %>
+    </div>
+    <%= f.submit 'Submit', class:'button tiny success' %>
+<% end %>

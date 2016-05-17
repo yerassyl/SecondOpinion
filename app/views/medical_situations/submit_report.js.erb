@@ -1,0 +1,14 @@
+<% if @medical_situation_report.errors.present? %>
+// show error messages
+$('#medical-situation-report-messages').html('<%= escape_javascript(render 'layouts/error_messages', object: @medical_situation_report)%>');
+<% else %>
+
+  // empty modal inputs
+  $('#medical_situation_report_description').val('').change();
+  // close modal
+  $('#report-form').foundation('reveal', 'close');
+  // show notice
+  // issue: alert modal doesn't close if loaded via js, not solved in foundation zurb
+  $('#notice').html('<%= escape_javascript(render 'layouts/messages_js', message: t('medical_situation_report_added') )%>');
+
+<% end %>

@@ -1,0 +1,12 @@
+<% if @medical_service.errors.present? %>
+// show errors
+$('#edit-service-messages').html('<%= escape_javascript(render 'layouts/error_messages', object: @medical_service) %>');
+<% else %>
+// close modal
+$('#edit-medical-service').foundation('reveal', 'close');
+
+// show success notice
+// issue: alert modal doesn't close if loaded via js, not solved in foundation zurb
+$('#notice').html('<%= escape_javascript(render 'layouts/messages_js', message: t('medical_service_updated') )%>');
+
+<% end %>

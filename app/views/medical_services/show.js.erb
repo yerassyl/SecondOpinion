@@ -1,0 +1,3 @@
+// load medical service extended info into medical_service_extended id
+$('#medical-service-extended').html("<%= escape_javascript(render 'medical_service_extended', medical_service: @medical_service,
+      medical_service_documents: @medical_service_documents) %> ");

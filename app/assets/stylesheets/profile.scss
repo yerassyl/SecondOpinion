@@ -1,4 +1,10 @@
 $border-color: $iron;
+
+.headings {
+  border-bottom: 3px solid $warning-color;
+}
+
+
 .patient, .doctor {
 
   .green {
@@ -25,9 +31,6 @@ $border-color: $iron;
     li {
       list-style: none;
     }
-  }
-  .headings {
-    border-bottom: 3px solid $warning-color;
   }
   ul {
     margin-left: 0;

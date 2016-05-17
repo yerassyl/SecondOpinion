@@ -1,0 +1,130 @@
+<div class="row">
+  <div class="large-12 columns">
+    <div id="fee-notice"></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns">
+
+    <span class="grey"><%= t('personal_details.specialization')%> </span>
+    <%= medical_service.specialization.name %>
+    <span class="grey"> <%= t('nouns.singular.fee') %> </span>
+
+    <span id="fee">
+      <% if medical_service.fee.present? %>
+        <%= medical_service.fee %>
+      <% else %>
+        <span class="alert"><%= t('fee_is_not_set')%></span>
+      <% end %>
+    </span>
+
+  </div>
+
+  <!-- BEGIN SET FEE FORM -->
+  <div class="large-6 columns">
+    <% if can? :edit, medical_service %>
+        <a href="#" data-reveal-id="edit-medical-service" class="button tiny alert fr"><%= t('verbs.edit') %></a>
+    <% end %>
+
+    <% if can? :set_fee, medical_service %>
+        <div class="row collapse">
+        <%= form_for medical_service, url:set_fee_medical_services_path, method: :post, remote:true do |f| %>
+            <%= f.hidden_field :id, value: medical_service.id %>
+
+            <div class="large-8 columns">
+              <%= f.number_field :fee, placeholder:medical_service.price, required: true %>
+            </div>
+            <div class="large-2 columns">
+              <%= f.submit t('verbs.set_fee'), class:'button tiny success' %>
+            </div>
+            <div class="large-2 columns"></div>
+
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+  <!-- END SET FEE FORM -->
+
+</div>
+<br/>
+
+
+<div class="row">
+
+  <div class="large-2 medium-4 columns">
+    <span class="grey"><%= t('nouns.singular.description') %></span>
+  </div>
+
+  <div class="large-10 medium-8 columns">
+    <%= medical_service.description %>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h4 class="headings">Medical Service documents</h4>
+
+    <% if medical_service_documents.present? %>
+
+        <table>
+        <thead>
+          <tr>
+            <th><%= t('personal_details.name') %></th>
+            <th><%= t('nouns.singular.description') %></th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% medical_service_documents.each do |document| %>
+            <tr>
+              <td><%= document.name %></td>
+              <td><%= document.description %></td>
+              <td><%= link_to t('open'),document.file.url %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    <% else %>
+      <h4 class="grey"> <%= t('nouns.singular.no')+' '+  t('nouns.plural.documents')%></h4>
+    <% end %>
+
+  </div>
+</div>
+
+<!-- BEGIN UPDATE MEDICAL SERVICE FORM -->
+<div id="edit-medical-service" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">Edit Medical Service</h2>
+
+  <div class="row">
+    <div class="large-12 small-12 columns">
+      <div id="edit-service-messages"></div>
+    </div>
+  </div>
+
+  <%= form_for medical_service, remote: true do |f| %>
+      <%= f.hidden_field :id, value: medical_service.id %>
+
+      <label> What type of service (Specialization) do you need?
+        <%= f.collection_select :specialization_id, Specialization.all, :id, :name, {include_blank:true} %> <br/><br/>
+      </label>
+      <%= f.text_field :description, placeholder: t('nouns.singular.description') %>
+      <%= f.number_field :price, placeholder: t('price') %>
+
+      <label> Upload any related documents
+        <%= f.fields_for :medical_service_documents do |d| %>
+            <%= render 'medical_situations/medical_service_document_fields', f: d %>
+        <% end %>
+      </label>
+      <div class="links">
+        <%= link_to_add_association '', f, :medical_service_documents, {class:'fa fa-2x fa-plus-square', partial:'medical_situations/medical_service_document_fields'} %>
+      </div>
+      <%= f.submit 'Submit', class:'button tiny success' %>
+  <% end %>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+<!-- END UPDATE MEDICAL SERVICE FORM -->

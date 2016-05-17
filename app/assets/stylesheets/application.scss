@@ -13,6 +13,12 @@
 @import "select2";
 @import "doctors";
 
+.grey {
+  color: $aluminum;
+}
+.alert {
+  color: $alert-color;
+}
 
 .fl {
   float:left;
@@ -32,6 +38,9 @@ li {
 .container {
   width:90%;
   margin: 0 auto;
+}
+table {
+  width:100%;
 }
 table td {
   min-width: 150px;
@@ -81,8 +90,8 @@ table td {
   }
 }
 
-.hidden {
-  display: none;
+.hide {
+  display: none !important;
 }
 
 .input-field {
@@ -92,6 +101,10 @@ table td {
   border-radius: 3px;
 
 }
+.links {
+  margin-bottom: 10px;
+}
+
 // styles for error messages in input fields
 .error-input-field {
   border-color: $alert-color !important;

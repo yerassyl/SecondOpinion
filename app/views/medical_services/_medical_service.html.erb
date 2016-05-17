@@ -1,0 +1,8 @@
+<%= link_to medical_service, remote:true do %>
+  <%= content_tag(:li) do %>
+        <span class="grey"><%= t('personal_details.specialization')%>:</span>
+        <%= medical_service.specialization.name %>
+        <span class="grey"><%= t('nouns.singular.fee')%>:</span>
+        <%= medical_service.price.present? ? medical_service.price : 'N/A' %>
+  <% end %>
+<% end %>

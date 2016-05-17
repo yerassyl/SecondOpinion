@@ -39,7 +39,7 @@ class ResumeUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
    def extension_white_list
-     %w(pdf doc pages)
+     %w(pdf doc docx pages)
    end
 
   def content_type_whitelist

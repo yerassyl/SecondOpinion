@@ -1,0 +1,17 @@
+<% if @medical_service.errors.present? %>
+  // show error messages inside the modal
+  $('#new-service-messages').html('<%= escape_javascript(render 'layouts/error_messages', object: @medical_service) %>');
+<% else %>
+  // empty modal inputs (reload)
+  $('#medical_service_specialization_id').val("").change(); // use change for select tags
+  $('#medical_service_description').val("");
+  $('.nested-fields').remove();
+
+  //$('#new-service').modal('toggle');
+  // append medical_service to list of medical_services on the left sidebar
+  $('#medical-services').append("<%= escape_javascript(render @medical_service )%>");
+  // close modal
+  $('#new-service').foundation('reveal', 'close');
+
+
+<% end %>

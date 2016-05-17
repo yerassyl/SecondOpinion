@@ -4,11 +4,14 @@
     <div class="row">
       <div class="small-4 large-2 columns">
         <span class="pool-status">
-          <% if medical_situation.inPool %>
+          <% if medical_situation.doctor.present? %>
+
+          <% elsif medical_situation.inPool %>
             <h4 class="in-pool"><%= t('in_pool') %></h4>
           <% else %>
               <h4 class="not-in-pool"><%= t('not_in_pool') %></h4>
           <% end %>
+          <%= link_to (fa_icon 'eye', class:'fa-2x'), medical_situation %>
         </span>
       </div>
       <div class="small-8 large-10 columns">

@@ -1,0 +1,179 @@
+<br/>
+
+<div class="medical_situation_expanded">
+
+  <div class="row">
+
+    <!-- BEGIN SERVICES -->
+    <div class="large-3 columns border-right">
+      <h3 class="headings"><%= t('services') %></h3>
+
+      <div class="row">
+        <div class="large-12 small-12 columns">
+          <% if can? :create, @medical_service %>
+            <a href="#" data-reveal-id="new-service" class="button tiny success expand"> New Service </a>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- BEGIN SERVICES LIST -->
+      <div class="row">
+        <div class="large-12 small-12 columns">
+          <ul class="medical-services" id="medical-services">
+            <%= render @medical_services %>
+          </ul>
+        </div>
+      </div>
+      <!-- END SERVICES LIST -->
+
+    </div>
+    <!-- END SERVICES -->
+
+    <!-- BEGIN MEDICAL SITUATION -->
+    <div class="large-9 columns">
+
+      <!-- BEGIN MEDICAL SITUATION BASE INFORMATION -->
+      <div class="row">
+        <div class="large-12 columns">
+          <div id="notice"></div>
+
+          <div class="row">
+            <div class="large-4 medium-5 columns">
+              <h4><span class="grey"><%= t('personal_details.patient_name') %>: </span>
+                <%= @medical_situation.patient.firstname + " " + @medical_situation.patient.lastname %>
+              </h4>
+            </div>
+            <div class="large-8 medium-7 columns">
+              <% if can? :submit_report, @medical_situation and @medical_situation.doctor_id.present? %>
+                  <a href="#" data-reveal-id="report-form" class="button tiny"><%= t('submit_report') %></a>
+              <% end %>
+            </div>
+          </div>
+
+          <table width="100%">
+            <tr>
+              <th><%= t('patient_module.medical_history.reason') %></th>
+              <td colspan="2"><%= @medical_situation.reason %></td>
+            </tr>
+            <tr>
+              <th><%= t('report') %></th>
+              <td>
+                <% if @medical_situation.medical_situation_report.present? %>
+                  <%= link_to t('open'), @medical_situation.medical_situation_report.file.url, {target:'_blank'} %>
+                <% else %>
+                  <%= t('nouns.singular.no') +' '+t('report')  %>
+                <% end %>
+              </td>
+            </tr>
+
+          </table>
+
+        </div>
+      </div>
+      <!-- END MEDICAL SITUATIONS BASE INFORMATION -->
+
+      <!-- BEGIN MEDICAL SITUATIONS DOCUMENTS ETC -->
+      <div class="row">
+
+        <div class="large-4 columns">
+          <h4 class="headings"><%= t('nouns.plural.medications') %></h4>
+          <% if @medications.present? %>
+            <ul>
+            <% @medications.each do |medication| %>
+                <li>
+                  <span class="heading"><%= t('nouns.singular.medication')%>:</span> <%= medication.name %><br>
+                  <span class="heading"><%= t('patient_module.medical_history.medication.dose')%>:</span> <%= medication.dose %> |
+                  <span class="heading"><%= t('patient_module.medical_history.medication.frequency')%>:</span> <%= medication.per_day %> <%= t('patient_module.medical_history.medication.times') %><br>
+                  <span class="heading"><%= t('patient_module.medical_history.other')%>:</span> <%= medication.other %>
+                </li>
+            <% end %>
+            </ul>
+
+          <% else %>
+            <h4 class="grey"><%= t('nouns.singular.no') + ' ' + t('nouns.plural.medications') %></h4>
+          <% end %>
+        </div>
+
+        <div class="large-4 columns">
+          <h4 class='headings'><%= t('nouns.plural.lab_tests') %> </h4>
+          <% if @lab_tests.present? %>
+            <ul>
+            <% @lab_tests.each do |lab_test| %>
+                <li>
+                  <span class="heading"><%= t('personal_details.name')%>:</span> <%= lab_test.name %> <br>
+                  <span class="heading"><%= t('nouns.singular.description')%>:</span> <%= lab_test.description %><br>
+                  <span class="heading"><%= t('file')%></span> <%= link_to t('open'), lab_test.file.url, {target:'_blank'} %>
+                </li>
+            <% end %>
+            </ul>
+          <% else %>
+            <h4 class="grey"><%= t('nouns.singular.no')+' '+t('nouns.plural.lab_tests') %></h4>
+          <% end %>
+        </div>
+        <div class="large-4 columns">
+          <h4 class="headings"><%= t('nouns.plural.other_documents') %> </h4>
+          <% if @other_documents.present? %>
+            <ul>
+              <% @other_documents.each do |other_document| %>
+                  <li>
+                    <span class="heading"><%= t('personal_details.name') %>:</span> <%= other_document.name %><br>
+                    <span class="heading"><%= t('nouns.singular.description') %></span> <%= other_document.description %><br>
+                    <span class="heading"><%= t('file') %>: </span> <%=link_to t('open'), other_document.file.url %>
+                  </li>
+              <% end %>
+            </ul>
+          <% else %>
+              <h4 class="grey"><%= t('nouns.singular.no')+' '+t('nouns.plural.other_documents') %></h4>
+          <% end %>
+        </div>
+      </div><br/>
+      <!-- END MEDICAL SITUATIONS DOCUMENTS ETC -->
+
+      <!-- BEGIN MEDICAL SERVICE EXTENDED -->
+        <div id="medical-service-extended"> </div>
+      <!-- END MEDICAL SERVICE EXTENDED -->
+
+    </div>
+    <!-- END MEDICAL SITUATION -->
+
+  </div>
+
+</div>
+
+<!-- BEGIN NEW SERVICE MODAL -->
+<div id="new-service" class="reveal-modal medium" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">New Service</h2>
+
+  <div class="row">
+    <div class="large-12 small-12 columns">
+      <div id="new-service-messages"></div>
+    </div>
+  </div>
+
+
+  <div class="row" id="medical-service-form">
+    <div class="large-12 small-12 columns">
+        <%= render 'medical_services/medical_service_form'%>
+    </div>
+
+  </div>
+
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+<!-- END NEW SERVICE MODAL -->
+
+
+<!-- BEGIN SUBMIT REPORT FORM -->
+  <div id="report-form" class="reveal-modal tiny" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h3><%= t('upload_report')%> </h3>
+    <div id="medical-situation-report-messages"></div>
+    <%= form_for @medical_situation_report, method: :patch, url: :submit_report_medical_situations, remote:true do |f|  %>
+        <%= f.hidden_field :medical_situation_id, value: @medical_situation.id %>
+
+        <%= f.text_field :description, placeholder: t('nouns.singular.description') %>
+        <%= f.file_field :file, accept: 'application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document', required:true %>
+        <%= f.hidden_field :file_cache %>
+        <%= f.submit t('forms.submit'), class:'button tiny success' %>
+    <% end %>
+  </div>
+<!-- END SUBMIT REPORT FORM -->

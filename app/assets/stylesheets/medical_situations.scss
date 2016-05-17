@@ -8,3 +8,23 @@
 .not-in-pool {
   color: $alert-color;
 }
+
+.medical-service-document-field {
+  padding: 20px;
+  background-color: $secondary-color;
+  margin-top: 10px;
+}
+
+.medical-services li {
+  padding:5px;
+  border-bottom: 1px solid $iron;
+  &:hover {
+    background-color: $white-smoke;
+  }
+}
+
+#medical-service-extended {
+  padding:10px;
+  background-color: $vapor;
+  border-radius: 5px;
+}

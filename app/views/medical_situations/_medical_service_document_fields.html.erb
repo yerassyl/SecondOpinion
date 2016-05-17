@@ -1,0 +1,9 @@
+<div class="nested-fields medical-service-document-field">
+
+<%= f.text_field :name, placeholder:t('personal_details.name') %>
+<%= f.text_field :description, placeholder: t('nouns.singular.description') %>
+<%= f.file_field :file, accept: 'application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf' %>
+<%= f.hidden_field :file_cache %>
+<%= link_to_remove_association '', f, class:'fa fa-trash' %>
+
+</div>

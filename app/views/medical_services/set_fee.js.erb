@@ -1,0 +1,10 @@
+<% if @medical_service.errors.present? %>
+// show error inside notice
+$('#fee-notice').html('<%= escape_javascript(render 'layouts/messages_js', object: @medical_service )%>');
+<% else %>
+// show success message
+$('#fee-notice').html('<%= escape_javascript( render('layouts/messages_js', message:t('fee_has_been_set') ) ) %>');
+// change fee price
+$('#fee').html('<%= @medical_service.fee %>');
+
+<% end %>

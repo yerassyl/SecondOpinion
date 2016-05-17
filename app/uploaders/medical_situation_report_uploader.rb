@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class LabTestUploader < CarrierWave::Uploader::Base
+class MedicalSituationReportUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -38,13 +38,14 @@ class LabTestUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-   def extension_white_list
-     %w(jpg pdf doc docx pages)
-   end
+  def extension_white_list
+    %w(pdf doc docx pages)
+  end
 
   def content_type_whitelist
-    ['image/jpg', 'application/pdf','application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
+    [ 'application/pdf','application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
   end
+
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.

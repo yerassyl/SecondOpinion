@@ -11,6 +11,7 @@ class LabTest < ActiveRecord::Base
   validates :file, presence: true
 
   attr_accessor :file_cache
+
   belongs_to :medical_situation
 
 end

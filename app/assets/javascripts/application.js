@@ -28,6 +28,7 @@
 $(document).on('ready page:load', function () {
     $(function(){ $(document).foundation(); });
     $('.assign-doctor').select2();
+    $('#medical_service_specialization_id').select2();
 });
 
 //

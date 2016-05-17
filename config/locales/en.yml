@@ -24,13 +24,17 @@ en:
     take: 'Take'
     remove: "Remove"
     add: "Add"
+    edit: "Edit"
     update: "Update"
     taking: "Taking"
     reject: "Reject"
     cancel: 'Cancel'
     save: 'Save'
+    set_fee: "Set Fee"
   nouns:
     singular:
+      no: "No"
+      fee: "Fee"
       disease: "Disease"
       medication: "Medication"
       allergy: "Allergy"
@@ -46,10 +50,12 @@ en:
       lab_tests: "Lab tests"
       other_documents: "Other documents"
       other_medical_documents: "Other Medical Documents"
+      documents: "Documents"
   navigation:
     go_back: "GO BACK"
     go_to_main: "GO TO MAIN"
   personal_details:
+    patient_name: "Patient name"
     name: "Name"
     firstname: "Firstname"
     middlename: "Middlename"
@@ -133,6 +139,7 @@ en:
           any_other: 'Any other information'
       allergy:
         allergy_name: "Allergy name"
+  medical_situations: "Medical Situations"
   open_new_medical_situations: "Open new medical situation"
   medical_situation_added: "New Medical Situation has been opened"
   medical_situation_error: 'Sorry, There were problems creating medical situation'
@@ -166,5 +173,14 @@ en:
   my_profile: 'My Profile'
   edit_profile: 'Edit Profile'
   my_patients: 'My Patients'
+  services: 'Services'
+  report: 'Report'
+  submit_report: 'Submit Report'
+  upload_report: 'Upload Report'
+  medical_situation_report_added: 'Your report has been successfully uploaded'
+  medical_service_updated: 'Medical service has been updated successfully'
+  fee_is_not_set: "Fee is not set by our manager yet"
+  fee_has_been_set: "Fee has been set"
+
 
 

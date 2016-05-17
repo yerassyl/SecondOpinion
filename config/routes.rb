@@ -46,13 +46,19 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :medical_situations, only: [:index, :create] do
+    resources :medical_situations, only: [:index, :show, :create] do
       collection do
         get 'in_pool'
         get 'not_in_pool'
         post 'send_to_pool', action: :send_to_pool
         get 'load_more'
         post 'take'
+        patch 'submit_report'
+      end
+    end
+    resources :medical_services, only: [:create, :show, :update] do
+      collection do
+        post 'set_fee'
       end
     end
 

@@ -13,10 +13,11 @@ class Ability
 
   def manager(user)
     can :manage, Manager
-    can [:index, :in_pool, :not_in_pool, :send_to_pool], MedicalSituation
     can [:read, :create], CallBack
     can [:accept, :reject], Client
     can [:index, :new, :create, :show], Doctor
+    can [:index,:show, :in_pool, :not_in_pool, :send_to_pool], MedicalSituation
+    can [:show, :set_fee], MedicalService
   end
 
   def client(user)
@@ -29,7 +30,17 @@ class Ability
       any_patient?(user.client, patient.id)
     end
     can [:create, :load_more], MedicalSituation
-    can [:create], [Patient]
+    can [:show], MedicalSituation do |medical_situation|
+      user.client.patients.any? { |p| p.id == medical_situation.patient_id }
+    end
+    can [:create], Patient
+    can [:create], MedicalService
+
+    # todo: client can only update medical service that belongs to him
+    can [:update], MedicalService
+
+    # todo: client can only see services he created
+    can [:show], MedicalService
   end
 
   def patient(user)
@@ -37,10 +48,16 @@ class Ability
   end
 
   def doctor(user)
-    can [:take], MedicalSituation
+    can [:show,:take], MedicalSituation
     can [:index], Pool
     # doctor can only see his profile or edit it.
     can [:show, :update, :update_resume], Doctor, :id => user.doctor.id
+    can [:submit_report], MedicalSituation
+
+    can [:show], MedicalService
+    # do |medical_situation|
+    #   user.doctor.medical_situations.any? { |p| p.doctor_id == medical_situation.id }
+    # end
 
   end
 
@@ -52,5 +69,8 @@ class Ability
   end
 
   # medical situation that belongs to the patient of authorized client
+  # def any_medical_situation?(doctor,id)
+  #
+  # end
 
 end

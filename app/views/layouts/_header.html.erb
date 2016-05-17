@@ -29,10 +29,13 @@
                   <% elsif current_user.has_role?(:manager) %>
 
                   <% end %>
-                  <li>
-                    <% if current_user.has_role?(:doctor)%>
-                        <%= link_to t('pool'), pools_path  %><% end %>
-                  </li>
+                  <% if current_user.has_role?(:doctor)%>
+                    <li>
+                      <%= link_to 'My profile', doctor_path(current_user.doctor) %>
+                    </li>
+                    <li>
+                      <%= link_to t('pool'), pools_path  %><% end %>
+                    </li>
 
                   <li><%= link_to t('forms.auth.logout'), destroy_user_session_path, method: :delete %></li>
                 </ul>
@@ -40,6 +43,7 @@
               <li><a href=""><%= print_role(current_user) %></a></li>
             <% else %>
             <li data-no-turbolink><%= link_to t('forms.auth.login'), new_user_session_path %></li>
+
             <% end %>
 
         </ul>
