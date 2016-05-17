@@ -50,7 +50,6 @@ roles = Role.create(
 
   client = Client.create(
     user_id: 3,
-    name: 'Yerassyl Diyas',
     country: 'Kazakhstan',
     phone: '877759798908',
     language: 'Kazakh'
