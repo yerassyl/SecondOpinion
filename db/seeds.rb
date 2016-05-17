@@ -24,18 +24,22 @@ roles = Role.create(
 )
 
   admin = User.create(
+                  name: 'Admin',
                   email: 'admin@gmail.com',
                   password: '12345678'
   )
   manager = User.create(
+                  name: 'Manager',
                   email: 'manager@gmail.com',
                   password: '12345678'
   )
   client_user = User.create(
+                  name: 'Client',
                   email: 'client@gmail.com',
                   password: '12345678'
   )
   doctor_user = User.create(
+                  name: 'Doctor',
                   email: 'doctor@gmail.com',
                   password: '12345678'
   )
