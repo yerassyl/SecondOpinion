@@ -40,6 +40,10 @@ roles = Role.create(
                   password: '12345678'
   )
 
+  manager = Manager.create(
+    user_id: 2
+  )
+
   client = Client.create(
     user_id: 3,
     name: 'Yerassyl Diyas',

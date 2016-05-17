@@ -27,12 +27,21 @@
                       <%= link_to t('edit_profile'), edit_client_path(current_user.client) %>
                     </li>
                   <% elsif current_user.has_role?(:manager) %>
-
+                    <li>
+                      <%= link_to t('edit_profile'), edit_manager_path(current_user.manager) %>
+                    </li>
                   <% end %>
-                  <li>
-                    <% if current_user.has_role?(:doctor)%>
-                        <%= link_to t('pool'), pools_path  %><% end %>
-                  </li>
+                  <% if current_user.has_role?(:doctor)%>
+                    <li>
+                      <%= link_to t('pool'), pools_path  %>
+                    </li>
+                    <li>
+                      <%= link_to t('my_profile'), user_profile %>
+                    </li>
+                    <li>
+                      <%= link_to t('edit_profile'), edit_doctor_path(current_user.doctor) %>
+                    </li>
+                  <% end %>
 
                   <li><%= link_to t('forms.auth.logout'), destroy_user_session_path, method: :delete %></li>
                 </ul>

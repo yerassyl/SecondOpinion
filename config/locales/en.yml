@@ -81,6 +81,8 @@ en:
       logout: "Logout"
       username: "Username"
       password: "Password"
+      password_confirmation: "Password Confirmation"
+      current_password: "Current Password"
       email: "Email"
       remember_me: "Remember me"
   dummy_placeholder:

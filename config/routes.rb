@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # if not authenticated, user will be redirected to sign in page
   authenticate :user do
 
-    resources :managers, only: [:index] do
+    resources :managers, only: [:index, :edit, :update] do
       collection do
         get :rejected
         get :accepted
