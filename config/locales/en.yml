@@ -82,6 +82,7 @@ en:
     submit_and_proceed_to_medical_history: "Submit and proceed to medical history"
     not_chosen: "--not chosen--"
     required: "Required"
+    password_confirmation_failure: "Password and Password Confirmation do not match"
     auth:
       login: "Login"
       logout: "Logout"
@@ -89,6 +90,7 @@ en:
       password: "Password"
       password_confirmation: "Password Confirmation"
       current_password: "Current Password"
+      invalid_password: "Invalid Password"
       email: "Email"
       remember_me: "Remember me"
   dummy_placeholder:
