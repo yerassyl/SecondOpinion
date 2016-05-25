@@ -42,7 +42,7 @@ gem 'kaminari' # pagintaion library
 gem 'cocoon' # allows easier nested attributes
 gem 'select2-rails' # select2 plugin
 
-
+gem 'faker' # only for testing
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -70,6 +70,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'faker'
+
 end
 
