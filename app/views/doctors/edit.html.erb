@@ -21,7 +21,7 @@
 
           <h3> Change Password </h3>
           <%= form_for @doctor do |f| %>
-              <%= render 'layouts/error_messages', object: @doctor %>
+              <%= render 'layouts/error_messages', object: @user %>
               <%= render 'layouts/profile/profile_password_instance', f: f, obj: :password, info_label:t('forms.auth.password') %>
               <%= render 'layouts/profile/profile_password_instance', f: f, obj: :password_confirmation, info_label:t('forms.auth.password_confirmation') %>
               <%= render 'layouts/profile/profile_password_instance', f: f, obj: :current_password, info_label:t('forms.auth.current_password') %>
