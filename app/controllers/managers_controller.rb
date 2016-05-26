@@ -2,6 +2,7 @@ class ManagersController < ApplicationController
 
   load_and_authorize_resource
   before_action :set_manager, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update]
 
   # index loads incoming callback requests initially
   def index
@@ -28,20 +29,25 @@ class ManagersController < ApplicationController
   end
 
   def update
-    @user = @manager.user
 
-    if @manager.update_attributes(manager_params)
-      if params[:manager][:password].blank?
-        flash[:success] = I18n.t('manager_profile_updated') + '' + @user.email
-        redirect_to '/managers'
-      elsif @user.valid_password?(params[:manager][:current_password])
-        @user.update_attribute(:password, params[:manager][:password])
-        sign_in @user, :bypass => true
-        flash[:success] = I18n.t('manager_profile_updated') + '' + @user.email
-        redirect_to '/managers'
-      else 
+    if params[:manager].has_key? 'password'
+      if @user.valid_password?(params[:manager][:current_password])
+        if params[:manager][:password].eql? params[:manager][:password_confirmation]
+          @user.update_attribute(:password, params[:manager][:password])
+          sign_in @user, :bypass => true
+          flash[:success] = I18n.t('manager_profile_updated') + ' ' + @user.email
+          redirect_to '/managers'
+        else
+          #flash[:error] = I18n.t['forms.password_confirmation_failure']
+          render 'edit'
+        end
+      else
+        #flash[:error] = I18n.t['forms.auth.invalid_password']
         render 'edit'
       end
+    elsif @manager.update_attributes(manager_params)
+      flash[:success] = I18n.t('manager_profile_updated') + ' ' + @user.email
+      redirect_to @manager
     else
       render 'edit'
     end
@@ -50,6 +56,10 @@ class ManagersController < ApplicationController
   private
     def set_manager
       @manager = Manager.find(params[:id])
+    end
+
+    def set_user
+      @user = current_user
     end
 
     def manager_params

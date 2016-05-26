@@ -3,6 +3,7 @@ class Doctor < ActiveRecord::Base
             :email,
             #:resume,
             :phone_number,
+            :address,
             presence: true
 
   mount_uploader :resume, ResumeUploader

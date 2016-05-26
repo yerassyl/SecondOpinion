@@ -45,11 +45,12 @@ roles = Role.create(
   )
 
   manager = Manager.create(
-    user_id: 2
+    user_id: 2,
   )
 
   client = Client.create(
     user_id: 3,
+    name: 'Me Client',
     country: 'Kazakhstan',
     phone: '877759798908',
     language: 'Kazakh'

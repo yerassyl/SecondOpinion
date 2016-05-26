@@ -28,7 +28,7 @@
                     </li>
                   <% elsif current_user.has_role?(:manager) %>
                     <li>
-                      <%#= link_to t('edit_profile'), edit_manager_path(current_user.manager) %>
+                      <%= link_to t('edit_profile'), edit_manager_path(current_user.manager) %>
                     </li>
                   <% end %>
 
@@ -43,6 +43,7 @@
                       <%= link_to t('edit_profile'), edit_doctor_path(current_user.doctor) %>
                     </li>
                   <% end %>
+              </li>
 
                   <li><%= link_to t('forms.auth.logout'), destroy_user_session_path, method: :delete %></li>
                 </ul>
