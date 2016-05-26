@@ -60,12 +60,16 @@ class MedicalSituationsController < ApplicationController
   def send_to_pool
     @medical_situation = MedicalSituation.find(params[:medical_situation][:medical_situation_id])
     # if doctor is assigned then assign doctor and do not send to pool
-    if params[:medical_situation][:doctor_id].present?
-      @medical_situation.update(doctor_id: params[:medical_situation][:doctor_id], price: params[:medical_situation][:price], inPool: true)
-    else
-      # else send to pool
-      @medical_situation.update(doctor_id: nil,price: params[:medical_situation][:price], inPool: true)
-    end
+    # refactor/rewrite this one later
+    @medical_situation.inPool = true
+    @medical_situation.update(medical_situation_params)
+    # if params[:medical_situation][:doctor_id].present?
+    #   @medical_situation.update(doctor_id: params[:medical_situation][:doctor_id], fee: params[:medical_situation][:fee], inPool: true)
+    # else
+    #   # else send to pool
+    #   @medical_situation.update(doctor_id: nil, fee: params[:medical_situation][:fee], inPool: true)
+    # end
+
   end
 
   # load more medical situations that belong to that patient
@@ -99,7 +103,8 @@ class MedicalSituationsController < ApplicationController
   private
 
   def medical_situation_params
-    params.require(:medical_situation).permit(:reason, :price, :paid, :patient_id, :doctor_id, :inPool, :medical_situation_id,
+    params.require(:medical_situation).permit(:reason, :price, :fee, :paid, :patient_id, :doctor_id, :inPool,
+                                              :specialization_id, :manager_sets_fee_attr,
                                               medications_attributes:[:id,:_destroy,:name,:dose,:per_day,:other,:medical_situation_id],
                                               lab_tests_attributes: [:id,:_destroy,:name,:description, :medical_situation_id,:file,:file_cache],
                                               other_documents_attributes: [:id,:_destroy, :name, :description, :medical_situation_id, :file, :other_document_cache]

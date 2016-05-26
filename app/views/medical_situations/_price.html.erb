@@ -1,12 +1,30 @@
 <% if medical_situation.inPool %>
 
     <% if current_user.has_role?(:doctor) %>
-        <span class="heading"><%= t('price') %></span> <span> <%= medical_situation.price %> $ </span>
-    <% elsif current_user.has_role?(:manager) %>
-        <span class="heading"><%= t('price') %></span> <span> <%= medical_situation.price %> $ </span>
-        <% if medical_situation.doctor.present? %>
-          <span class="heading"><%= t('assigned_doctor') %> </span> <span><%= medical_situation.doctor.name %></span>
-        <% end %>
-    <% end %>
+        <span class="heading"><%= t('nouns.singular.fee') %>:</span> <span> <%= medical_situation.fee %>$</span>
 
+    <% end %>
+<% end %>
+
+<% if current_user.has_role?(:manager) %>
+
+    <span data-tooltip aria-haspopup="true" class="has-tip tip-top" title="<%= t('fee_price_description') %>">
+
+      <span class="heading"><%= t('price') %>:</span> <span> <%= medical_situation.price %>$ </span>
+
+      <span class="heading"><%= t('nouns.singular.fee') %>:</span>
+      <span id="fee">
+        <% if medical_situation.fee.present? %>
+          <%= medical_situation.fee %>$
+        <% else %>
+            <span class="alert"><%= t('fee_is_not_set')%></span>
+        <% end %>
+      </span>
+
+    </span>
+
+
+  <% if medical_situation.doctor.present? %>
+      <span class="heading"><%= t('assigned_doctor') %> </span> <span><%= medical_situation.doctor.name %></span>
+  <% end %>
 <% end %>

@@ -31,9 +31,10 @@
         <div class="row collapse">
         <%= form_for medical_service, url:set_fee_medical_services_path, method: :post, remote:true do |f| %>
             <%= f.hidden_field :id, value: medical_service.id %>
+            <%= f.hidden_field :manager_sets_fee_attr, value: true %>
 
             <div class="large-8 columns">
-              <%= f.number_field :fee, placeholder:medical_service.price, required: true %>
+                <%= f.number_field :fee, placeholder:medical_service.price, required: true %>
             </div>
             <div class="large-2 columns">
               <%= f.submit t('verbs.set_fee'), class:'button tiny success' %>

@@ -33,6 +33,7 @@ en:
     set_fee: "Set Fee"
   nouns:
     singular:
+      client: 'Client'
       no: "No"
       fee: "Fee"
       disease: "Disease"
@@ -181,8 +182,9 @@ en:
   upload_report: 'Upload Report'
   medical_situation_report_added: 'Your report has been successfully uploaded'
   medical_service_updated: 'Medical service has been updated successfully'
-  fee_is_not_set: "Fee is not set by our manager yet"
+  fee_is_not_set: "Fee is not set by manager yet"
   fee_has_been_set: "Fee has been set"
+  fee_price_description: "Price is what set by client, and fee is what will be paid to doctors"
 
 
 

@@ -11,5 +11,10 @@ class Doctor < ActiveRecord::Base
 
   belongs_to :user
   has_many :medical_situations
+  has_many :medical_services
+
+  has_many :doctor_specializations
+  has_many :specializations, through: :doctor_specializations
+
 
 end

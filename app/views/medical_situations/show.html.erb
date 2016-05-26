@@ -6,25 +6,29 @@
 
     <!-- BEGIN SERVICES -->
     <div class="large-3 columns border-right">
-      <h3 class="headings"><%= t('services') %></h3>
+
+      <!--
+      <h3 class="headings"><%#= t('services') %></h3>
 
       <div class="row">
         <div class="large-12 small-12 columns">
-          <% if can? :create, @medical_service %>
+          <%# if can? :create, @medical_service %>
             <a href="#" data-reveal-id="new-service" class="button tiny success expand"> New Service </a>
-          <% end %>
+          <%# end %>
         </div>
       </div>
 
-      <!-- BEGIN SERVICES LIST -->
+      <!-- BEGIN SERVICES LIST --
       <div class="row">
         <div class="large-12 small-12 columns">
           <ul class="medical-services" id="medical-services">
-            <%= render @medical_services %>
+            <%#= render @medical_services %>
           </ul>
         </div>
       </div>
-      <!-- END SERVICES LIST -->
+      <!-- END SERVICES LIST --
+
+      -->
 
     </div>
     <!-- END SERVICES -->
@@ -129,7 +133,7 @@
       </div><br/>
       <!-- END MEDICAL SITUATIONS DOCUMENTS ETC -->
 
-      <!-- BEGIN MEDICAL SERVICE EXTENDED -->
+      <!-- BEGIN MEDICAL SERVICE EXTENDED --
         <div id="medical-service-extended"> </div>
       <!-- END MEDICAL SERVICE EXTENDED -->
 

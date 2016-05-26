@@ -1,10 +1,13 @@
 <% if @medical_service.errors.present? %>
 // show error inside notice
-$('#fee-notice').html('<%= escape_javascript(render 'layouts/messages_js', object: @medical_service )%>');
+$('#fee-notice').html('<%= escape_javascript(render 'layouts/error_messages', object: @medical_service )%>');
 <% else %>
 // show success message
-$('#fee-notice').html('<%= escape_javascript( render('layouts/messages_js', message:t('fee_has_been_set') ) ) %>');
+$('#fee-notice').html('<%= escape_javascript( render('layouts/messages', flash: flash) ) %>');
 // change fee price
 $('#fee').html('<%= @medical_service.fee %>');
+// change fee price in list of services on the sidebar
+var id = <%= @medical_service.id %>;
+$('#medical-services').find('#'+id).find('#medical-service-fee').html('<%= @medical_service.fee %>');
 
 <% end %>

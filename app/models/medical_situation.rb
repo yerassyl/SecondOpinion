@@ -10,6 +10,7 @@ class MedicalSituation < ActiveRecord::Base
 
   belongs_to :patient
   belongs_to :pool
+  belongs_to :specialization
 
   # todo: does medical situation belong to only one doctor
   # can it be so that many doctors are viewing one medical_situation, probably yes
@@ -19,7 +20,12 @@ class MedicalSituation < ActiveRecord::Base
   has_many :medical_services
   has_one :medical_situation_report
 
-  validates :reason, presence: true
-  validates :price,  numericality: {only_integer: true, greater_than: 0}, on: :update
+  attr_accessor :manager_sets_fee_attr
+
+  validates :reason, :specialization_id, presence: true
+  validates :price,  numericality: {only_integer: true, greater_than: 0}, on: :create
+
+  validates :fee, numericality: { greater_than: 0, less_than: :price }, if: lambda {|u| manager_sets_fee_attr }
+
 
 end

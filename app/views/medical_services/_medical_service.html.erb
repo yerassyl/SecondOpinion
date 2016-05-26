@@ -1,8 +1,14 @@
+<!--
+medical service li item partial which
+look for medical_service_extended for extended view
+ -->
 <%= link_to medical_service, remote:true do %>
-  <%= content_tag(:li) do %>
+  <%= content_tag(:li, id:medical_service.id) do %>
         <span class="grey"><%= t('personal_details.specialization')%>:</span>
         <%= medical_service.specialization.name %>
-        <span class="grey"><%= t('nouns.singular.fee')%>:</span>
+        <span class="grey"><%= t('nouns.singular.client') +' '+t('price') %>: </span>
         <%= medical_service.price.present? ? medical_service.price : 'N/A' %>
+        <span class="grey"><%= t('nouns.singular.fee')%>:</span>
+        <span id="medical-service-fee"><%= medical_service.fee.present? ? medical_service.fee : 'N/A' %></span>
   <% end %>
 <% end %>

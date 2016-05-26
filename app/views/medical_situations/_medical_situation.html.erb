@@ -19,9 +19,12 @@
           <%= render 'medical_situations/price', medical_situation: medical_situation %>
         </span>
         &nbsp;
-          <span>
-            <%= render 'doctors/medical_situation_actions', medical_situation: medical_situation %>
-          </span>
+
+        <span class="heading"><%= t('personal_details.specialization') %></span>
+        <span> <%= medical_situation.specialization.name%></span>
+        <span>
+          <%= render 'doctors/medical_situation_actions', medical_situation: medical_situation %>
+        </span>
         <span class="fr heading">date opened: <%= medical_situation.created_at.to_date %></span>
       </div>
     </div>
@@ -40,10 +43,12 @@
 
             <%= form_for medical_situation, {url: :send_to_pool_medical_situations, method: :post, remote:true} do |f| %>
                <%= f.hidden_field :medical_situation_id, value: medical_situation.id %>
+               <%= f.hidden_field :manager_sets_fee_attr, value:true %>
+
               <div class="row">
 
                 <div class="large-3 columns">
-                  <%= f.number_field :price, {placeholder: t('set_price')} %>
+                  <%= f.number_field :fee, {placeholder: t('verbs.set_fee'),required:true } %>
                 </div>
 
                 <div class="large-4 columns">

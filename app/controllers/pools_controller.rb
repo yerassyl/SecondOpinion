@@ -3,7 +3,13 @@ class PoolsController < ApplicationController
 
   # default pool
   def index
-    @medical_situations = MedicalSituation.where(inPool: true, doctor_id: nil).page(params[:page]).per(10)
+   # doctor_specialization_id = current_user.doctor.specializations.first.id
+    @medical_situations = MedicalSituation.where(inPool: true, doctor_id: nil)
+                              .page(params[:page]).per(10)
+    # @medical_services = @medical_situations.each do |medical_situation|
+    #   medical_situation.medical_services
+    # end
+    #@medical_services = MedicalService.where(in_pool: true, doctor_id: nil).page(params[:page]).per(10)
   end
 
   private
