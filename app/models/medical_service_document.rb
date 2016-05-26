@@ -1,7 +1,7 @@
 class MedicalServiceDocument < ActiveRecord::Base
 
   mount_uploader :file, MedicalServiceDocumentUploader
-  belongs_to :medical_services
+  belongs_to :medical_service
 
   attr_accessor :file_cache
 

@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
   load_and_authorize_resource
   before_action :set_client, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update]
 
   def index
     # get all patients that belong to that client
@@ -81,20 +82,24 @@ class ClientsController < ApplicationController
   end
 
   def update
-    @user = @client.user
-
-    if @client.update_attributes(client_params)
-      if params[:client][:password].blank?
-        flash[:success] = I18n.t('client_profile_updated') + '' + @client.user.email
-        redirect_to @client
-      elsif @user.valid_password?(params[:client][:current_password])
-        @user.update_attribute(:password, params[:client][:password])
-        sign_in @user, :bypass => true
-        flash[:success] = I18n.t('client_profile_updated') + '' + @client.user.email
-        redirect_to @client
-      else 
+    if params[:client].has_key? 'password'
+      if @user.valid_password?(params[:client][:current_password])
+        if params[:client][:password].eql? params[:client][:password_confirmation]
+          @user.update_attribute(:password, params[:client][:password])
+          sign_in @user, :bypass => true
+          flash[:success] = I18n.t('client_profile_updated') + ' ' + @client.user.email
+          redirect_to @client
+        else
+          #flash[:error] = I18n.t['forms.password_confirmation_failure']
+          render 'edit'
+        end
+      else
+        #flash[:error] = I18n.t['forms.auth.invalid_password']
         render 'edit'
       end
+    elsif @client.update_attributes(client_params)
+      flash[:success] = I18n.t('client_profile_updated') + ' ' + @client.user.email
+      redirect_to @client
     else
       render 'edit'
     end
@@ -103,6 +108,10 @@ class ClientsController < ApplicationController
   private
     def set_client
       @client = Client.find(params[:id])
+    end
+
+    def set_user
+      @user = current_user
     end
 
     def client_params
