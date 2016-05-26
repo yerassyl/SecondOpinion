@@ -1,7 +1,7 @@
 class Doctor < ActiveRecord::Base
   validates :name,
             :email,
-            :resume,
+            #:resume,
             :phone_number,
             :address,
             presence: true

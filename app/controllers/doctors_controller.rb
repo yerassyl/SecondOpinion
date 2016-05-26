@@ -50,7 +50,7 @@ class DoctorsController < ApplicationController
         if params[:doctor][:password].eql? params[:doctor][:password_confirmation]
           @user.update_attribute(:password, params[:doctor][:password])
           sign_in @user, :bypass => true
-          flash[:success] = I18n.t('doctor_profile_updated') + '' + @doctor.email
+          flash[:success] = I18n.t('doctor_profile_updated') + ' ' + @doctor.email
           redirect_to @doctor
         else
           #flash[:error] = I18n.t['forms.password_confirmation_failure']
@@ -61,7 +61,7 @@ class DoctorsController < ApplicationController
         render 'edit'
       end
     elsif @doctor.update_attributes(doctor_params)
-      flash[:success] = I18n.t('doctor_profile_updated') + '' + @doctor.email
+      flash[:success] = I18n.t('doctor_profile_updated') + ' ' + @doctor.email
       redirect_to @doctor
     else
       render 'edit'
