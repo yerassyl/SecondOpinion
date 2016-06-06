@@ -1,0 +1,9 @@
+<% js = escape_javascript(
+  render @medical_situations
+) %>
+$("#filterrific_results").html("<%= js %>");
+
+<% pg = escape_javascript(
+	paginate(@medical_situations, remote: true)
+) %>
+$("#paginator").html("<%= pg %>");

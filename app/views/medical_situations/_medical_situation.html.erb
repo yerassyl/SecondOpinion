@@ -25,7 +25,8 @@
         <span>
           <%= render 'doctors/medical_situation_actions', medical_situation: medical_situation %>
         </span>
-        <span class="fr heading">date opened: <%= medical_situation.created_at.to_date %></span>
+        <span class="fr heading">date opened: <%= medical_situation.created_at.to_date %></span></br>
+        <span class="fr heading">ID: <%= medical_situation.id %></span>
       </div>
     </div>
 
@@ -77,6 +78,7 @@
 
 
     </div>
+
 
     <div class="row">
       <div class="small-3 large-2 columns">

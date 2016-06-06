@@ -43,6 +43,8 @@ gem 'cocoon' # allows easier nested attributes
 gem 'select2-rails' # select2 plugin
 
 gem 'faker' # only for testing
+
+gem 'filterrific' # for filters
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

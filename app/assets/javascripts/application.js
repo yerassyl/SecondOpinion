@@ -21,6 +21,7 @@
 //= require cocoon
 //= require select2
 //= require_tree .
+//= require filterrific/filterrific-jquery
 
 //$(function(){
 //    $(document).foundation();
