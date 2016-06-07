@@ -162,7 +162,9 @@ end
     doctor_id: nil,
     pool_id: 1,
     paid: false,
-    price: nil,
+    price: Faker::Number.between(1000,7000),
+    specialization_id: Faker::Number.between(1, 4),
+    #fee: Faker::Number.between(1, 1000),
     inPool: false
   )
 end
@@ -175,6 +177,8 @@ end
       pool_id: 1,
       paid: false,
       price: Faker::Number.between(1000,7000),
+      specialization_id: Faker::Number.between(1, 4),
+      fee: Faker::Number.between(1, 1000),
       inPool: true
   )
 end
