@@ -23,11 +23,56 @@
   </div>
 </div>
 
+<div class="large-12 columns">
+  <fieldset>
+    <%= form_for_filterrific @filterrific do |f| %>
+      <div class="row">
+        <div class="large-4 columns">
+          <label>
+            Search
+            <%= f.text_field(:search_by_patient, class: 'filterrific-periodically-observed') %>
+          </label>
+        </div>
+        <div class="large-4 columns">
+          <label>
+            Specialization
+            <%= f.select(
+              :with_specialization_id,
+              @filterrific.select_options[:with_specialization_id],
+              { include_blank: '- Any -' }
+            ) %>
+          </label>
+        </div>
+        <div class="large-4 columns">
+          <label>
+            Sorted by
+            <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="large-4 columns">
+          <%= link_to(
+            'Reset filters',
+            reset_filterrific_url,
+            class: "button secondary"
+          ) %>
+        <%= render_filterrific_spinner %>
+        </div>
+      </div>
+      
+    <% end %>
+  </fieldset>
+</div>
+
 <div class="row">
-  <div class="large-12 small-12 columns">
-    <%= paginate medical_situations %>
+  <div class="large-12 small-12 columns" id="paginator">
+    <%= paginate @medical_situations, remote: true %>
   </div>
 </div>
-<%= render medical_situations %>
 
+<div id="filterrific_results">
+  <%= render @medical_situations %>
+</div>
 

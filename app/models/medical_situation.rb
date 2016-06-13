@@ -8,7 +8,7 @@ class MedicalSituation < ActiveRecord::Base
   has_many :other_documents
   accepts_nested_attributes_for :other_documents, reject_if: :all_blank, allow_destroy: true
 
-  belongs_to :patient
+  belongs_to :patient, foreign_key: 'patient_id'
   belongs_to :pool
   belongs_to :specialization, foreign_key: 'specialization_id'
 
@@ -44,9 +44,39 @@ class MedicalSituation < ActiveRecord::Base
         # Joining on other tables is quite common in Filterrific, and almost
         # every ActiveRecord table has a 'created_at' column.
         order("medical_situations.created_at #{ direction }")
+      when /^fee_/
+        order("medical_situations.fee #{ direction } NULLS LAST")
+      when /^price_/
+        order("medical_situations.price #{ direction } NULLS LAST")
+      when /patient_name_/
+        MedicalSituation.joins("INNER JOIN patients ON patients.id = medical_situations.patient_id").order("LOWER(patients.firstname) #{ direction },
+               LOWER(patients.lastname) #{ direction }")
       else
         raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
+  }
+
+  scope :search_by_patient, lambda { |query| 
+    return nil if query.blank?
+
+    # condition query, parse into individual keywords
+    terms = query.downcase.split(/\s+/)
+
+    # replace "*" with "%" for wildcard searches,
+    # append '%', remove duplicate '%'s
+    terms = terms.map { |e|
+      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+    }
+    # configure number of OR conditions for provision
+    # of interpolation arguments. Adjust this if you
+    # change the number of OR conditions.
+    num_or_conds = 2
+    MedicalSituation.joins("INNER JOIN patients ON patients.id = medical_situations.patient_id").where(
+      terms.map { |term|
+        "(LOWER(patients.firstname) LIKE ? OR LOWER(patients.lastname) LIKE ?)"
+      }.join(' AND '),
+      *terms.map { |e| [e] * num_or_conds }.flatten
+    )
   }
 
   def self.options_for_sorted_by
@@ -56,12 +86,25 @@ class MedicalSituation < ActiveRecord::Base
   ]
   end
 
+  def self.options_for_sorted_by_manager
+    [
+      ['Fee ascending', 'fee_asc'],
+      ['Fee descending', 'fee_desc'],
+      ['Price ascending', 'price_asc'],
+      ['Price descending', 'price_desc'],
+      ['Patient name (a-z)', 'patient_name_asc'],
+      ['Registration date (newest first)', 'created_at_desc'],
+      ['Registration date (oldest first)', 'created_at_asc']
+    ]
+  end
+
   filterrific(
     default_settings: { sorted_by: 'created_at_desc' },
     available_filters: [
       :sorted_by,
       :with_fee_gte,
-      :with_specialization_id
+      :with_specialization_id,
+      :search_by_patient
     ]
   )
 
