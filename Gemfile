@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
-# Use postgresql as the database for Active Record
-gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -55,6 +53,7 @@ gem 'filterrific' # for filters
 # gem 'capistrano-rails', group: :developmentrai
 group :production do
   gem 'rails_12factor'
+  gem 'mysql'
 end
 
 group :development, :test do
@@ -64,6 +63,7 @@ group :development, :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.0'
+  gem 'pg'
 end
 
 group :development do

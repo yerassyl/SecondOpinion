@@ -1,21 +1,47 @@
 class MedicalSituationsController < ApplicationController
   load_and_authorize_resource
 
+  before_action :set_filterrific, only: [:index, :in_pool, :not_in_pool]
+
   # all medical situations
   def index
-    @medical_situations = MedicalSituation.order(created_at: 'desc').page(params[:page]).per(10)
+    @medical_situations = @filterrific.find.page(params[:page]).per(10)
     @doctors = Doctor.all
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   # in pool medical situations
   def in_pool
-    @medical_situations = MedicalSituation.where(inPool: true).order(created_at: 'desc').page(params[:page]).per(10)
+    @medical_situations = @filterrific.find.page(params[:page]).where(inPool: true).per(10)
     @doctors = Doctor.all
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   def not_in_pool
-    @medical_situations = MedicalSituation.where(inPool: false).order(created_at: 'desc').page(params[:page]).per(10)
+    @medical_situations = @filterrific.find.page(params[:page]).where(inPool: false).per(10)
     @doctors = Doctor.all
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   # show medical situation in expanded mode with it's medical_services and other related information
@@ -102,17 +128,29 @@ class MedicalSituationsController < ApplicationController
 
   private
 
-  def medical_situation_params
-    params.require(:medical_situation).permit(:reason, :price, :fee, :paid, :patient_id, :doctor_id, :inPool,
-                                              :specialization_id, :manager_sets_fee_attr,
-                                              medications_attributes:[:id,:_destroy,:name,:dose,:per_day,:other,:medical_situation_id],
-                                              lab_tests_attributes: [:id,:_destroy,:name,:description, :medical_situation_id,:file,:file_cache],
-                                              other_documents_attributes: [:id,:_destroy, :name, :description, :medical_situation_id, :file, :other_document_cache]
-    )
-  end
+    def medical_situation_params
+      params.require(:medical_situation).permit(:reason, :price, :fee, :paid, :patient_id, :doctor_id, :inPool,
+                                                :specialization_id, :manager_sets_fee_attr,
+                                                medications_attributes:[:id,:_destroy,:name,:dose,:per_day,:other,:medical_situation_id],
+                                                lab_tests_attributes: [:id,:_destroy,:name,:description, :medical_situation_id,:file,:file_cache],
+                                                other_documents_attributes: [:id,:_destroy, :name, :description, :medical_situation_id, :file, :other_document_cache]
+      )
+    end
 
-  def medical_situation_report_params
-    params.require(:medical_situation_report).permit(:medical_situation_id,:description,:file,:file_cache)
-  end
+    def medical_situation_report_params
+      params.require(:medical_situation_report).permit(:medical_situation_id,:description,:file,:file_cache)
+    end
+
+    def set_filterrific
+      @filterrific = initialize_filterrific(
+        MedicalSituation,
+        params[:filterrific],
+        select_options: {
+          sorted_by: MedicalSituation.options_for_sorted_by_manager,
+          with_specialization_id: Specialization.options_for_select
+        },
+        persistence_id: 'shared_key',
+      ) or return
+    end
 
 end
