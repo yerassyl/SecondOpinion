@@ -53,7 +53,7 @@ gem 'filterrific' # for filters
 # gem 'capistrano-rails', group: :developmentrai
 group :production do
   gem 'rails_12factor'
-  gem 'mysql'
+  gem 'pg'
 end
 
 group :development, :test do
