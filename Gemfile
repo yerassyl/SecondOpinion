@@ -49,11 +49,11 @@ gem 'filterrific' # for filters
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+gem 'pg'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :developmentrai
 group :production do
   gem 'rails_12factor'
-  gem 'pg'
 end
 
 group :development, :test do
@@ -63,7 +63,6 @@ group :development, :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.0'
-  gem 'pg'
 end
 
 group :development do
