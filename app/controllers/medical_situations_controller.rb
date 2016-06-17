@@ -1,7 +1,8 @@
 class MedicalSituationsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_filterrific, only: [:index, :in_pool, :not_in_pool]
+  before_action :set_filterrific, only: [:index]
+  before_action :set_medical_situation, only: [:drop]
 
   # all medical situations
   def index
@@ -17,51 +18,27 @@ class MedicalSituationsController < ApplicationController
     redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
-  # in pool medical situations
-  def in_pool
-    @medical_situations = @filterrific.find.page(params[:page]).where(inPool: true).per(10)
-    @doctors = Doctor.all
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  rescue ActiveRecord::RecordNotFound => e
-    # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{ e.message }"
-    redirect_to(reset_filterrific_url(format: :html)) and return
-  end
-
-  def not_in_pool
-    @medical_situations = @filterrific.find.page(params[:page]).where(inPool: false).per(10)
-    @doctors = Doctor.all
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  rescue ActiveRecord::RecordNotFound => e
-    # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{ e.message }"
-    redirect_to(reset_filterrific_url(format: :html)) and return
-  end
-
   # show medical situation in expanded mode with it's medical_services and other related information
   # such as notes, reports etc
   def show
     #@medical_situation should be loaded
+    @medical_situation = MedicalSituation.find(params[:id])
     @medical_services = @medical_situation.medical_services
     @medical_service = MedicalService.new
     @medications = @medical_situation.medications
     @lab_tests = @medical_situation.lab_tests
     @other_documents = @medical_situation.other_documents
+    @medical_situation_reports = @medical_situation.medical_situation_reports
     @medical_situation_report = MedicalSituationReport.new
     #@medical_service.medical_service_documents.build
   end
-
 
   def create
     @patient_id = params[:patient]
     @medical_situation = MedicalSituation.new(medical_situation_params)
     @medical_situation.patient_id = @patient_id
+    @medical_situation.medical_situation_status = MedicalSituationStatus.find_by(name: 'Not in pool')
+
     respond_to do |format|
       if @medical_situation.save
         format.json { render json: @medical_situation, status: :created}
@@ -87,7 +64,7 @@ class MedicalSituationsController < ApplicationController
     @medical_situation = MedicalSituation.find(params[:medical_situation][:medical_situation_id])
     # if doctor is assigned then assign doctor and do not send to pool
     # refactor/rewrite this one later
-    @medical_situation.inPool = true
+    @medical_situation.medical_situation_status = MedicalSituationStatus.find_by(name: 'In pool')
     @medical_situation.update(medical_situation_params)
     # if params[:medical_situation][:doctor_id].present?
     #   @medical_situation.update(doctor_id: params[:medical_situation][:doctor_id], fee: params[:medical_situation][:fee], inPool: true)
@@ -114,23 +91,37 @@ class MedicalSituationsController < ApplicationController
   def take
      doctor_id = params[:doctor_id]
      # medical_situation is loaded by cancancan via passing id of medical_situation as parameter to url
-     if @medical_situation.update(doctor_id: doctor_id)
+     if @medical_situation.update(doctor_id: doctor_id, 
+          medical_situation_status: MedicalSituationStatus.find_by(name: 'Doctor reviewing'))
        flash[:success] = I18n.t('you_took_medical_situation')
        redirect_to pools_path
      end
   end
 
+  # doctor can drop medical situation which then goes back to Pool with 'Returned' status
+  def drop
+    if @medical_situation.update(doctor_id: nil,
+          medical_situation_status: MedicalSituationStatus.find_by(name: 'Returned'))
+      flash[:success] = I18n.t('you_dropped_medical_situtation')
+      @doctor = params[:doctor_id]
+      redirect_to doctor_path @doctor
+    end
+  end
+
   # doctor can submit report
   # js
   def submit_report
-    @medical_situation_report = MedicalSituationReport.create(medical_situation_report_params)
+    @medical_situation_report = MedicalSituationReport.new(medical_situation_report_params)
+    if @medical_situation_report.save
+      @medical_situation_reports = MedicalSituation.find(@medical_situation_report.medical_situation_id).medical_situation_reports
+    end
   end
 
   private
 
     def medical_situation_params
-      params.require(:medical_situation).permit(:reason, :price, :fee, :paid, :patient_id, :doctor_id, :inPool,
-                                                :specialization_id, :manager_sets_fee_attr,
+      params.require(:medical_situation).permit(:reason, :price, :fee, :paid, :patient_id, :doctor_id, :medical_situation_status_id,
+                                                :specialization_id, :manager_sets_fee_attr, :is_urgent,
                                                 medications_attributes:[:id,:_destroy,:name,:dose,:per_day,:other,:medical_situation_id],
                                                 lab_tests_attributes: [:id,:_destroy,:name,:description, :medical_situation_id,:file,:file_cache],
                                                 other_documents_attributes: [:id,:_destroy, :name, :description, :medical_situation_id, :file, :other_document_cache]
@@ -138,7 +129,11 @@ class MedicalSituationsController < ApplicationController
     end
 
     def medical_situation_report_params
-      params.require(:medical_situation_report).permit(:medical_situation_id,:description,:file,:file_cache)
+      params.require(:medical_situation_report).permit(:medical_situation_id, :name, :description, :file, :file_cache)
+    end
+
+    def set_medical_situation
+      @medical_sitation = MedicalSituation.find(params[:id])
     end
 
     def set_filterrific
@@ -147,7 +142,8 @@ class MedicalSituationsController < ApplicationController
         params[:filterrific],
         select_options: {
           sorted_by: MedicalSituation.options_for_sorted_by_manager,
-          with_specialization_id: Specialization.options_for_select
+          with_specialization_id: Specialization.options_for_select,
+          with_medical_situation_status_id: MedicalSituationStatus.options_for_select
         },
         persistence_id: 'shared_key',
       ) or return

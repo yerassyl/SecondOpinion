@@ -5,5 +5,5 @@ class MedicalSituationReport < ActiveRecord::Base
 
   belongs_to :medical_situation
 
-  validates :file, presence:true
+  validates :file, :name, presence:true
 end

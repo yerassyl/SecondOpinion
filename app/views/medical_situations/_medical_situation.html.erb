@@ -1,16 +1,11 @@
-<div class="row medical_situation record" data-id="<%= medical_situation.id %>">
+<div class="row medical_situation record <%= 'urgent' if medical_situation.is_urgent %>"
+      data-id="<%= medical_situation.id %>">
   <div class="small-12 large-12 columns">
 
     <div class="row">
       <div class="small-4 large-2 columns">
         <span class="pool-status">
-          <% if medical_situation.doctor.present? %>
-
-          <% elsif medical_situation.inPool %>
-            <h4 class="in-pool"><%= t('in_pool') %></h4>
-          <% else %>
-              <h4 class="not-in-pool"><%= t('not_in_pool') %></h4>
-          <% end %>
+          <h4><%= medical_situation.medical_situation_status.name %></h4>
           <%= link_to (fa_icon 'eye', class:'fa-2x'), medical_situation %>
         </span>
       </div>
@@ -27,6 +22,7 @@
         </span>
         <span class="fr heading">date opened: <%= medical_situation.created_at.to_date %></span></br>
         <span class="fr heading">ID: <%= medical_situation.id %></span>
+        <%= 'URGENT!' if medical_situation.is_urgent %>
       </div>
     </div>
 
@@ -60,8 +56,12 @@
                   </span>
                 </div>
 
-                <div class="large-5 columns">
-                  <% if medical_situation.inPool %>
+                <div class="large-2 columns">
+                    <%= t('urgent') %>
+                  <%= f.check_box :is_urgent %>
+                </div>
+                <div class="large-3 columns">
+                  <% if medical_situation.medical_situation_status.name.eql? 'In pool' %>
                       <%= f.submit t('verbs.update'), { class: 'button tiny warning send_to_pool'} %>
                   <% else %>
                       <%= f.submit t('send_to_pool'), { class: 'button tiny success send_to_pool'} %>
@@ -74,7 +74,6 @@
 
         <% end %>
       </div>
-
 
 
     </div>

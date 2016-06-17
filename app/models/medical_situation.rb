@@ -11,6 +11,7 @@ class MedicalSituation < ActiveRecord::Base
   belongs_to :patient, foreign_key: 'patient_id'
   belongs_to :pool
   belongs_to :specialization, foreign_key: 'specialization_id'
+  belongs_to :medical_situation_status, foreign_key: 'medical_situation_status_id'
 
   # todo: does medical situation belong to only one doctor
   # can it be so that many doctors are viewing one medical_situation, probably yes
@@ -18,7 +19,7 @@ class MedicalSituation < ActiveRecord::Base
   belongs_to :doctor
 
   has_many :medical_services
-  has_one :medical_situation_report
+  has_many :medical_situation_reports
 
   attr_accessor :manager_sets_fee_attr
 
@@ -29,6 +30,10 @@ class MedicalSituation < ActiveRecord::Base
 
   scope :with_specialization_id, lambda { |specialization_ids| 
     where(specialization_id: [*specialization_ids])
+  }
+
+  scope :with_medical_situation_status_id, lambda { |status_ids| 
+    where(medical_situation_status_id: [*status_ids])
   }
 
   scope :with_fee_gte, lambda { |given_fee|
@@ -44,6 +49,8 @@ class MedicalSituation < ActiveRecord::Base
         # Joining on other tables is quite common in Filterrific, and almost
         # every ActiveRecord table has a 'created_at' column.
         order("medical_situations.created_at #{ direction }")
+      when /^urgent_/
+        order("medical_situations.is_urgent #{ direction }")
       when /^fee_/
         order("medical_situations.fee #{ direction } NULLS LAST")
       when /^price_/
@@ -82,7 +89,8 @@ class MedicalSituation < ActiveRecord::Base
   def self.options_for_sorted_by
   [
     ['Registration date (newest first)', 'created_at_desc'],
-    ['Registration date (oldest first)', 'created_at_asc']
+    ['Registration date (oldest first)', 'created_at_asc'],
+    ['Urgent first', 'urgent_desc']
   ]
   end
 
@@ -94,7 +102,8 @@ class MedicalSituation < ActiveRecord::Base
       ['Price descending', 'price_desc'],
       ['Patient name (a-z)', 'patient_name_asc'],
       ['Registration date (newest first)', 'created_at_desc'],
-      ['Registration date (oldest first)', 'created_at_asc']
+      ['Registration date (oldest first)', 'created_at_asc'],
+      ['Urgent first', 'urgent_desc']
     ]
   end
 
@@ -104,7 +113,8 @@ class MedicalSituation < ActiveRecord::Base
       :sorted_by,
       :with_fee_gte,
       :with_specialization_id,
-      :search_by_patient
+      :search_by_patient,
+      :with_medical_situation_status_id
     ]
   )
 

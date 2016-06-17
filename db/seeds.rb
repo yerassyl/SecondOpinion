@@ -154,6 +154,17 @@ CallBack.create!(
   )
 end
 
+MedicalSituationStatus.create(
+  [
+    { name: 'Not in pool'},
+    { name: 'In pool' },
+    { name: 'Doctor reviewing' },
+    { name: 'Returned' },
+    { name: 'Closed' },
+    { name: 'Reopened' }
+  ]
+)
+
 # create fake medical situations
 40.times do |medical_situation|
   MedicalSituation.create(
@@ -164,8 +175,8 @@ end
     paid: false,
     price: Faker::Number.between(1000,7000),
     specialization_id: Faker::Number.between(1, 4),
-    #fee: Faker::Number.between(1, 1000),
-    inPool: false
+    is_urgent: Faker::Boolean.boolean(0.2),
+    medical_situation_status_id: 1
   )
 end
 
@@ -179,7 +190,8 @@ end
       price: Faker::Number.between(1000,7000),
       specialization_id: Faker::Number.between(1, 4),
       fee: Faker::Number.between(1, 1000),
-      inPool: true
+      is_urgent: Faker::Boolean.boolean(0.2),
+      medical_situation_status_id: 2
   )
 end
 

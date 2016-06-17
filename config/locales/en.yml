@@ -44,6 +44,7 @@ en:
       document: "Document"
       description: "Description"
       status: 'Status'
+      name: "Name"
     plural:
       diseases: "Diseases"
       medications: "Medications"
@@ -187,6 +188,7 @@ en:
   fee_is_not_set: "Fee is not set by manager yet"
   fee_has_been_set: "Fee has been set"
   fee_price_description: "Price is what set by client, and fee is what will be paid to doctors"
-
+  urgent: "Urgent"
+  date_submitted: "Date submitted"
 
 
