@@ -3,10 +3,10 @@ class PoolsController < ApplicationController
 
   # default pool
   def index
-    # doctor_specialization_id = current_user.doctor.specializations.first.id
-
     @filterrific = initialize_filterrific(
-      MedicalSituation,
+      MedicalSituation.joins("INNER JOIN medical_situation_statuses ON 
+                                medical_situation_statuses.id = medical_situations.medical_situation_status_id")
+                              .where("medical_situation_statuses.name = 'In pool'"),
       params[:filterrific],
       select_options: {
         sorted_by: MedicalSituation.options_for_sorted_by,
@@ -15,7 +15,7 @@ class PoolsController < ApplicationController
       persistence_id: 'shared_key'
     ) or return
 
-    @medical_situations = @filterrific.find.page(params[:page]).where(inPool: true, doctor_id: nil).per(10)
+    @medical_situations = @filterrific.find.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html

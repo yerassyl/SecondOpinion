@@ -25,8 +25,6 @@ module ManagersHelper
     'active' if current_page?(controller: :managers, action: :rejected)
   end
 
-
-
   def doctor_module_sub_nav_link
     ddclass = current_page?(controller: :doctors, action: :index) ? 'active' : ''
     disabled = ddclass=='active' ? 'disabled' : ''
@@ -34,26 +32,9 @@ module ManagersHelper
   end
 
   def cases_module_sub_nav_link
-    ddclass = ( current_page?(controller: :medical_situations, action: :index) or
-                current_page?(controller: :medical_situations, action: :in_pool) or
-                current_page?(controller: :medical_situations, action: :not_in_pool)
-              ) ? 'active' : ''
+    ddclass = current_page?(controller: :medical_situations, action: :index) ? 'active' : ''
     disabled = ddclass=='active' ? 'disabled' : ''
     content_tag('dd', link_to(t('cases_module'), medical_situations_path, html: {disabled: disabled} ), class: ddclass)
-  end
-
-  # cases_module -> sub nav links
-  # medical situations sub nav links
-  def all_situations_sub_nav_link
-    current_page?(controller: :medical_situations, action: :index) ? 'active' : ''
-  end
-
-  def in_pool
-    current_page?(controller: :medical_situations, action: :in_pool) ? 'active' : ''
-  end
-
-  def not_in_pool
-    current_page?(controller: :medical_situations, action: :not_in_pool) ? 'active' : ''
   end
 
 

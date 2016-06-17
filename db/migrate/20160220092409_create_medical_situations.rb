@@ -4,8 +4,8 @@ class CreateMedicalSituations < ActiveRecord::Migration
       t.string :reason
       t.belongs_to :patient, index: true
       t.belongs_to :doctor, index: true
-      t.belongs_to :pool, index:true
-      t.boolean :inPool, default: false
+      t.belongs_to :pool, index: true
+      t.belongs_to :medical_situation_status, index: true
       t.boolean :paid, default: false
       t.integer :price
       t.integer :fee

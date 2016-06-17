@@ -1,4 +1,4 @@
-<% if medical_situation.inPool %>
+<% if medical_situation.medical_situation_status.name.eql? 'In pool' %>
 
     <% if current_user.has_role?(:doctor) %>
         <span class="heading"><%= t('nouns.singular.fee') %>:</span> <span> <%= medical_situation.fee %>$</span>

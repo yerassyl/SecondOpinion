@@ -47,9 +47,15 @@
                 <%= @medical_situation.patient.firstname + " " + @medical_situation.patient.lastname %>
               </h4>
             </div>
-            <div class="large-8 medium-7 columns">
-              <% if can? :submit_report, @medical_situation and @medical_situation.doctor_id.present? %>
-                  <a href="#" data-reveal-id="report-form" class="button tiny"><%= t('submit_report') %></a>
+            <div class="large-4 medium-7 columns">
+              <% if can? :submit_report, @medical_situation and @medical_situation.doctor.present? and current_user.id == @medical_situation.doctor.user_id %>
+                  <a href="#" data-reveal-id="report-form" data-reveal class="button tiny"><%= t('submit_report') %></a>
+              <% end %>
+            </div>
+            <div class="large-4 medium-5 columns">
+              <% if can? :drop, @medical_situation and @medical_situation.doctor.present? and current_user.id == @medical_situation.doctor.user_id %>
+                <%= link_to t('drop_medical_situation'), drop_medical_situations_path(id: @medical_situation, doctor_id: current_user.doctor), 
+                        method: :post, class: 'button tiny alert' %>
               <% end %>
             </div>
           </div>
@@ -59,19 +65,10 @@
               <th><%= t('patient_module.medical_history.reason') %></th>
               <td colspan="2"><%= @medical_situation.reason %></td>
             </tr>
-            <tr>
-              <th><%= t('report') %></th>
-              <td>
-                <% if @medical_situation.medical_situation_report.present? %>
-                  <%= link_to t('open'), @medical_situation.medical_situation_report.file.url, {target:'_blank'} %>
-                <% else %>
-                  <%= t('nouns.singular.no') +' '+t('report')  %>
-                <% end %>
-              </td>
-            </tr>
-
           </table>
-
+          <div id="reports">
+            <%= render 'reports', medical_situation_reports: @medical_situation_reports %>
+          </div>
         </div>
       </div>
       <!-- END MEDICAL SITUATIONS BASE INFORMATION -->
@@ -173,7 +170,7 @@
     <div id="medical-situation-report-messages"></div>
     <%= form_for @medical_situation_report, method: :patch, url: :submit_report_medical_situations, remote:true do |f|  %>
         <%= f.hidden_field :medical_situation_id, value: @medical_situation.id %>
-
+        <%= f.text_field :name, placeholder: t('nouns.singular.name') %>
         <%= f.text_field :description, placeholder: t('nouns.singular.description') %>
         <%= f.file_field :file, accept: 'application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document', required:true %>
         <%= f.hidden_field :file_cache %>

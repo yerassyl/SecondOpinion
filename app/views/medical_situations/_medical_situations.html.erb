@@ -2,38 +2,18 @@
 
 <%= render 'managers/module_menu' %>
 
-<div class="row">
-  <div class="large-12 small-12 columns">
-
-    <dl class="sub-nav">
-
-      <dt>Filter:</dt>
-      <dd class="<%= all_situations_sub_nav_link %>">
-        <%= link_to t('all'), medical_situations_path %>
-      </dd>
-      <dd class="<%= in_pool %>">
-        <%= link_to t('in_pool'), in_pool_medical_situations_path %>
-      </dd>
-      <dd class="<%= not_in_pool %>">
-        <%= link_to t('not_in_pool'), not_in_pool_medical_situations_path %>
-      </dd>
-
-    </dl>
-
-  </div>
-</div>
 
 <div class="large-12 columns">
   <fieldset>
     <%= form_for_filterrific @filterrific do |f| %>
       <div class="row">
-        <div class="large-4 columns">
+        <div class="large-3 columns">
           <label>
             Search
             <%= f.text_field(:search_by_patient, class: 'filterrific-periodically-observed') %>
           </label>
         </div>
-        <div class="large-4 columns">
+        <div class="large-3 columns">
           <label>
             Specialization
             <%= f.select(
@@ -43,7 +23,17 @@
             ) %>
           </label>
         </div>
-        <div class="large-4 columns">
+        <div class="large-3 columns">
+          <label>
+            Status
+            <%= f.select(
+              :with_medical_situation_status_id,
+              @filterrific.select_options[:with_medical_situation_status_id],
+              { include_blank: 'All' }
+            ) %>
+          </label>
+        </div>
+        <div class="large-3 columns">
           <label>
             Sorted by
             <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>

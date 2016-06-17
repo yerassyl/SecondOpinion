@@ -48,11 +48,11 @@ class Ability
   end
 
   def doctor(user)
-    can [:show,:take], MedicalSituation
+    can [:show, :take, :submit_report, :drop], MedicalSituation
     can [:index], Pool
     # doctor can only see his profile or edit it.
-    can [:show, :update, :update_resume], Doctor, :id => user.doctor.id
-    can [:submit_report], MedicalSituation
+    can [:show], Doctor
+    can [:update, :update_resume], Doctor, :id => user.doctor.id
 
     can [:show], MedicalService
     # do |medical_situation|
