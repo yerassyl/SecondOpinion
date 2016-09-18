@@ -159,9 +159,9 @@ MedicalSituationStatus.create(
     { name: 'Not in pool'},
     { name: 'In pool' },
     { name: 'Doctor reviewing' },
+    { name: 'Waiting for patient' },
     { name: 'Returned' },
-    { name: 'Closed' },
-    { name: 'Reopened' }
+    { name: 'Closed' }
   ]
 )
 

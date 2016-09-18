@@ -53,6 +53,8 @@ Rails.application.routes.draw do
         post 'take'
         patch 'submit_report'
         post 'drop'
+        post 'send_to_patient'
+        post 'send_to_doctor'
       end
     end
     resources :medical_services, only: [:create, :show, :update] do

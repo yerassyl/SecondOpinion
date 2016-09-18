@@ -42,23 +42,42 @@
           <div id="notice"></div>
 
           <div class="row">
-            <div class="large-4 medium-5 columns">
+            <div class="large-9 columns">
               <h4><span class="grey"><%= t('personal_details.patient_name') %>: </span>
                 <%= @medical_situation.patient.firstname + " " + @medical_situation.patient.lastname %>
               </h4>
             </div>
-            <div class="large-4 medium-7 columns">
+          </div>
+          <div class="row">
+            <div class="large-3 small-3 columns">
               <% if can? :submit_report, @medical_situation and @medical_situation.doctor.present? and current_user.id == @medical_situation.doctor.user_id %>
                   <a href="#" data-reveal-id="report-form" data-reveal class="button tiny"><%= t('submit_report') %></a>
               <% end %>
             </div>
-            <div class="large-4 medium-5 columns">
+            <div class="large-3 small-3 columns">
+              <% if can? :send_to_patient, @medical_situation and @medical_situation.doctor.present? and current_user.id == @medical_situation.doctor.user_id %>
+                <%= link_to t('send_to_patient'), send_to_patient_medical_situations_path(id: @medical_situation),
+                    method: :post, class: 'button tiny' %>
+              <% end %>
+            </div>
+            <div class="large-3 small-3 columns">
               <% if can? :drop, @medical_situation and @medical_situation.doctor.present? and current_user.id == @medical_situation.doctor.user_id %>
                 <%= link_to t('drop_medical_situation'), drop_medical_situations_path(id: @medical_situation, doctor_id: current_user.doctor), 
                         method: :post, class: 'button tiny alert' %>
               <% end %>
             </div>
+            <div class="large-3 small-3 columns">
+            </div>
           </div>
+
+          <% if can? :send_to_doctor, @medical_situation %>
+            <div class="row">
+              <div class="large-3 small-3 columns">
+                <%= link_to t('send_to_doctor'), send_to_doctor_medical_situations_path(id: @medical_situation),
+                    method: :post, class: 'button tiny' %>
+              </div>
+            </div>
+          <% end %>
 
           <table width="100%">
             <tr>
@@ -165,11 +184,13 @@
 
 
 <!-- BEGIN SUBMIT REPORT FORM -->
+<% if can? :submit_report, @medical_situation and @medical_situation.doctor.present? and current_user.id == @medical_situation.doctor.user_id %>
   <div id="report-form" class="reveal-modal tiny" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <h3><%= t('upload_report')%> </h3>
     <div id="medical-situation-report-messages"></div>
     <%= form_for @medical_situation_report, method: :patch, url: :submit_report_medical_situations, remote:true do |f|  %>
         <%= f.hidden_field :medical_situation_id, value: @medical_situation.id %>
+        <%= f.hidden_field :doctor_id, value: @medical_situation.doctor.id %>
         <%= f.text_field :name, placeholder: t('nouns.singular.name') %>
         <%= f.text_field :description, placeholder: t('nouns.singular.description') %>
         <%= f.file_field :file, accept: 'application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document', required:true %>
@@ -177,4 +198,5 @@
         <%= f.submit t('forms.submit'), class:'button tiny success' %>
     <% end %>
   </div>
+<% end %>
 <!-- END SUBMIT REPORT FORM -->

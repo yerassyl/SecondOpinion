@@ -8,6 +8,7 @@ class MedicalSituationsController < ApplicationController
   def index
     @medical_situations = @filterrific.find.page(params[:page]).per(10)
     @doctors = Doctor.all
+    @medical_situation_statuses = MedicalSituationStatus.all
     respond_to do |format|
       format.js
       format.html
@@ -24,6 +25,7 @@ class MedicalSituationsController < ApplicationController
     #@medical_situation should be loaded
     @medical_situation = MedicalSituation.find(params[:id])
     @medical_services = @medical_situation.medical_services
+    @medical_situation_statuses = MedicalSituationStatus.all
     @medical_service = MedicalService.new
     @medications = @medical_situation.medications
     @lab_tests = @medical_situation.lab_tests
@@ -64,7 +66,6 @@ class MedicalSituationsController < ApplicationController
     @medical_situation = MedicalSituation.find(params[:medical_situation][:medical_situation_id])
     # if doctor is assigned then assign doctor and do not send to pool
     # refactor/rewrite this one later
-    @medical_situation.medical_situation_status = MedicalSituationStatus.find_by(name: 'In pool')
     @medical_situation.update(medical_situation_params)
     # if params[:medical_situation][:doctor_id].present?
     #   @medical_situation.update(doctor_id: params[:medical_situation][:doctor_id], fee: params[:medical_situation][:fee], inPool: true)
@@ -117,6 +118,20 @@ class MedicalSituationsController < ApplicationController
     end
   end
 
+  def send_to_patient
+    if @medical_situation.update(medical_situation_status: MedicalSituationStatus.find_by(name: 'Waiting for patient'))
+      flash[:success] = I18n.t('sent_to_patient')
+      redirect_to @medical_situation
+    end
+  end
+
+  def send_to_doctor
+    if @medical_situation.update(medical_situation_status: MedicalSituationStatus.find_by(name: 'Doctor reviewing'))
+      flash[:success] = I18n.t('sent_to_doctor')
+      redirect_to @medical_situation
+    end
+  end
+
   private
 
     def medical_situation_params
@@ -129,7 +144,7 @@ class MedicalSituationsController < ApplicationController
     end
 
     def medical_situation_report_params
-      params.require(:medical_situation_report).permit(:medical_situation_id, :name, :description, :file, :file_cache)
+      params.require(:medical_situation_report).permit(:medical_situation_id, :doctor_id, :name, :description, :file, :file_cache)
     end
 
     def set_medical_situation

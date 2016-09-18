@@ -44,6 +44,7 @@ en:
       document: "Document"
       description: "Description"
       status: 'Status'
+      medical_situation_status: 'Medical situation status'
       name: "Name"
     plural:
       diseases: "Diseases"
@@ -63,7 +64,7 @@ en:
     middlename: "Middlename"
     lastname: "Lastname"
     date_of_birth: "Date of birth"
-    maritial_status: "Maritial Status"
+    maritial_status: "Marital Status"
     gender: "Gender"
     address: 'Address'
     telephone: "Telephone"

@@ -4,6 +4,7 @@ class MedicalSituationReport < ActiveRecord::Base
   attr_accessor :file_cache
 
   belongs_to :medical_situation
+  belongs_to :doctor
 
   validates :file, :name, presence:true
 end

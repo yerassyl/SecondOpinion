@@ -29,53 +29,12 @@
     <br>
     <div class="row">
       <!-- load patient name only in managers module-->
-      <div class="large-2 columns <%= medical_situation_class %>">
+      <div class="small-3 large-2 columns <%= medical_situation_class %>">
         <span class="heading"><%= t('patient_module.patient')%></span>
       </div>
-      <div class="large-2 columns <%= medical_situation_class %>">
+      <div class="small-9 large-10 columns <%= medical_situation_class %>">
         <span class="patient_name"> <%= medical_situation.patient.firstname + ' ' + medical_situation.patient.lastname %></span>
       </div>
-      <div class="large-8 columns">
-        <% if medical_situation_class=='show' %>
-
-            <%= form_for medical_situation, {url: :send_to_pool_medical_situations, method: :post, remote:true} do |f| %>
-               <%= f.hidden_field :medical_situation_id, value: medical_situation.id %>
-               <%= f.hidden_field :manager_sets_fee_attr, value:true %>
-
-              <div class="row">
-
-                <div class="large-3 columns">
-                  <%= f.number_field :fee, {placeholder: t('verbs.set_fee'),required:true } %>
-                </div>
-
-                <div class="large-4 columns">
-                  <span data-tooltip aria-haspopup="true" class="has-tip tip-top" title="<%= t('assign_doctor_tooltip')%>">
-                    <%= f.select :doctor_id, options_from_collection_for_select(@doctors, 'id', 'name', selected: (medical_situation.doctor.id if medical_situation.doctor.present?) ),
-                                 {multiple: false, include_blank:t('assign_to_doctor')},
-                                 class:'assign-doctor' %>
-                  </span>
-                </div>
-
-                <div class="large-2 columns">
-                    <%= t('urgent') %>
-                  <%= f.check_box :is_urgent %>
-                </div>
-                <div class="large-3 columns">
-                  <% if medical_situation.medical_situation_status.name.eql? 'In pool' %>
-                      <%= f.submit t('verbs.update'), { class: 'button tiny warning send_to_pool'} %>
-                  <% else %>
-                      <%= f.submit t('send_to_pool'), { class: 'button tiny success send_to_pool'} %>
-                  <% end %>
-                </div>
-
-              </div>
-
-          <% end %>
-
-        <% end %>
-      </div>
-
-
     </div>
 
 
@@ -88,55 +47,111 @@
       </div>
     </div>
 
+
+
     <div class="row">
 
       <div class="small-4 large-4 columns">
         <h4 class="headings"><%= "#{t('nouns.plural.medications')} #{t('verbs.taking')}" %></h4>
         <% if medical_situation.medications.present? %>
-            <ul>
-              <% medical_situation.medications.each do |medication| %>
-                  <li>
-                    <span class="heading"><%= t('nouns.singular.medication')%>:</span> <%= medication.name %><br>
-                    <span class="heading"><%= t('patient_module.medical_history.medication.dose')%>:</span> <%= medication.dose %> |
-                    <span class="heading"><%= t('patient_module.medical_history.medication.frequency')%>:</span> <%= medication.per_day %> <%= t('patient_module.medical_history.medication.times') %><br>
-                    <span class="heading"><%= t('patient_module.medical_history.other')%>:</span> <%= medication.other %>
-                  </li>
-              <% end %>
-            </ul>
+          <ul>
+            <% medical_situation.medications.each do |medication| %>
+              <li>
+                <span class="heading"><%= t('nouns.singular.medication')%>:</span> <%= medication.name %><br>
+                <span class="heading"><%= t('patient_module.medical_history.medication.dose')%>:</span> <%= medication.dose %> |
+                <span class="heading"><%= t('patient_module.medical_history.medication.frequency')%>:</span> <%= medication.per_day %> <%= t('patient_module.medical_history.medication.times') %><br>
+                <span class="heading"><%= t('patient_module.medical_history.other')%>:</span> <%= medication.other %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <h5 class="subheader"><em>No data</em></h5>
+          <hr />
         <% end %>
       </div>
 
       <div class="small-4 large-4 columns">
         <h4 class="headings"><%= t('nouns.plural.lab_tests')%></h4>
         <% if medical_situation.lab_tests.present? %>
-            <ul>
-              <% medical_situation.lab_tests.each do |lab_test| %>
-                  <li>
-                    <span class="heading"><%= t('personal_details.name')%>:</span> <%= lab_test.name %> <br>
-                    <span class="heading"><%= t('nouns.singular.description')%>:</span> <%= lab_test.description %><br>
-                    <span class="heading"><%= t('file')%></span> <%= link_to t('open'), lab_test.file.url, {target:'_blank'} %>
-                  </li>
-              <% end %>
+          <ul>
+            <% medical_situation.lab_tests.each do |lab_test| %>
+              <li>
+                <span class="heading"><%= t('personal_details.name')%>:</span> <%= lab_test.name %> <br>
+                <span class="heading"><%= t('nouns.singular.description')%>:</span> <%= lab_test.description %><br>
+                <span class="heading"><%= t('file')%></span> <%= link_to t('open'), lab_test.file.url, {target:'_blank'} %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <h5 class="subheader"><em>No data</em></h5>
+          <hr />
         <% end %>
-            </ul>
       </div>
 
       <div class="small-4 large-4 columns">
         <h4 class="headings"><%= t('nouns.plural.other_documents')%></h4>
         <% if medical_situation.other_documents.present? %>
-            <ul>
-              <% medical_situation.other_documents.each do |other_document| %>
-                  <li>
-                    <span class="heading"><%= t('personal_details.name')%>:</span> <%= other_document.name %><br>
-                    <span class="heading"><%= t('nouns.singular.description')%></span> <%= other_document.description %><br>
-                    <span class="heading"><%= t('file')%>: </span> <%=link_to t('open'), other_document.file.url %>
-                  </li>
-              <% end %>
-            </ul>
+          <ul>
+            <% medical_situation.other_documents.each do |other_document| %>
+              <li>
+                <span class="heading"><%= t('personal_details.name')%>:</span> <%= other_document.name %><br>
+                <span class="heading"><%= t('nouns.singular.description')%></span> <%= other_document.description %><br>
+                <span class="heading"><%= t('file')%>: </span> <%=link_to t('open'), other_document.file.url %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <h5 class="subheader"><em>No data</em></h5>
+          <hr />
         <% end %>
       </div>
-
     </div>
+
+    <% if medical_situation_class=='show' %>
+
+        <%= form_for medical_situation, {url: :send_to_pool_medical_situations, method: :post, remote:true} do |f| %>
+           <%= f.hidden_field :medical_situation_id, value: medical_situation.id %>
+           <%= f.hidden_field :manager_sets_fee_attr, value:true %>
+
+          <div class="row">
+            <div class="small-4 large-4 columns">
+              <label>
+                <span class="heading"><%= t('fee')%></span>
+                <%= f.number_field :fee, { placeholder:t('verbs.set_fee'), required: true } %>
+              </label>
+            </div>
+            <div class="small-4 large-4 columns">
+              <label>
+                <span class="heading"><%= t('doctor') %></span>
+                <span data-tooltip aria-haspopup="true" class="has-tip tip-top" title="<%= t('assign_doctor_tooltip')%>">
+                  <%= f.select :doctor_id, options_from_collection_for_select(@doctors, 'id', 'name', selected: (medical_situation.doctor.id if medical_situation.doctor.present?) ),
+                               {multiple: false, include_blank:t('assign_to_doctor')} %>
+                </span>
+              </label>
+            </div>
+            <div class="small-4 large-4 columns">
+              <label>
+                <span class="heading"><%= t('nouns.singular.medical_situation_status')%></span>
+                <%= f.select :medical_situation_status_id, options_from_collection_for_select(@medical_situation_statuses, 'id', 'name', selected: (medical_situation.medical_situation_status.id if medical_situation.medical_situation_status.present?) ),
+                               { multiple: false } %>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-3 large-2 columns">
+                <span class="heading">Urgent?</span>
+              <%= f.check_box :is_urgent %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-3 columns">
+              <%= f.submit t('verbs.update'), { class: 'button tiny success send_to_pool'} %> 
+            </div>
+          </div>
+
+      <% end %>
+
+    <% end %>
 
   </div>
 </div>

@@ -29,7 +29,7 @@ class Ability
          ], Patient do |patient|
       any_patient?(user.client, patient.id)
     end
-    can [:create, :load_more], MedicalSituation
+    can [:create, :send_to_doctor, :load_more], MedicalSituation
     can [:show], MedicalSituation do |medical_situation|
       user.client.patients.any? { |p| p.id == medical_situation.patient_id }
     end
@@ -48,7 +48,7 @@ class Ability
   end
 
   def doctor(user)
-    can [:show, :take, :submit_report, :drop], MedicalSituation
+    can [:show, :take, :submit_report, :send_to_patient, :drop], MedicalSituation
     can [:index], Pool
     # doctor can only see his profile or edit it.
     can [:show], Doctor

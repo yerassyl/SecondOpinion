@@ -4,12 +4,14 @@
     <tr>
       <th><%= t('report') %></th>
       <th><%= t('description') %></th>
+      <th><%= t('doctor') %></th>
       <th><%= t('date_submitted') %></th>
     </tr>
     <% medical_situation_reports.each do |report| %>
       <tr>
         <td><%= link_to report.name, report.file.url, {target:'_blank'} %></td>
         <td><%= report.description %></td>
+        <td><%= report.doctor.name %></td>
         <td><%= report.created_at.strftime("%Y-%m-%d, %I:%M") %></td>
       </tr>
     <% end %>
