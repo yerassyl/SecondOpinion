@@ -1,7 +1,8 @@
 class LandingPageController < ApplicationController
   
-  def index
+  def landing_index
     @client_call_back = CallBack.new
+    render layout: false
   end
 
   def access_denied

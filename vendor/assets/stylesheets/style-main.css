@@ -9,13 +9,13 @@ Primary use:    Attorney & Lawyer Business Template
 Author:         ThemeMascot
 URL:            http://themeforest.net/user/ThemeMascot
 -------------------------------------------------------------------*/
-@import "../css/font-awesome.min";
-@import "../css/font-awesome-animation.min";
-@import "../css/pe-icon-7-stroke";
-@import "../css/elegant-icons";
-@import "../css/stroke-gap-icons";
-@import "../css/flaticon";
-@import "../css/medinova-font-icons";
+@import "font-awesome.min.css";
+@import "font-awesome-animation.min";
+@import "pe-icon-7-stroke";
+@import "elegant-icons";
+@import "stroke-gap-icons";
+@import "flaticon";
+@import "medinova-font-icons";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800);
 @import url(http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700,700italic);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,300,200,500,700,600,800);
