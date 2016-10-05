@@ -4,12 +4,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   # default root routes for each role
-   authenticated :user, ->(u) { u.has_role?(:manager) } do
-     root to: 'managers#index', as: :manager_root
-   end
-   authenticated :user, ->(u) { u.has_role?(:client) } do
-     root to: 'clients#index', as: :client_root
-   end
+  authenticated :user, ->(u) { u.has_role?(:manager) } do
+    root to: 'managers#index', as: :manager_root
+  end
+  authenticated :user, ->(u) { u.has_role?(:client) } do
+    root to: 'clients#index', as: :client_root
+  end
   authenticated :user, ->(u) { u.has_role?(:doctor) } do
     root to: 'pools#index', as: :doctor_root
   end

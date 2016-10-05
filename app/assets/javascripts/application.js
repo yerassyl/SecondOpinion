@@ -20,8 +20,9 @@
 //= require components
 //= require cocoon
 //= require select2
-//= require_tree .
 //= require filterrific/filterrific-jquery
+//= require_tree ../../../vendor
+//= require_tree .
 
 //$(function(){
 //    $(document).foundation();
