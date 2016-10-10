@@ -3,11 +3,11 @@
 <head>
 
 <!-- Meta Tags -->
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <meta name="description" content="Medinova - Health & Medical HTML Template" />
 <meta name="keywords" content="building,business,construction,cleaning,transport,workshop" />
-<meta name="author" content="ThemeMascot" />
+<meta name="author" content="ThemeMascot" /> -->
 
 <!-- Page Title -->
 <title>Second Opinion</title>
@@ -74,7 +74,7 @@
       <div class="widget no-border">
         <nav>
           <ul class="nav nav-list">
-            <li><a href="#">Home</a></li>
+            <li><%= link_to 'Home', root_path %></li>
             <li><a href="#">Services</a></li>
             <li><a class="tree-toggler nav-header">Pages <i class="fa fa-angle-down"></i></a>
               <ul class="nav nav-list tree">
@@ -202,14 +202,16 @@
             </ul>
             <div class="pull-right flip hidden-sm hidden-xs">
               <div class="widget no-border m-0">
-                <div class="search-form-wrapper">
-                  <form id="searchform" class="m-0 mt-10" method="get">
+                  <%= link_to 'Doctor Callback', doctor_callback_path, :class => 'btn btn-dark btn-theme-colored btn-flat btn-sm' %>
+                  <%= link_to 'Client Callback', client_callback_path, :class => 'btn btn-dark btn-theme-colored btn-flat btn-sm' %>
+                  <%= link_to 'Login', new_user_session_path, :class => 'btn btn-dark btn-theme-colored btn-flat btn-sm' %>
+                <!--  <form id="searchform" class="m-0 mt-10" method="get">
                     <input class="" type="text" name="s" id="searchinput" data-height="38px" value="Enter your search" onblur="if(this.value == '') { this.value ='Enter your search'; }" onfocus="if(this.value =='Enter your search') { this.value = ''; }"  >
                     <label>
                       <input type="submit" value="" name="submit" data-height="34px">
                     </label>
                   </form>
-                </div>
+                </div> -->
               </div>
             </div>
           </nav>

@@ -114,32 +114,32 @@ class PatientsController < ApplicationController
 
   private
 
-  def set_patient
-    @patient = Patient.find(params[:patient])
-  end
+    def set_patient
+      @patient = Patient.find(params[:patient])
+    end
 
-  def build_nested_attributes
-    @medical_situation.medications.build
-    @medical_situation.lab_tests.build
-    @medical_situation.other_documents.build
-  end
+    def build_nested_attributes
+      @medical_situation.medications.build
+      @medical_situation.lab_tests.build
+      @medical_situation.other_documents.build
+    end
 
-  def patient_params
-    params.require(:patient).permit(:firstname,:middlename,:lastname,:birthday,:maritial_status,:gender,:email,
-                                    :telephone,:cellphone,:emergency_person,:emergency_person_phone, :client_id)
-  end
+    def patient_params
+      params.require(:patient).permit(:firstname,:middlename,:lastname,:birthday,:maritial_status,:gender,:email,
+                                      :telephone,:cellphone,:emergency_person,:emergency_person_phone, :client_id)
+    end
 
-  def familyHistory_params
-    params.require(:family_history).permit(:skype,:email,:alive,:age,:relationship,:other_information,:patient_id)
-  end
+    def familyHistory_params
+      params.require(:family_history).permit(:skype,:email,:alive,:age,:relationship,:other_information,:patient_id)
+    end
 
-  def allergy_params
-    params.require(:allergy).permit(:name,:patient_id)
-  end
+    def allergy_params
+      params.require(:allergy).permit(:name,:patient_id)
+    end
 
-  def disease_params
-    params.require(:disease).permit(:diagnose,:condition,:treatment,:other, :patient_id)
-  end
+    def disease_params
+      params.require(:disease).permit(:diagnose,:condition,:treatment,:other, :patient_id)
+    end
 
 
 

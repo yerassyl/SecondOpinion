@@ -9,7 +9,11 @@ class LandingPageController < ApplicationController
 
   end
 
-  def leave_callback
+  def client_callback
+    @client_call_back = CallBack.new
+  end
+
+  def doctor_callback
     @callback = DoctorCallback.new
   end
 
@@ -21,7 +25,7 @@ class LandingPageController < ApplicationController
       ResumeMailer.send_resume(@callback).deliver_later
       redirect_to root_path
     else
-      render 'leave_callback'
+      render 'doctor_callback'
     end   
 
   end

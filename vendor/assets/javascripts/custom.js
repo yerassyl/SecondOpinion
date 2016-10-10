@@ -87,7 +87,7 @@
             var ajaxLoadContent = true;
             if( ajaxLoadContent ) {
                 $.ajax({
-                    url: "ajax-load/bootstrap-parent-modal.html",
+                    url: "assets/bootstrap-parent-modal.html",
                     success: function (data) { $('body').append(data); },
                     dataType: 'html'
                 });
