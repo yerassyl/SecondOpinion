@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_client, only: [:edit, :update]
+  before_action :set_client, only: [:edit, :update, :show]
   before_action :set_user, only: [:edit, :update]
 
   def index
@@ -9,7 +9,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    
+    @patients = @client.patients
   end
 
   # accept and create client account, then send message to the provided email

@@ -13,6 +13,7 @@
       <div class="row border-bottom">
         <div class="large-12 columns profile-info">
           <h3> Personal Details </h3>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.name'), value: @client.name %>
           <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.country'), value: @client.country %>
           <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.phone'), value:@client.phone %>
           <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.language'), value:@client.language %>
@@ -20,6 +21,7 @@
         </div>
       </div>
       <br/>
+      <h3>Patients</h3>
       <div class="row">
         <div class="large-12 columns">
         <table>
@@ -37,7 +39,7 @@
           <% if @patients.present? %>
             <% @patients.each do |patient| %>
             <tr>
-              <td><%= patient.firstname +' '+patient.lastname %></td>
+              <td><%= patient.firstname + ' ' + patient.lastname %></td>
               <td><%= patient.birthday %></td>
               <td><%= patient.email %></td>
               <td><%= patient.telephone %></td>
