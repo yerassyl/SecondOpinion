@@ -9,7 +9,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @patients = @client.patients
+    @patients = current_user.client.patients
   end
 
   # accept and create client account, then send message to the provided email
