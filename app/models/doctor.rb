@@ -1,7 +1,6 @@
 class Doctor < ActiveRecord::Base
   validates :name,
             :email,
-            #:resume,
             :phone_number,
             :address,
             presence: true
@@ -9,6 +8,9 @@ class Doctor < ActiveRecord::Base
   mount_uploader :resume, ResumeUploader
 
   attr_accessor :resume_cache
+
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100> "}, default_url: ":style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   belongs_to :user
   has_many :medical_situations

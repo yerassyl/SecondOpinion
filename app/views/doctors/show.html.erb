@@ -3,7 +3,7 @@
 <div class="doctor">
 	<div class="row">
 		<div class="large-3 columns border-right">
-			<h3 class="headings"><%= t('TODO')%> </h3>
+			<%= image_tag @doctor.avatar.url(:medium) %>
 		</div>
 
 		<div class="large-9 columns">
@@ -14,7 +14,12 @@
 	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.name'), value: @doctor.name %>
 	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.email'), value: @doctor.email %>
 	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.phone_number'), value: @doctor.phone_number %>
+	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.emergency_phone'), value: @doctor.emergency_phone %>
 	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.address'), value: @doctor.address %>
+	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.city'), value: @doctor.city %>
+	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.state'), value: @doctor.state %>
+	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.zipcode'), value: @doctor.zipcode %>
+	        <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.country'), value: @doctor.country %>
 	        <div class="row info-instance">
 					  <div class="small-6 large-6 columns ">
 					    Resume
@@ -45,12 +50,86 @@
 
       <br/>
       <!-- BEGIN MEDICAL SITUATIONS -->
+      <% if false %>
       <div class="row">
         <div class="small-12 large-12 columns">
           <%= render @medical_situations %>
         </div>
-      </div><!-- END MEDICAL SITUATIONS -->
+      </div>
+      <% end %>
+      <!-- END MEDICAL SITUATIONS -->
+	  </div>@
+	</div>
 
-	  </div>
+	<div class="row">
+		<div class="small-12 large-12 columns">
+			<h3>Medical Situations</h3>
+
+			<% if current_user.has_role?(:manager) %>
+				<%= form_for :medical_situation, :url => { :action => 'pay' } do %>
+					<table>
+						<thead>
+							<tr>
+								<th width="10">ID</th>
+								<th>Patient</th>
+								<th>Specialization</th>
+								<th>Amount Due</th>
+								<th>Amount Paid</th>
+								<th>Balance Due</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<% if @medical_situations.present? %>
+								<% @medical_situations.each do |medical_situation| %>
+									<%= fields_for 'medical_situation[]', medical_situation do |medical_situation_field| %>
+										<tr>
+											<td><%= medical_situation.id %></td>
+											<td><%= medical_situation.patient.firstname + ' ' + medical_situation.patient.lastname %></td>
+											<td><%= medical_situation.specialization.name %></td>
+											<td><%= medical_situation.fee %></td>
+											<td><%= medical_situation.doctor_amount_paid %></td>
+											<td><%= (medical_situation.fee - medical_situation.doctor_amount_paid) %></td>
+											<td><%= medical_situation_field.check_box :paid %></td>
+											<td><%= link_to (fa_icon 'eye', class:'fa-2x'), medical_situation %></td>
+										</tr>
+									<% end %>
+								<% end %>
+							<% end %>
+						</tbody>
+					</table>
+					<%= submit_tag 'Update', class:'button tiny success' %>
+				<% end %>
+			<% else %>
+				<table>
+					<thead>
+						<tr>
+							<th width="10">ID</th>
+							<th>Patient</th>
+							<th>Specialization</th>
+							<th>Amount Due</th>
+							<th>Amount Paid</th>
+							<th>Balance Due</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if @medical_situations.present? %>
+							<% @medical_situations.each do |medical_situation| %>
+								<tr>
+									<td><%= medical_situation.id %></td>
+									<td><%= medical_situation.patient.firstname + ' ' + medical_situation.patient.lastname %></td>
+									<td><%= medical_situation.specialization.name %></td>
+									<td><%= medical_situation.fee %></td>
+									<td><%= medical_situation.doctor_amount_paid %></td>
+									<td><%= (medical_situation.fee - medical_situation.doctor_amount_paid) %></td>
+									<td><%= link_to (fa_icon 'eye', class:'fa-2x'), medical_situation %></td>
+								</tr>
+							<% end %>
+						<% end %>
+					</tbody>
+				</table>
+			<% end %>
+		</div>
 	</div>
 </div>

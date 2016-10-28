@@ -111,7 +111,7 @@
 
     <% if medical_situation_class=='show' %>
 
-        <%= form_for medical_situation, {url: :send_to_pool_medical_situations, method: :post, remote:true} do |f| %>
+        <%= form_for medical_situation, { url: :send_to_pool_medical_situations, method: :post, remote:true } do |f| %>
            <%= f.hidden_field :medical_situation_id, value: medical_situation.id %>
            <%= f.hidden_field :manager_sets_fee_attr, value:true %>
 

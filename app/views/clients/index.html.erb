@@ -2,12 +2,8 @@
 
 <div class="row">
   <div class="small-3 columns">
-    <h2>My patients </h2>
+    <h2>Clients</h2>
   </div>
-  <div class="small-9 columns">
-    <%= link_to t('patient_module.new_patient'), new_patient_path , class:'button tiny' %>
-  </div>
-
 </div>
 
 <div class="row">
@@ -16,32 +12,20 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Full name</th>
-          <th>Date of birth</th>
-          <th>Maritial Status</th>
-          <th>Email</th>
-          <th>Telephone</th>
-          <th>Gender</th>
-          <th>Amount Due</th>
-          <th>Amount Paid</th>
-          <th>Balance Due</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Cellphone</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-      <% @patients.each do |patient| %>
+      <% @clients.each do |client| %>
         <tr>
-          <td><%= patient.id %></td>
-          <td><%= "#{patient.firstname} #{patient.middlename} #{patient.lastname}"  %></td>
-          <td><%= patient.birthday %></td>
-          <td><%= patient.maritial_status %></td>
-          <td><%= patient.email %></td>
-          <td><%= patient.telephone %></td>
-          <td><%= patient.gender %></td>
-          <td><%= patient.amount_due %></td>
-          <td><%= patient.amount_paid %></td>
-          <td><%= (patient.amount_due - patient.amount_paid) %></td>
-          <td><%= link_to (fa_icon 'eye', class:'fa-2x'), patient %></td>
+          <td><%= client.id %></td>
+          <td><%= client.name %></td>
+          <td><%= client.phone %></td>
+          <td><%= client.cellphone %></td>
+          <td><%= link_to (fa_icon 'eye', class:'fa-2x'), client %></td>
         </tr>
       <% end %>
       </tbody>

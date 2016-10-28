@@ -6,6 +6,12 @@
     <% end %>
 <% end %>
 
+<% if current_user.has_role?(:client) %>
+  <span data-tooltip aria-haspopup="true" class="has-tip tip-top" title="<%= t('fee_price_description') %>">
+    <span class="heading"><%= t('price') %>:</span> <span> <%= medical_situation.price %>$ </span>
+  </span>
+<% end %>
+
 <% if current_user.has_role?(:manager) %>
 
     <span data-tooltip aria-haspopup="true" class="has-tip tip-top" title="<%= t('fee_price_description') %>">

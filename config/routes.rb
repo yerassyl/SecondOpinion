@@ -24,10 +24,12 @@ Rails.application.routes.draw do
         get :accepted
       end
     end
+
     resources :clients, except:[:delete] do
       collection do
         post 'accept', action: :accept
         post 'reject', action: :reject
+        post 'pay'
       end
     end
 
@@ -39,7 +41,6 @@ Rails.application.routes.draw do
         get 'allergies'
         post 'create_allergy', action: :create_allergy
         delete 'delete_allergy', action: :delete_allergy
-
         get 'diseases'
         post 'create_disease', action: :create_disease
         delete 'delete_disease', action: :delete_disease
@@ -65,6 +66,9 @@ Rails.application.routes.draw do
 
     resources :pools, only: [:index]
     resources :doctors do
+      collection do
+        post 'pay'
+      end
       member do
         patch :update_resume
       end

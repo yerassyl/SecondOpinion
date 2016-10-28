@@ -23,8 +23,13 @@
               <%= form_for @client do |f| %>
                   <%= render 'layouts/error_messages', object: @client %>
                   <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :name, info_label:t('personal_details.name') %>
+                  <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :address, info_label:t('personal_details.address') %>
+                  <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :city, info_label:t('personal_details.city') %>
+                  <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :state, info_label:t('personal_details.state') %>
+                  <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :zipcode, info_label:t('personal_details.zipcode') %>
                   <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :country, info_label:t('personal_details.country') %>
                   <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :phone, info_label:t('personal_details.phone') %>
+                  <%= render 'layouts/profile/profile_info_instance_edit', f: f, obj: :cellphone, info_label:t('personal_details.cellphone') %>
 
                   <%= f.submit t('verbs.save'), class:'button tiny success' %>
               <% end %>

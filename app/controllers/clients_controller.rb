@@ -5,11 +5,22 @@ class ClientsController < ApplicationController
 
   def index
     # get all patients that belong to that client
-    @patients = current_user.client.patients
+    @clients = Client.all
   end
 
   def show
-    @patients = current_user.client.patients
+    @patients = @client.patients
+  end
+
+  def pay
+    Patient.update(params[:patient].keys, params[:patient].values)
+    Patient.all.each do |patient|
+      if patient.paid
+        patient.update_attribute(:amount_paid, patient.amount_due)
+        
+      end
+    end
+    redirect_to :back
   end
 
   # accept and create client account, then send message to the provided email
@@ -115,7 +126,8 @@ class ClientsController < ApplicationController
     end
 
     def client_params
-      params.require(:client).permit(:name,:email,:country, :phone, :language)
+      params.require(:client).permit(:name, :address, :city, :state, :zipcode, 
+                                     :country, :phone, :cellphone, :language, :paid)
     end
 
     def user_params
