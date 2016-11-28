@@ -74,10 +74,20 @@
                   <td><%= patient.telephone %></td>
                   <td><%= if patient.gender then 'Male' else 'Female' end %></td>
                   <td><%= patient.amount_due %></td>
-                  <td><%= patient.amount_paid %></td>
+                  <td>
+                    <% if patient.paid then %>
+                      <%= patient.amount_paid %>
+                    <% else %>
+                      <%= patient_field.number_field :amount_paid %>
+                    <% end %>
+                  </td>
                   <td><%= (patient.amount_due - patient.amount_paid) %></td>
                   <td>
-                    <%= patient_field.check_box :paid %>
+                    <% if patient.paid then %>
+                      Paid
+                    <% else %>
+                      <%= patient_field.check_box :paid %>
+                    <% end %>
                   </td>
                   <td><%= link_to (fa_icon 'eye', class:'fa-2x'), patient %></td>
                 </tr>
@@ -86,6 +96,7 @@
           <% end %>
         </table>
         <%= submit_tag 'Update', class:'button tiny success' %>
+        <%= submit_tag 'Pay by paypal', class: 'button tiny success' %>
       <% end %>
     <% else %>
       <table>

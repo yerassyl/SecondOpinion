@@ -17,11 +17,16 @@ class DoctorsController < ApplicationController
   end
 
   def pay
-    session[:return_to] ||= request.referer
     MedicalSituation.update(params[:medical_situation].keys, params[:medical_situation].values)
     MedicalSituation.all.each do |medical_situation|
-      if medical_situation.paid
-        medical_situation.update_attribute(:doctor_amount_paid, medical_situation.fee)
+      if medical_situation.fee != nil
+        if medical_situation.fee - medical_situation.doctor_amount_paid == 0
+          medical_situation.update_attribute(:paid, 'true')
+        else
+          medical_situation.update_attribute(:paid, 'false')
+        end
+      else
+        medical_situation.update_attribute(:paid, 'false')
       end
     end
     redirect_to :back

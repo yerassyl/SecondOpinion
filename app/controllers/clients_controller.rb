@@ -15,9 +15,20 @@ class ClientsController < ApplicationController
   def pay
     Patient.update(params[:patient].keys, params[:patient].values)
     Patient.all.each do |patient|
-      if patient.paid
-        patient.update_attribute(:amount_paid, patient.amount_due)
-        
+      if params[:commit] == 'Update' then
+        if patient.amount_due != nil
+          if patient.amount_due - patient.amount_paid <= 0
+            patient.update_attribute(:paid, 'true')
+          else
+            patient.update_attribute(:paid, 'false')
+          end
+        else
+          patient.update_attribute(:paid, 'false')
+        end
+      else
+        if patient.paid
+          patient.update_attribute(:amount_paid, patient.amount_due)
+        end
       end
     end
     redirect_to :back
