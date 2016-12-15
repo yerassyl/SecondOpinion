@@ -29,10 +29,11 @@ gem 'foundation-rails', '~> 5.5', '>= 5.5.3.2' # foundation zurb for front-end
 gem 'font-awesome-rails' # icons
 gem 'active_model_serializers' # json serializers
 
+gem 'rails_admin', '~> 1.0'
 gem 'devise' # authorization library
 gem 'cancancan', '~> 1.10'  # authentication library
 gem 'carrierwave' # file upload
-gem 'remotipart', '~> 1.2' # file upload via js
+gem 'remotipart', '~> 1.3' # file upload via js
 
 # small functionality gems
 gem 'country_select' # select tag with all countries in iso etc. formats
@@ -40,7 +41,6 @@ gem 'kaminari' # pagintaion library
 gem 'cocoon' # allows easier nested attributes
 gem 'select2-rails' # select2 plugin
 
-gem 'faker' # only for testing
 
 gem 'filterrific' # for filters
 # Use ActiveModel has_secure_password
@@ -63,6 +63,7 @@ group :development, :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.0'
+  gem 'faker' # only for testing
 end
 
 group :development do
