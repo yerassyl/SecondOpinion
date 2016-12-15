@@ -2,12 +2,12 @@
 usage: render 'select_field', { form_builder: f, obj: :name, options: Model.all, form_label: t('personal_details.phone') }
 -->
 <div class="row collapse prefix-radius">
-  <div class="small-3 columns">
+  <div class="small-4 columns">
             <span class="prefix">
                  <%= form_label %>
             </span>
   </div>
-  <div class="small-9 columns">
+  <div class="small-8 columns">
     <%= form_builder.select(obj, options, {include_blank: t('forms.not_chosen')}) %>
   </div>
 </div>

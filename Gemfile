@@ -49,6 +49,8 @@ gem 'filterrific' # for filters
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+gem 'paperclip', '~> 5.0.0'
+
 gem 'pg'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :developmentrai

@@ -2,10 +2,14 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
-Rails.application.config.assets.precompile += %w( filterrific/filterrific-spinner.gif )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
 # Precompile additional assets.
 # application.js, application.scss, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w( bootstrap.min.css )
+Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+Rails.application.config.assets.precompile << Proc.new { |path, fn| fn =~ /vendor\/assets/  }
+Rails.application.config.assets.precompile << /\.(?:html)\z/
+Rails.application.config.assets.precompile += %w( filterrific/filterrific-spinner.gif )

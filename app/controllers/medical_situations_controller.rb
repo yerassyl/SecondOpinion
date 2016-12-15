@@ -2,7 +2,7 @@ class MedicalSituationsController < ApplicationController
   load_and_authorize_resource
 
   before_action :set_filterrific, only: [:index]
-  before_action :set_medical_situation, only: [:drop]
+  before_action :set_medical_situation, only: [:show, :drop]
 
   # all medical situations
   def index
@@ -23,7 +23,6 @@ class MedicalSituationsController < ApplicationController
   # such as notes, reports etc
   def show
     #@medical_situation should be loaded
-    @medical_situation = MedicalSituation.find(params[:id])
     @medical_services = @medical_situation.medical_services
     @medical_situation_statuses = MedicalSituationStatus.all
     @medical_service = MedicalService.new
@@ -37,8 +36,10 @@ class MedicalSituationsController < ApplicationController
 
   def create
     @patient_id = params[:patient]
+    @patient = Patient.find(@patient_id)
     @medical_situation = MedicalSituation.new(medical_situation_params)
     @medical_situation.patient_id = @patient_id
+    @patient.amount_due += @medical_situation.price
     @medical_situation.medical_situation_status = MedicalSituationStatus.find_by(name: 'Not in pool')
 
     respond_to do |format|
@@ -55,7 +56,7 @@ class MedicalSituationsController < ApplicationController
           #flash[:alert] = @medical_situation.errors.full_messages
           redirect_to patient_path(@patient_id)
         }
-        @patient = Patient.find(@patient_id)
+        @patient
       end
     end
   end

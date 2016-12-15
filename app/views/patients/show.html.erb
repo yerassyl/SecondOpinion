@@ -3,6 +3,7 @@
 <div class="patient">
 
   <div class="row">
+  <% if false %>
   <div class="large-3 columns border-right">
 
     <h3 class="headings"><%= t('nouns.singular.family_history')%> </h3>
@@ -29,6 +30,7 @@
     }) %>
 
   </div>
+  <% end %>
 
   <div class="large-9 columns">
 
@@ -53,7 +55,7 @@
 
           <div class="row">
             <div class="small-12 large-12 columns">
-          <span><%= link_to 'New Medical Situation', '#',class:'button success tiny', id:'new_med_situation_btn' %>
+          <span><%= link_to 'New Medical Situation', '#', class:'button success tiny', id:'new_med_situation_btn' %>
           </span>
               <%= render 'medical_situations/medical_situation_form' %>
             </div>

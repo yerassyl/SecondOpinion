@@ -150,7 +150,8 @@ CallBack.create!(
     cellphone: Faker::PhoneNumber.cell_phone,
     emergency_person: Faker::StarWars.character,
     emergency_person_phone: Faker::PhoneNumber.phone_number,
-    client_id: 1
+    client_id: 1,
+    amount_due: Faker::Number.between(10000, 30000)
   )
 end
 

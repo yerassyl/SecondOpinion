@@ -16,6 +16,22 @@ class DoctorsController < ApplicationController
     @medical_situations = @doctor.medical_situations
   end
 
+  def pay
+    MedicalSituation.update(params[:medical_situation].keys, params[:medical_situation].values)
+    MedicalSituation.all.each do |medical_situation|
+      if medical_situation.fee != nil
+        if medical_situation.fee - medical_situation.doctor_amount_paid == 0
+          medical_situation.update_attribute(:paid, 'true')
+        else
+          medical_situation.update_attribute(:paid, 'false')
+        end
+      else
+        medical_situation.update_attribute(:paid, 'false')
+      end
+    end
+    redirect_to :back
+  end
+
   # fix doctor validation
   def create
     @doctor = Doctor.new(doctor_params)
@@ -86,7 +102,9 @@ class DoctorsController < ApplicationController
     end
 
     def doctor_params
-      params.require(:doctor).permit(:name, :email, :phone_number, :address, :resume, :resume_cache)
+      params.require(:doctor).permit(:name, :email, :phone_number, :emergency_phone, 
+                                     :address, :city, :state, :zipcode, :country, 
+                                     :avatar, :resume, :resume_cache)
     end
 
 

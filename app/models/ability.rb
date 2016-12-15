@@ -14,9 +14,9 @@ class Ability
   def manager(user)
     can :manage, Manager
     can [:read, :create], CallBack
-    can [:accept, :reject], Client
-    can [:index, :new, :create, :show], Doctor
-    can [:index,:show, :in_pool, :not_in_pool, :send_to_pool], MedicalSituation
+    can [:index, :show, :accept, :reject, :pay], Client
+    can [:index, :new, :create, :show, :pay], Doctor
+    can [:index, :show, :in_pool, :not_in_pool, :send_to_pool], MedicalSituation
     can [:show, :set_fee], MedicalService
   end
 

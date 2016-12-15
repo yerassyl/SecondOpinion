@@ -13,47 +13,126 @@
       <div class="row border-bottom">
         <div class="large-12 columns profile-info">
           <h3> Personal Details </h3>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.name'), value: @client.name %>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.address'), value: @client.address %>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.city'), value: @client.city %>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.state'), value: @client.state %>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.zipcode'), value: @client.zipcode %>
           <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.country'), value: @client.country %>
           <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.phone'), value:@client.phone %>
+          <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.cellphone'), value: @client.cellphone %>
           <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.language'), value:@client.language %>
           <%= render 'layouts/profile/profile_info_instance', info_label:t('personal_details.email'), value:@client.user.email %>
         </div>
       </div>
       <br/>
-      <div class="row">
-        <div class="large-12 columns">
-        <table>
-          <thead>
-          <tr>
-            <td>Fullname</td>
-            <td>Birthday</td>
-            <td>Email</td>
-            <td>Telephone</td>
-            <td>Cellphone</td>
-            <td></td>
-          </tr>
-          </thead>
-          <tbody>
-          <% if @patients.present? %>
-            <% @patients.each do |patient| %>
-            <tr>
-              <td><%= patient.firstname +' '+patient.lastname %></td>
-              <td><%= patient.birthday %></td>
-              <td><%= patient.email %></td>
-              <td><%= patient.telephone %></td>
-              <td><%= patient.cellphone %></td>
-              <td></td>
-            </tr>
-            <% end %>
-          <% end %>
-          </tbody>
-        </table>
-        </div>
-      </div>
-
     </div><!-- END RIGHT SECTION -->
+  </div>
+</div>
 
+<div class="row">
+  <div class="small-3 columns">
+    <h2>Patients</h2>
+  </div>
+  <div class="small-9 columns">
+    <%= link_to t('patient_module.new_patient'), new_patient_path , class:'button tiny' %>
   </div>
 
+</div>
 
+<div class="row">
+  <div class="small-12 large-12 columns">
+
+    <% if current_user.has_role?(:manager) %>
+      <%= form_for :patient, :url => { :action => 'pay' } do %>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Full name</th>
+              <th>Date of birth</th>
+              <th>Maritial Status</th>
+              <th>Email</th>
+              <th>Telephone</th>
+              <th>Gender</th>
+              <th>Amount Due</th>
+              <th>Amount Paid</th>
+              <th>Balance Due</th>
+              <th>Pay Now?</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% @patients.each do |patient| %>
+            <%= fields_for 'patient[]', patient do |patient_field| %>
+              <tbody>
+                <tr>
+                  <td><%= patient.id %></td>
+                  <td><%= "#{patient.firstname} #{patient.middlename} #{patient.lastname}" %></td>
+                  <td><%= patient.birthday %></td>
+                  <td><%= patient.maritial_status %></td>
+                  <td><%= patient.email %></td>
+                  <td><%= patient.telephone %></td>
+                  <td><%= if patient.gender then 'Male' else 'Female' end %></td>
+                  <td><%= patient.amount_due %></td>
+                  <td>
+                    <% if patient.paid then %>
+                      <%= patient.amount_paid %>
+                    <% else %>
+                      <%= patient_field.number_field :amount_paid %>
+                    <% end %>
+                  </td>
+                  <td><%= (patient.amount_due - patient.amount_paid) %></td>
+                  <td>
+                    <% if patient.paid then %>
+                      Paid
+                    <% else %>
+                      <%= patient_field.check_box :paid %>
+                    <% end %>
+                  </td>
+                  <td><%= link_to (fa_icon 'eye', class:'fa-2x'), patient %></td>
+                </tr>
+              </tbody>
+           <% end %>
+          <% end %>
+        </table>
+        <%= submit_tag 'Update', class:'button tiny success' %>
+        <%= submit_tag 'Pay by paypal', class: 'button tiny success' %>
+      <% end %>
+    <% else %>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Full name</th>
+            <th>Date of birth</th>
+            <th>Maritial Status</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Gender</th>
+            <th>Amount Due</th>
+            <th>Amount Paid</th>
+            <th>Balance Due</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @patients.each do |patient| %>
+          <tr>
+            <td><%= patient.id %></td>
+            <td><%= "#{patient.firstname} #{patient.middlename} #{patient.lastname}" %></td>
+            <td><%= patient.birthday %></td>
+            <td><%= patient.maritial_status %></td>
+            <td><%= patient.email %></td>
+            <td><%= patient.telephone %></td>
+            <td><%= if patient.gender then 'Male' else 'Female' end %></td>
+            <td><%= patient.amount_due %></td>
+            <td><%= patient.amount_paid %></td>
+            <td><%= (patient.amount_due - patient.amount_paid) %></td>
+            <td><%= link_to (fa_icon 'eye', class:'fa-2x'), patient %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
 </div>

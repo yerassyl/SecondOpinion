@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   # default root routes for each role
-   authenticated :user, ->(u) { u.has_role?(:manager) } do
-     root to: 'managers#index', as: :manager_root
-   end
-   authenticated :user, ->(u) { u.has_role?(:client) } do
-     root to: 'clients#index', as: :client_root
-   end
+  authenticated :user, ->(u) { u.has_role?(:manager) } do
+    root to: 'managers#index', as: :manager_root
+  end
+  authenticated :user, ->(u) { u.has_role?(:client) } do
+    root to: 'clients#index', as: :client_root
+  end
   authenticated :user, ->(u) { u.has_role?(:doctor) } do
     root to: 'pools#index', as: :doctor_root
   end
@@ -25,10 +25,12 @@ Rails.application.routes.draw do
         get :accepted
       end
     end
+
     resources :clients, except:[:delete] do
       collection do
         post 'accept', action: :accept
         post 'reject', action: :reject
+        post 'pay'
       end
     end
 
@@ -40,7 +42,6 @@ Rails.application.routes.draw do
         get 'allergies'
         post 'create_allergy', action: :create_allergy
         delete 'delete_allergy', action: :delete_allergy
-
         get 'diseases'
         post 'create_disease', action: :create_disease
         delete 'delete_disease', action: :delete_disease
@@ -66,6 +67,9 @@ Rails.application.routes.draw do
 
     resources :pools, only: [:index]
     resources :doctors do
+      collection do
+        post 'pay'
+      end
       member do
         patch :update_resume
       end
@@ -85,9 +89,10 @@ Rails.application.routes.draw do
   # not authorized routes
   resources :call_backs, only: [:create]
   # routes that do not need authentication must be declared here
-  root 'landing_page#index'
+  root 'landing_page#landing_index'
   get 'access_denied' => 'landing_page#access_denied'
-  get 'leave_callback' => 'landing_page#leave_callback'
+  get 'doctor_callback' => 'landing_page#doctor_callback'
+  get 'client_callback' => 'landing_page#client_callback'
   post 'send_resume' => 'landing_page#send_resume'
 
 

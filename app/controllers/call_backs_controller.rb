@@ -17,7 +17,6 @@ class CallBacksController < ApplicationController
           format.js {render json: @call_back.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   def show
@@ -28,13 +27,13 @@ class CallBacksController < ApplicationController
 
   private
 
-  def set_callback
-    @call_back = CallBack.find(params[:id])
-  end
+    def set_callback
+      @call_back = CallBack.find(params[:id])
+    end
 
-  def callback_params
-    params.require(:call_back).permit(:name,:country,:phone,:language,:email,:specialization,:message,:didAgree,:code)
-  end
+    def callback_params
+      params.require(:call_back).permit(:name,:country,:phone,:language,:email,:specialization,:message,:didAgree,:code)
+    end
 
 
 end

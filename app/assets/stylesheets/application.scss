@@ -1,11 +1,14 @@
 // dont touch these
+/*
+@import "../../../vendor/**";
+*/
+
 @import "foundation_and_overrides";
-@import "font-awesome"; // dont delete it, it is correct!!!
+@import "font-awesome";
 
 @import "conversations";
 @import "authorization";
 @import "landing_page";
-
 @import "clients";
 @import "profile";
 @import "patients";
