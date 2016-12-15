@@ -3,6 +3,8 @@
 @import "../../../vendor/**";
 */
 
+@import "variables.scss";
+
 @import "foundation_and_overrides";
 @import "font-awesome";
 
@@ -15,6 +17,9 @@
 @import "medical_situations";
 @import "select2";
 @import "doctors";
+
+// import bootstrap files
+
 
 .grey {
   color: $aluminum;
