@@ -10,5 +10,6 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( bootstrap.min.css )
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+Rails.application.config.assets.precompile << Proc.new { |path, fn| fn =~ /vendor\/assets/  }
 Rails.application.config.assets.precompile << /\.(?:html)\z/
 Rails.application.config.assets.precompile += %w( filterrific/filterrific-spinner.gif )
